@@ -1,0 +1,65 @@
+/* your custom css */
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
+
+.text-left {
+  text-align: left;
+
+}
+img.text-left {
+  display: inline;
+}
+blockquote {
+  background: none;
+  border-left: 5px solid rgba(0,0,0,0.8);
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(0,0,0,0.8);
+}
+.fixedHeaderContainer h1, .fixedHeaderContainer h2, .fixedHeaderContainer h3, .fixedHeaderContainer h4, .fixedHeaderContainer h5, .fixedHeaderContainer h6 {
+  color: white !important;
+}
+.toc .toggleNav .navGroup .navGroupCategoryTitle {
+  font-weight: 900;
+}
+h1,h2,h3,h4,h5,h6 {
+  color: #20232a;
+/*
+  font-family: "Helvetica Neue", helvetica, arial;
+  letter-spacing: -1px;
+  */
+
+}
+pre {
+  font-size: 12px;
+}
+.well {
+  padding: 0 20px;
+  border: 5px solid black;
+}
+a {
+  color: cornflowerblue;
+}
+p, li {
+  font-size: 90%;
+}
+img.frame {
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 8px;
+  overflow: hidden;
+}

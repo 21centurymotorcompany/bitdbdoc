@@ -1,0 +1,15 @@
+{
+  "docs": {
+    "Introduction": ["bitdb"],
+    "Components": ["crawler", "indexer", "query"],
+    "Howto": ["quickstart", "tutorial", "install"],
+    "FAQ": [
+      "diy",
+      "chain",
+      "decentralized"
+    ]
+  },
+  "docs-other": {
+    "First Category": ["doc4", "doc5"]
+  }
+}
