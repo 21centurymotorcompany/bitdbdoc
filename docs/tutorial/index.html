@@ -44,7 +44,7 @@
 <li><strong>out.b2</strong>: base64 encoded version of 0x6d656d6f</li>
 </ul>
 <blockquote>
-<p>To learn more about the Bitdb document format, see <a href="/docs/indexer#2-bitdb-document-format">here</a></p>
+<p>To learn more about the Bitdb document format, see <a href="indexer#2-bitdb-document-format">here</a></p>
 </blockquote>
 <p>Now that we understand how Memo's protocol works, let's look at the actual &quot;action&quot; that we're interested in. We only want to fetch all the &quot;Post memo&quot; actions and display them.</p>
 <p><img src="/bitdbdoc/docs/assets/memopost.png" alt="memoaction"></p>
@@ -94,7 +94,7 @@
 <ul>
 <li><strong>find:</strong> It's looking for a match for &quot;out.b1&quot;: &quot;6d02&quot; (We already specified the hex encoding from above, so the query engine will recognize this as hex)</li>
 <li><strong>limit:</strong> get 50</li>
-<li><strong>project:</strong> This is a special MongoDB projection operation that <a href="/docs/query#4-only-return-the-matched-part">only returns a matched subdocument instead of the entire document</a>. In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.</li>
+<li><strong>project:</strong> This is a special MongoDB projection operation that <a href="query#4-only-return-the-matched-part">only returns a matched subdocument instead of the entire document</a>. In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.</li>
 </ul></li>
 </ol>
 <h1><a class="anchor" aria-hidden="true" id="3-write-the-web-app"></a><a href="#3-write-the-web-app" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Write the Web App</h1>
