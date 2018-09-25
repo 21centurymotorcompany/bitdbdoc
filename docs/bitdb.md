@@ -4,7 +4,9 @@ title: BitDB
 sidebar_label: BitDB
 ---
 
-**Random Access Memory for Bitcoin** - [https://bitdb.network](https://bitdb.network)
+**Random Access Memory for Bitcoin**
+
+[https://bitdb.network](https://bitdb.network)
 
 <br>
 
