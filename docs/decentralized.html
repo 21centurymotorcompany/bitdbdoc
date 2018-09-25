@@ -33,7 +33,7 @@
 <li>implement the replication feature</li>
 <li>sprinkle some magical distributed consensus and governance rules to tackle the decentralized replication problem.</li>
 </ol>
-<p><img src="/img/concurrentwrite.png" alt="concurrent write"></p>
+<p><img src="img/concurrentwrite.png" alt="concurrent write"></p>
 <p>The big challenge with this approach is that the network needs to not only get the tech but also the incentive structure right in order to achieve decentralization. If nobody is incentivized enough to run the network, the whole thing collapses overnight. This is not a trivial problem. There's a reason why we don't have a mainstream decentralized database with such architecture.</p>
 <p>Bitdb does not invent a new experimental consensus algorithm, nor does it try to bootstrap a new network from scratch starting from 0 liquidity, all of which are huge risk factors for these initiatives.</p>
 <p>Because Bitcoin has already solved the decentralized consensus problem through Proof of Work, Bitdb works right out of the box, because BitDB is Bitcoin.</p>
@@ -46,7 +46,7 @@
 <li>But actually, proof of work is THE ONLY way to build <strong>truly decentralized</strong> apps.</li>
 </ul>
 <p>BitDB builds on top of Bitcoin.</p>
-<p><img src="/img/onewaysync.png" alt="one way sync"></p>
+<p><img src="img/onewaysync.png" alt="one way sync"></p>
 <h3><a class="anchor" aria-hidden="true" id="1-bitdb-is-proof-of-work"></a><a href="#1-bitdb-is-proof-of-work" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. BitDB is Proof of Work</h3>
 <p>Bitdb utilizes Bitcoin as the single source of truth, and the &quot;database&quot; is just a derived layer on top of the Bitcoin's blockchain, providing a high level, high throughput readonly API into Bitcoin.</p>
 <p>BitDB can only be derived from Bitcoin (Only BitDB can write to itself by reading from Bitcoin, and humans can't write to BitDB directly) therefore the contents inside BitDB are transactions confirmed by Bitcoin's proof of work.</p>
