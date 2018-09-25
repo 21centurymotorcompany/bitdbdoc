@@ -56,9 +56,9 @@
 <p>Bitcoin's transaction inputs and outputs are encoded in a low level language called &quot;script&quot; which looks like this:</p>
 <pre><code class="hljs">OP_DUP OP_HASH160 <span class="hljs-number">20</span> <span class="hljs-number">0x3e2288390ab7a25cad792e662431db4bda0b9c6b</span> OP_EQUALVERIFY OP_CHECKSIG
 </code></pre>
-<p>Bitcoin validates this transaction by walking through this script from left to right, pushing and popping and computing each push data based on the opcodes and bitcoin script rules. While this is the simplest and most elegant way to implement programmable money, this elegance comes at a cost:</p>
+<p>Bitcoin validates this transaction by walking through this script from left to right, computing each push data based on the opcodes and bitcoin script rules. While this is the simplest and most elegant way to implement programmable money, this elegance comes at a cost:</p>
 <p><strong>Bitcoin script is not optimized for letting the &quot;outside world&quot; make sense of and take programmatic actions through powerful queries into Bitcoin.</strong></p>
-<p>This means it's not easy to build user-facing applications directly on top of Bitcoin. For example, trying to find an answer to a problem like the following has been impossible:</p>
+<p>Another way of saying this is: it's not easy to build sophisticated user-facing Bitcoin applications without building out some complex custom backend infrastructure to index and process all the data. For example, trying to find an answer to a problem like the following has been impossible:</p>
 <pre><code class="hljs"><span class="hljs-builtin-name">Find</span> all the transactions that were:
 - Sent <span class="hljs-keyword">from</span> the<span class="hljs-built_in"> address </span>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe
 - AFTER block 543210
@@ -110,7 +110,8 @@
 <li><code>&quot;in.e.a&quot;</code> stands for <strong>input edge address</strong></li>
 <li><code>&quot;blk.i&quot;</code> stands for <strong>block index</strong></li>
 </ul>
-<p>Since it's JSON, this query can even be sent over HTTP. BitDB nodes can provide HTTP API endpoints where various 3rd party decentralized applications can connect to for various purposes.</p>
+<p>This type of powerful query is possible because BitDB crawls, parses, and indexes all Bitcoin transactions in a structured document format, to which you can run any complex queries.</p>
+<p>Also, since the query language itself is JSON, the query is portable, can be implemented in any programming language, and can even be sent over HTTP. BitDB nodes can provide HTTP API endpoints where various 3rd party decentralized applications can connect to for various purposes.</p>
 <p>The standardized database query language protocol ensures that your app will live on forever even after you decide to move on from your project, because all that's required to run the application is the query.</p>
 <h3><a class="anchor" aria-hidden="true" id="2-architecture-overview"></a><a href="#2-architecture-overview" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Architecture Overview</h3>
 <p><img src="/docs/assets/ciq.png" alt="ciq"></p>
