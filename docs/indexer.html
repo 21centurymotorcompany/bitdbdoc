@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Indexer · bitdb</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The first task of BitDB indexer is to take a raw Bitcoin transaction and transform it into a structured format on top of which we can run all kinds of powerful queries."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Indexer · bitdb"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/index.html"/><meta property="og:description" content="The first task of BitDB indexer is to take a raw Bitcoin transaction and transform it into a structured format on top of which we can run all kinds of powerful queries."/><meta property="og:image" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/img/docusaurus.png"/><link rel="shortcut icon" href="/bitdbdoc/website/build/bitdbdoc/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,900"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/bitdbdoc/website/build/bitdbdoc/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/bitdbdoc/website/build/bitdbdoc/"><h2 class="headerTitle">bitdb</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/21centurymotorcompany" target="_self">GitHub</a></li><li class=""><a href="https://twitter.com/_unwriter" target="_self">Twitter</a></li><li class=""><a href="https://t.me/joinchat/HH1DDQ8pZlSlsdNcKgIcxw" target="_self">Chat</a></li><li class=""><a href="https://bitdb.network/explorer" target="_self">Explorer</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Components</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/bitdb">BitDB</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/crawler">Crawler</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/indexer">Indxer</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/query">Query Engine</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Howto</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/quickstart">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/tutorial">Build a Bitcoin App in 5 Minutes</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/install">Run a node</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/diy">BitDB vs. DIY Custom Backend</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/chain">What chain does BitDB support?</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/decentralized">BitDB vs. Decentralized Databases vs. &quot;DApp Blockchain&quot;</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Indexer</h1></header><article><div><span><p>The first task of BitDB indexer is to take a raw Bitcoin transaction and transform it into a structured format on top of which we can run all kinds of powerful queries.</p>
+<p>After TNA transforms the raw transaction into BitDB document format, it's stored into the database.</p>
+<h2><a class="anchor" aria-hidden="true" id="1-tna"></a><a href="#1-tna" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. TNA</h2>
+<p>We can think of each bitcoin transaction as a DNA that needs to be expressed into a meaningful protein. This is what BitDB Indexer does before storing into the database, through a module named <a href="https://github.com/21centurymotorcompany/tna">TNA</a>.</p>
+<p><img src="/img/protein.png" alt="protein"></p>
+<p>For example, here's a raw transaction:</p>
+<pre><code class="hljs"><span class="hljs-number">0100000001</span>b<span class="hljs-number">08</span>acdbdad<span class="hljs-number">97</span>ad<span class="hljs-number">6670</span><span class="hljs-keyword">c</span><span class="hljs-number">83</span>cee<span class="hljs-number">6794</span>bfbd<span class="hljs-number">1e9</span>bb<span class="hljs-number">1220</span>b<span class="hljs-number">9e6</span>b<span class="hljs-number">3116</span>b<span class="hljs-number">754</span>bca<span class="hljs-number">2459326010000006</span>a<span class="hljs-number">47304402201</span><span class="hljs-keyword">c</span><span class="hljs-number">6039241540945</span><span class="hljs-keyword">c</span><span class="hljs-number">8</span><span class="hljs-keyword">c</span><span class="hljs-number">65</span>f<span class="hljs-number">3</span>d<span class="hljs-number">3</span>ba<span class="hljs-number">116</span>dd<span class="hljs-number">7</span>b<span class="hljs-number">77</span>ea<span class="hljs-number">2</span>ca<span class="hljs-number">89</span>afac<span class="hljs-number">33</span>ef<span class="hljs-number">49</span>a<span class="hljs-number">8</span>bfa<span class="hljs-number">66</span>dafef<span class="hljs-number">022035</span>f<span class="hljs-number">906</span>ffc<span class="hljs-number">1</span>a<span class="hljs-number">12613</span>cab<span class="hljs-number">7</span>ee<span class="hljs-number">1</span>ec<span class="hljs-number">9443674</span>f<span class="hljs-number">594039</span><span class="hljs-keyword">c</span><span class="hljs-number">09</span>fce<span class="hljs-number">6e59</span>b<span class="hljs-number">4</span>f<span class="hljs-number">1781e18086</span>f<span class="hljs-number">8412103</span>d<span class="hljs-number">6</span>d<span class="hljs-number">364</span>d<span class="hljs-number">31666821548044723</span>f<span class="hljs-number">6</span>a<span class="hljs-number">8</span>b<span class="hljs-number">15</span>f<span class="hljs-number">43e6</span><span class="hljs-keyword">c</span><span class="hljs-number">7</span>dc<span class="hljs-number">5</span>edcc<span class="hljs-number">2</span>fc<span class="hljs-number">3</span>cf<span class="hljs-number">7831</span>b<span class="hljs-number">3e81095</span>cffffffff<span class="hljs-number">020000000000000000176</span>a<span class="hljs-number">026</span>d<span class="hljs-number">0212706</span>f<span class="hljs-number">737420746</span>f<span class="hljs-number">206</span>d<span class="hljs-number">656</span>d<span class="hljs-number">6</span>f<span class="hljs-number">2e636173682108420000000000001976</span>a<span class="hljs-number">91419</span>b<span class="hljs-number">26</span>abab<span class="hljs-number">87</span>de<span class="hljs-number">1</span>a<span class="hljs-number">5</span>d<span class="hljs-number">07</span>d<span class="hljs-number">34</span>a<span class="hljs-number">12</span>f<span class="hljs-number">232</span>f<span class="hljs-number">5</span>b<span class="hljs-number">75</span><span class="hljs-keyword">c</span><span class="hljs-number">7</span>caf<span class="hljs-number">188</span>ac<span class="hljs-number">00000000</span>
+</code></pre>
+<p>If we deserialize it into a readable format, it has one input script, and two output scripts:</p>
+<pre><code class="hljs"><span class="hljs-comment"># INPUT:</span>
+71 0x304402201c6039241540945c8c65f3d3ba116dd7b77ea2ca89afac33ef49a8bfa66dafef022035f906ffc1a12613cab7ee1ec9443674f594039c09fce6e59b4f1781e18086f841<span class="hljs-number"> 33 </span>0x03d6d364d31666821548044723f6a8b15f43e6c7dc5edcc2fc3cf7831b3e81095c
+​
+<span class="hljs-comment"># OUTPUT:</span>
+OP_RETURN<span class="hljs-number"> 2 </span>0x6d02<span class="hljs-number"> 18 </span>0x706f737420746f206d656d6f2e6361736821
+OP_DUP OP_HASH160<span class="hljs-number"> 20 </span>0x19b26abab87de1a5d07d34a12f232f5b75c7caf1 OP_EQUALVERIFY OP_CHECKSIG
+</code></pre>
+<p>This deserialized format is readable but not queryable because it's one dimensional. We need to transform this into a more structured two dimensional format with query-able attributes, along with additional metadata such as transaction hash and block information including <code>blk.i</code> (block index), <code>blk.h</code> (block hash), <code>blk.t</code> (block time):</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"tx"</span>: {
+    <span class="hljs-attr">"h"</span>: <span class="hljs-string">"92b87fc7390dff0ccfc43469ce90a8d3dbc20e752fdd5cbde55a6d89e230cdf5"</span>
+  },
+  <span class="hljs-attr">"blk"</span>: {
+    <span class="hljs-attr">"i"</span>: <span class="hljs-number">546492</span>,
+    <span class="hljs-attr">"h"</span>: <span class="hljs-string">"000000000000000000d3ad1ddba37d2d82cd50246e8ed20ee4bbea235d066e25"</span>,
+    <span class="hljs-attr">"t"</span>: <span class="hljs-number">1536117057</span>
+  },
+  <span class="hljs-attr">"in"</span>: [
+    {
+      <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"b0"</span>: <span class="hljs-string">"MEQCIBxgOSQVQJRcjGXz07oRbde3fqLKia+sM+9JqL+mba/vAiA1+Qb/waEmE8q37h7JRDZ09ZQDnAn85uWbTxeB4YCG+EE="</span>,
+      <span class="hljs-attr">"b1"</span>: <span class="hljs-string">"A9bTZNMWZoIVSARHI/aosV9D5sfcXtzC/Dz3gxs+gQlc"</span>,
+      <span class="hljs-attr">"str"</span>: <span class="hljs-string">"&lt;Script: 71 0x304402201c6039241540945c8c65f3d3ba116dd7b77ea2ca89afac33ef49a8bfa66dafef022035f906ffc1a12613cab7ee1ec9443674f594039c09fce6e59b4f1781e18086f841 33 0x03d6d364d31666821548044723f6a8b15f43e6c7dc5edcc2fc3cf7831b3e81095c&gt;"</span>,
+      <span class="hljs-attr">"e"</span>: {
+        <span class="hljs-attr">"h"</span>: <span class="hljs-string">"269345a2bc54b716316b9e0b22b19b1ebdbf9467ee3cc87066ad97adbdcd8ab0"</span>,
+        <span class="hljs-attr">"i"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"a"</span>: <span class="hljs-string">"qqvmy646hp77rfws0562zter9adht3727yu7kf3sls"</span>
+      }
+    }
+  ],
+  <span class="hljs-attr">"out"</span>: [
+    {
+      <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"b0"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span>
+      },
+      <span class="hljs-attr">"b1"</span>: <span class="hljs-string">"bQI="</span>,
+      <span class="hljs-attr">"s1"</span>: <span class="hljs-string">"m\u0002"</span>,
+      <span class="hljs-attr">"b2"</span>: <span class="hljs-string">"cG9zdCB0byBtZW1vLmNhc2gh"</span>,
+      <span class="hljs-attr">"s2"</span>: <span class="hljs-string">"post to memo.cash!"</span>,
+      <span class="hljs-attr">"str"</span>: <span class="hljs-string">"&lt;Script: OP_RETURN 2 0x6d02 18 0x706f737420746f206d656d6f2e6361736821&gt;"</span>,
+      <span class="hljs-attr">"e"</span>: {
+        <span class="hljs-attr">"v"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>
+      }
+    },
+    {
+      <span class="hljs-attr">"i"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"b0"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">118</span>
+      },
+      <span class="hljs-attr">"b1"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">169</span>
+      },
+      <span class="hljs-attr">"b2"</span>: <span class="hljs-string">"GbJqurh94aXQfTShLyMvW3XHyvE="</span>,
+      <span class="hljs-attr">"s2"</span>: <span class="hljs-string">"\u0019�j��}��}4�/#/[u���"</span>,
+      <span class="hljs-attr">"b3"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">136</span>
+      },
+      <span class="hljs-attr">"b4"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">172</span>
+      },
+      <span class="hljs-attr">"str"</span>: <span class="hljs-string">"&lt;Script: OP_DUP OP_HASH160 20 0x19b26abab87de1a5d07d34a12f232f5b75c7caf1 OP_EQUALVERIFY OP_CHECKSIG&gt;"</span>,
+      <span class="hljs-attr">"e"</span>: {
+        <span class="hljs-attr">"v"</span>: <span class="hljs-number">16904</span>,
+        <span class="hljs-attr">"i"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"a"</span>: <span class="hljs-string">"qqvmy646hp77rfws0562zter9adht3727yu7kf3sls"</span>
+      }
+    }
+  ]
+}
+</code></pre>
+<p><br></p>
+<p>Finally, <strong>THIS</strong> is what gets stored in BitDB as a row.</p>
+<p><br></p>
+<p>In the sections below, we'll take a look at each attribute of this document format. There are three levels:</p>
+<ol>
+<li><strong>Transaction:</strong> The top level object contains <strong>tx</strong>, <strong>blk</strong>, <strong>in</strong>, and <strong>out</strong>.</li>
+<li><strong>Script:</strong> <strong>in</strong> represents input scripts, and <strong>out</strong> represents output scripts. These are the core of every transaction as they contain the actual algorithm of each transaction.</li>
+<li><strong>Graph:</strong> Each item in the <strong>in</strong> and <strong>out</strong> arrays has an attribute called <strong>e</strong> (stands for &quot;edge&quot;) which contains the graph structure of each transaction.</li>
+</ol>
+<ul>
+<li><strong>in.e:</strong> (the <strong>e</strong> attribute inside an <strong>in</strong> item) means &quot;incoming edge&quot;. It represents the previous linked transaction.</li>
+<li><strong>out.e:</strong> (the <strong>e</strong> attribute inside an <strong>out</strong> item) means &quot;outgoing edge&quot;. It represents the next linked transaction.</li>
+</ul>
+<p>Let's walk through the entire document to see how each level is structured:</p>
+<h2><a class="anchor" aria-hidden="true" id="2-bitdb-document-format"></a><a href="#2-bitdb-document-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. BitDB Document Format</h2>
+<h3><a class="anchor" aria-hidden="true" id="level-1-transaction"></a><a href="#level-1-transaction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Level 1. Transaction</h3>
+<p>BitDB represents a transaction as a MongoDB document entry, which follows the following high level format:</p>
+<pre><code class="hljs">{
+  <span class="hljs-string">"tx"</span>: {
+    <span class="hljs-string">"h"</span>: [TRANSACTION HASH]
+  },
+  <span class="hljs-string">"blk"</span> {
+    <span class="hljs-string">"i"</span>: [BLOCK INDEX],
+    <span class="hljs-string">"h"</span>: [BLOCK HASH],
+    <span class="hljs-string">"t"</span>: [BLOCK TIME]
+  },
+  <span class="hljs-string">"in"</span>: [
+    INPUT1,
+    INPUT2,
+    INPUT3,
+    ...
+  ],
+  <span class="hljs-string">"out"</span>: [
+    OUTPUT1,
+    OUTPUT2,
+    OUTPUT3,
+    ...
+  ]
+}
+</code></pre>
+<p>This is the top level view of what each transaction looks like when it's stored into BitDB.</p>
+<ul>
+<li><strong>tx</strong> (short for &quot;transaction&quot;): contains <strong>h</strong> attribute, which is the transaction hash.</li>
+<li><strong>blk</strong> (short for &quot;block&quot;): contains <strong>i</strong> (block index), <strong>h</strong> (block hash), <strong>t</strong> (block time).</li>
+</ul>
+<p>We will discuss the INPUT and OUTPUT script objects in detail in the next section.</p>
+<h3><a class="anchor" aria-hidden="true" id="level-2-script"></a><a href="#level-2-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Level 2. Script</h3>
+<p>Each input and output is essentially a Bitcoin script. We will need to transform a 1-dimensional Bitcoin script that looks like this:</p>
+<pre><code class="hljs">OP_DUP OP_HASH160 <span class="hljs-number">20</span> <span class="hljs-number">0xfe686b9b2ab589a3cb3368d02211ca1a9b88aa42</span> OP_EQUALVERIFY OP_CHECKSIG
+</code></pre>
+<p>into this:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>,
+  <span class="hljs-attr">"b0"</span>: {
+    <span class="hljs-attr">"op"</span>: <span class="hljs-number">118</span>
+  },
+  <span class="hljs-attr">"b1"</span>: {
+    <span class="hljs-attr">"op"</span>: <span class="hljs-number">169</span>
+  },
+  <span class="hljs-attr">"b2"</span>: <span class="hljs-string">"/mhrmyq1iaPLM2jQIhHKGpuIqkI="</span>,
+  <span class="hljs-attr">"s2"</span>: <span class="hljs-string">"�hk�*����3h�\"\u0011�\u001a���B"</span>,
+  <span class="hljs-attr">"b3"</span>: {
+    <span class="hljs-attr">"op"</span>: <span class="hljs-number">136</span>
+  },
+  <span class="hljs-attr">"b4"</span>: {
+    <span class="hljs-attr">"op"</span>: <span class="hljs-number">172</span>
+  },
+  <span class="hljs-attr">"str"</span>: <span class="hljs-string">"&lt;Script: OP_DUP OP_HASH160 20 0xfe686b9b2ab589a3cb3368d02211ca1a9b88aa42 OP_EQUALVERIFY OP_CHECKSIG&gt;"</span>,
+  <span class="hljs-attr">"e"</span>: {
+    <span class="hljs-attr">"v"</span>: <span class="hljs-number">459046</span>,
+    <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>,
+    <span class="hljs-attr">"a"</span>: <span class="hljs-string">"qrlxs6um926cng7txd5dqgs3egdfhz92ggrzlp5vsy"</span>
+  }
+}
+</code></pre>
+<p>Here's what each attribute means and how they're constructed:</p>
+<ul>
+<li><strong>i:</strong> The index of the current script within its parent transaction. One transaction can contain many input/outputs and all input/outputs are ordered within the transaction. This field describes the index of the current script input/output's index.</li>
+<li><strong>b0, b1, b2, ... :</strong> base64 encoded representation of each push data. There are two rules:
+<ul>
+<li><strong>If a push data is an opcode,</strong> it's stored as a JSON object with a single key &quot;op&quot; and its value which corresponds to Bitcoin opcode (Bitcoin opcode table) - (Example: <code>{ &quot;b0&quot;: { &quot;op&quot;: 106 } }</code> is an OP_RETURN opcode)</li>
+<li><strong>If a push data is a non-opcode,</strong> it's stored as a base64 encoded string</li>
+</ul></li>
+<li><strong>s0, s1, s2, ... :</strong> UTF8 encoded representation of each push data. Used for full text search as well as simple string matching. Only stored if the push data is not an opcode.</li>
+<li><strong>str</strong>: Full string representation of the script</li>
+<li><strong>e</strong>: (for inputs) Stands for &quot;graph edge&quot;. An array of previous outputs linking to the current transaction.
+<ul>
+<li><strong>h</strong>: The hash of the transaction that contains the previous output.</li>
+<li><strong>i</strong>: The index of the previous output within its transaction output set.</li>
+<li><strong>a</strong>: The sender address in case it can be parsed into an address</li>
+</ul></li>
+<li><strong>e</strong>: (for outputs) Stands for &quot;graph edge&quot;. An array of all outgoing outputs from the current transaction.
+<ul>
+<li><strong>v</strong>: The amount of satoshis sent</li>
+<li><strong>i</strong>: The output index within the transaction</li>
+<li><strong>a</strong>: The receiver address if the output is linking to an address</li>
+</ul></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="level-3-graph"></a><a href="#level-3-graph" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Level 3. Graph</h3>
+<p>In this section we will take a look at <strong>e</strong> (edge).</p>
+<p>There are two edges: <strong>in.e</strong> (input edge) and <strong>out.e</strong> (output edge)</p>
+<p>These represent the edges between transactions, one transaction linking to another. Let's take a look at an example to explain these concepts. We'll focus on TX B from the following diagram:</p>
+<p><img src="/img/graph.png" alt="graph"></p>
+<ol>
+<li>TX B (Transaction B) has 3 inputs and 1 output.</li>
+<li>The first input of 0.5 BCH comes from Bob</li>
+<li>If we take a look at the part where Bob sends 0.5 BCH to Alice (under &quot;Bob spends&quot;) we can see that the 0.5 BCH to Alice is the first output in the transaction (index: 0)</li>
+</ol>
+<pre><code class="hljs">{
+  <span class="hljs-string">"in"</span>: [{
+    ...
+    <span class="hljs-string">"e"</span>: {
+      <span class="hljs-string">"a"</span>: [Bob address],
+      <span class="hljs-string">"h"</span>: [TX A HASH],
+      <span class="hljs-string">"i"</span>: <span class="hljs-number">0</span>
+    }
+    ...
+  }]
+}
+</code></pre>
+<p>Basically the sender object represents the output of the previous transaction this input is connected to.</p>
+<p>Coming back to TX B and looking at its output, there seems to be only 1 output that pays out 0.8 BCH.</p>
+<pre><code class="hljs">{
+  <span class="hljs-string">"out"</span>: [{
+    ...
+    <span class="hljs-string">"e"</span>: {
+      <span class="hljs-string">"a"</span>: [Alice's employee address],
+      <span class="hljs-string">"v"</span>: <span class="hljs-number">80000000</span>,
+      <span class="hljs-string">"i"</span>: <span class="hljs-number">0</span>
+    }
+    ...
+  }]
+}
+</code></pre>
+<p>Note that 0.8 BCH equals to 80,000,000 satoshis, which is why v is 80,000,000. And since the output only has one item, the index of the output is 0.</p>
+<p>Wrapping up, the edge objects (both <strong>in.e</strong> and <strong>out.e</strong>) contain the graph structure of all bitcoin transactions. You can then query bitdb to find transactions that match certain graph patterns:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"in.e.a"</span>: [Bob address]
+    }
+  }
+}
+</code></pre>
+<p>Or, you can also use MongoDB's <a href="https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/">$lookup</a> to run JOIN operations, or <a href="https://docs.mongodb.com/manual/reference/operator/aggregation/graphLookup/">$graphLookup</a> to perform graph database queries.</p>
+<p>For example, bitdb's graph data can be used to construct an application-specific overlay graph database, such as <a href="https://tokengraph.network">tokengraph.network</a>, an explorer for <a href="https://simpleledger.cash">Simple Ledger Protocol</a>, a colored coin protocol implementation.</p>
+<p><img src="/img/tokengraph.png" alt="tokengraph"></p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/bitdbdoc/website/build/bitdbdoc/docs/crawler"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/bitdbdoc/website/build/bitdbdoc/docs/query"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#1-tna">1. TNA</a></li><li><a href="#2-bitdb-document-format">2. BitDB Document Format</a><ul class="toc-headings"><li><a href="#level-1-transaction">Level 1. Transaction</a></li><li><a href="#level-2-script">Level 2. Script</a></li><li><a href="#level-3-graph">Level 3. Graph</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>

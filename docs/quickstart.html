@@ -1,0 +1,162 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Quickstart · bitdb</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Go to https://bitdb.network/explorer and try the following queries. (Don&#x27;t forget the `&quot;v&quot;: 2`, this entire documentation is based on version 2.0, and the previous version has been deprecated)"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Quickstart · bitdb"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/index.html"/><meta property="og:description" content="Go to https://bitdb.network/explorer and try the following queries. (Don&#x27;t forget the `&quot;v&quot;: 2`, this entire documentation is based on version 2.0, and the previous version has been deprecated)"/><meta property="og:image" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/img/docusaurus.png"/><link rel="shortcut icon" href="/bitdbdoc/website/build/bitdbdoc/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,900"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/bitdbdoc/website/build/bitdbdoc/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/bitdbdoc/website/build/bitdbdoc/"><h2 class="headerTitle">bitdb</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/21centurymotorcompany" target="_self">GitHub</a></li><li class=""><a href="https://twitter.com/_unwriter" target="_self">Twitter</a></li><li class=""><a href="https://t.me/joinchat/HH1DDQ8pZlSlsdNcKgIcxw" target="_self">Chat</a></li><li class=""><a href="https://bitdb.network/explorer" target="_self">Explorer</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Howto</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/bitdb">BitDB</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/crawler">Crawler</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/indexer">Indxer</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/query">Query Engine</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Howto</h3><ul><li class="navListItem navListItemActive"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/quickstart">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/tutorial">Build a Bitcoin App in 5 Minutes</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/install">Run a node</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/diy">BitDB vs. DIY Custom Backend</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/chain">What chain does BitDB support?</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/decentralized">BitDB vs. Decentralized Databases vs. &quot;DApp Blockchain&quot;</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Quickstart</h1></header><article><div><span><p>Go to <a href="https://bitdb.network/explorer">https://bitdb.network/explorer</a> and try the following queries. (Don't forget the <code>&quot;v&quot;: 2</code>, this entire documentation is based on version 2.0, and the previous version has been deprecated)</p>
+<h2><a class="anchor" aria-hidden="true" id="1-exact-string-match"></a><a href="#1-exact-string-match" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Exact String Match</h2>
+<p>Find all transactions where the first push data is &quot;hello&quot; in UTF8</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.s1"</span>: <span class="hljs-string">"hello"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="2-multiple-push-data-query"></a><a href="#2-multiple-push-data-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Multiple Push Data Query</h2>
+<p>Find all transactions that start with &quot;6d02&quot; in hex as the first push data.</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="3-exact-match-full-text-search"></a><a href="#3-exact-match-full-text-search" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Exact Match + Full Text Search</h2>
+<p>Find all transactions where one of its outputs starts with &quot;6d02&quot; in hex, but also includes the string &quot;bet&quot; in any of its output push data.</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"$text"</span>: {
+        <span class="hljs-attr">"$search"</span>: <span class="hljs-string">"bet"</span>
+      },
+      <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span>
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="4-regular-expression-full-text-search"></a><a href="#4-regular-expression-full-text-search" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Regular Expression + Full Text Search</h2>
+<p>It is possible to run regular expression matches on fields. But due to the way MongoDB works, running pure regular expression queries can be inefficient unless efficiently structured. (Related Article)</p>
+<p>It is recommended that you use it in conjunction with a full text search to filter it down to a subset that matches the full text search results, and then apply the regex operation. (Also, make sure to read the linked article above)</p>
+<p>Example: Find all transactions where the second push data matches the UTF8 regular expression <code>/hello.*/i</code></p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7CiAgICAgICAgIiRzZWFyY2giOiAiaGVsbG8iCiAgICAgIH0sCiAgICAgICJvdXQuczIiOiB7CiAgICAgICAgIiRyZWdleCI6ICJoZWxsby4qIiwgIiRvcHRpb25zIjogImkiCiAgICAgIH0KICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"$text"</span>: {
+        <span class="hljs-attr">"$search"</span>: <span class="hljs-string">"hello"</span>
+      },
+      <span class="hljs-attr">"out.s2"</span>: {
+        <span class="hljs-attr">"$regex"</span>: <span class="hljs-string">"hello.*"</span>, <span class="hljs-attr">"$options"</span>: <span class="hljs-string">"i"</span>
+      }
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="5-query-by-address"></a><a href="#5-query-by-address" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. Query by Address</h2>
+<p>Find all transactions sent from the address <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code></p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span>
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="6-query-by-multiple-addresses"></a><a href="#6-query-by-multiple-addresses" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6. Query by Multiple Addresses</h2>
+<p>Find all transactions sent from the address <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code> and received by <code>qpne29ue8chsv9pxv653zxdhjn45umm4esyds75nx6</code></p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIsCiAgICAgICJvdXQuZS5hIjogInFwbmUyOXVlOGNoc3Y5cHh2NjUzenhkaGpuNDV1bW00ZXN5ZHM3NW54NiIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span>,
+      <span class="hljs-attr">"out.e.a"</span>: <span class="hljs-string">"qpne29ue8chsv9pxv653zxdhjn45umm4esyds75nx6"</span>
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="7-find-op-return-transactions"></a><a href="#7-find-op-return-transactions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>7. Find OP_RETURN Transactions</h2>
+<p>Find all transactions that contain an <strong>OP_RETURN</strong> output (<strong>output.b0</strong> <code>{ op: 106 }</code>)</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmIwIjogewogICAgICAgICJvcCI6IDEwNgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"out.b0"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span>
+      }
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="8-find-multisig-transactions"></a><a href="#8-find-multisig-transactions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>8. Find Multisig Transactions</h2>
+<p>Find all transactions that contain Multisig transactions (<strong>output.b5</strong> <code>{ op: 174 }</code>)</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmI1IjogewogICAgICAgICJvcCI6IDE3NAogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"out.b5"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">174</span>
+      }
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="9-filter-down-to-the-actual-matched-script"></a><a href="#9-filter-down-to-the-actual-matched-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>9. Filter down to the actual matched script</h2>
+<p>By default all queries return transaction objects since a &quot;row&quot; in BitDB is a transaction. However we can take advantage of the flexible MongoDB queries to drill down into the matched subdocuments.</p>
+<p>For example, if we were looking for a specific match in an output, we can ask the query to return the actual matched output instead of the full transaction, using MongoDB's project and $ operator:</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">"project"</span>: {
+      <span class="hljs-attr">"out.$"</span>: <span class="hljs-number">1</span>
+    }
+  }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/bitdbdoc/website/build/bitdbdoc/docs/query"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/bitdbdoc/website/build/bitdbdoc/docs/tutorial"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#1-exact-string-match">1. Exact String Match</a></li><li><a href="#2-multiple-push-data-query">2. Multiple Push Data Query</a></li><li><a href="#3-exact-match-full-text-search">3. Exact Match + Full Text Search</a></li><li><a href="#4-regular-expression-full-text-search">4. Regular Expression + Full Text Search</a></li><li><a href="#5-query-by-address">5. Query by Address</a></li><li><a href="#6-query-by-multiple-addresses">6. Query by Multiple Addresses</a></li><li><a href="#7-find-op-return-transactions">7. Find OP_RETURN Transactions</a></li><li><a href="#8-find-multisig-transactions">8. Find Multisig Transactions</a></li><li><a href="#9-filter-down-to-the-actual-matched-script">9. Filter down to the actual matched script</a></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>

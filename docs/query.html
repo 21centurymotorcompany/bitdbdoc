@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Query Engine · bitdb</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="BitDB is powered by MongoDB."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Query Engine · bitdb"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/index.html"/><meta property="og:description" content="BitDB is powered by MongoDB."/><meta property="og:image" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://docs.bitdb.network/bitdbdoc/website/build/bitdbdoc/img/docusaurus.png"/><link rel="shortcut icon" href="/bitdbdoc/website/build/bitdbdoc/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,900"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/bitdbdoc/website/build/bitdbdoc/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/bitdbdoc/website/build/bitdbdoc/"><h2 class="headerTitle">bitdb</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/21centurymotorcompany" target="_self">GitHub</a></li><li class=""><a href="https://twitter.com/_unwriter" target="_self">Twitter</a></li><li class=""><a href="https://t.me/joinchat/HH1DDQ8pZlSlsdNcKgIcxw" target="_self">Chat</a></li><li class=""><a href="https://bitdb.network/explorer" target="_self">Explorer</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Components</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/bitdb">BitDB</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/crawler">Crawler</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/indexer">Indxer</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/query">Query Engine</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Howto</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/quickstart">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/tutorial">Build a Bitcoin App in 5 Minutes</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/install">Run a node</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/diy">BitDB vs. DIY Custom Backend</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/chain">What chain does BitDB support?</a></li><li class="navListItem"><a class="navItem" href="/bitdbdoc/website/build/bitdbdoc/docs/decentralized">BitDB vs. Decentralized Databases vs. &quot;DApp Blockchain&quot;</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Query Engine</h1></header><article><div><span><p>BitDB is powered by MongoDB.</p>
+<p>On top of MongoDB's own query language, BitDB's query language adds one additional layer to create a completely self-contained and portable query language. The additional bitdb layer lets you express the query language protocol version, query encoding per push data, and the query itself.</p>
+<ul>
+<li>BitDB internally uses MongoDB to index the transactions in a structured manner. This means you can query it just like any regular MongoDB collection.</li>
+<li>BitDB supports most MongoDB methods such as find, aggregate, sort, limit, project, etc.</li>
+<li>To query the database, you simply make a request to BitDB with a JSON-based query language that looks like this:</li>
+</ul>
+<p><img src="/img/ql.png" alt="ql"></p>
+<h2><a class="anchor" aria-hidden="true" id="1-bitdb-document-format"></a><a href="#1-bitdb-document-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. BitDB Document Format</h2>
+<p>Before looking at the query language, first make sure you understand how a bitcoin transaction is decoded and transformed and stored into a query-optimized format in BitDB.</p>
+<p>You can learn about BitDB document format in the Indexer section: <a href="/docs/indexer">Learn Indexer</a></p>
+<h2><a class="anchor" aria-hidden="true" id="2-bitdb-query-language"></a><a href="#2-bitdb-query-language" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. BitDB Query Language</h2>
+<p>A BitDB query is a self-contained declarative JSON query object built on top of MongoDB query language. Every query consists of 3 top level attributes:</p>
+<ol>
+<li><strong>v:</strong> stands for &quot;version&quot;. This documentation is based on v: 2 so always use v: 2 (v:1 has been deprecated)</li>
+<li><strong>e:</strong> stands for &quot;encoding&quot;. Key-value pairs of encoding schemes for b-prefixed attributes used in the query request and its response. (example: <code>{ &quot;e&quot;: { &quot;out.b1&quot;: &quot;hex&quot; } }</code> means: &quot;the <strong>out.b1</strong> attribute is hex encoded&quot;)
+<ul>
+<li>For requests, all <strong>b-prefixed attributes</strong> are treated as &quot;utf8&quot; if not specified</li>
+<li>For responses, all <strong>b-prefixed attributes</strong> will be returned as base64 encoding unless you specify it here (&quot;hex&quot; or &quot;utf8&quot;)</li>
+</ul></li>
+<li><strong>q:</strong> stands for &quot;query&quot;.
+<ul>
+<li><strong>find:</strong> MongoDB query filter object. Learn more about MongoDB query filter​</li>
+<li><strong>aggregate:</strong> MongoDB aggregationg pipeline stages array. Learn more about Mongodb aggregate stages​</li>
+<li><strong>project:</strong> MongoDB project operator for selectively returning attributes. Learn more about Mongodb projection​</li>
+<li><strong>sort:</strong> MongoDB sort operator. Learn more about Mongodb sort operator​</li>
+<li><strong>limit:</strong> MongoDB limit operator. Limit the number of results to return</li>
+<li><strong>db:</strong> The array of database types to query against. The default is [&quot;confirmed&quot;, &quot;unconfirmed&quot;], but you can explicitly query against only one of them, using [&quot;confirmed&quot;], or [&quot;unconfirmed&quot;]</li>
+</ul></li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" id="3-example"></a><a href="#3-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Example</h2>
+<blockquote>
+<p>All examples below contain <strong>&quot;v&quot;: 2</strong>, (version 2) you should also always include the version number (&quot;v&quot;: 2 at the moment) in all your queries to future-proof your applications.</p>
+</blockquote>
+<p>Find all transactions where the first push data is &quot;hello&quot; in UTF8</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.s1"</span>: <span class="hljs-string">"hello"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<p>Find all transactions where the first push data is &quot;6d02&quot; in hex encoding</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<p>Find all transactions where the first push data is &quot;6d02&quot; in hex encoding, and the second push data matches &quot;bet&quot; in UTF8 (Note that it's combined with a full text search query for efficiency. Learn more about speeding up MongoDB regular expression queries here: <a href="https://medium.com/statuscode/how-to-speed-up-mongodb-regex-queries-by-a-factor-of-up-to-10-73995435c606">How to Speed-Up MongoDB Regex Queries by a Factor of up-to 10</a>)</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIiwKICAgICAgIm91dC5zMiI6IHsKICAgICAgICAiJHJlZ2V4IjogImJldCIsICIkb3B0aW9ucyI6ICJpIgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"$text"</span>: {
+        <span class="hljs-attr">"$search"</span>: <span class="hljs-string">"bet"</span>
+      },
+      <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span>,
+      <span class="hljs-attr">"out.s2"</span>: {
+        <span class="hljs-attr">"$regex"</span>: <span class="hljs-string">"bet"</span>, <span class="hljs-attr">"$options"</span>: <span class="hljs-string">"i"</span>
+      }
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<p>Find all input scripts with the sender <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code></p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span>
+    },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="4-only-return-the-matched-part"></a><a href="#4-only-return-the-matched-part" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Only Return the Matched Part</h2>
+<p>In many cases you are querying for a certain pattern in the subdocument.</p>
+<p>For example, you may be looking for a transaction that matches certain OP_RETURN pattern in its output.</p>
+<p>By default all BitDB queries return the entire transaction, so you may want to ask it to only return the matched OP_RETURN output. You can do this by using MongoDB's <a href="https://docs.mongodb.com/manual/reference/operator/projection/positional/">Positional Operator $</a>.</p>
+<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">"project"</span>: {
+      <span class="hljs-attr">"out.$"</span>: <span class="hljs-number">1</span>
+    }
+  }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/bitdbdoc/website/build/bitdbdoc/docs/indexer"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/bitdbdoc/website/build/bitdbdoc/docs/quickstart"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#1-bitdb-document-format">1. BitDB Document Format</a></li><li><a href="#2-bitdb-query-language">2. BitDB Query Language</a></li><li><a href="#3-example">3. Example</a></li><li><a href="#4-only-return-the-matched-part">4. Only Return the Matched Part</a></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
