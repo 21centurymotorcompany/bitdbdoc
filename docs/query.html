@@ -60,7 +60,7 @@
 <p>All examples below contain <strong>&quot;v&quot;: 2</strong>, (version 2) you should also always include the version number (&quot;v&quot;: 2 at the moment) in all your queries to future-proof your applications.</p>
 </blockquote>
 <p>Find all transactions where the first push data is &quot;hello&quot; in UTF8</p>
-<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -70,7 +70,7 @@
 }
 </code></pre>
 <p>Find all transactions where the first push data is &quot;6d02&quot; in hex encoding</p>
-<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
@@ -81,7 +81,7 @@
 }
 </code></pre>
 <p>Find all transactions where the first push data is &quot;6d02&quot; in hex encoding, and the second push data matches &quot;bet&quot; in UTF8 (Note that it's combined with a full text search query for efficiency. Learn more about speeding up MongoDB regular expression queries here: <a href="https://medium.com/statuscode/how-to-speed-up-mongodb-regex-queries-by-a-factor-of-up-to-10-73995435c606">How to Speed-Up MongoDB Regex Queries by a Factor of up-to 10</a>)</p>
-<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIiwKICAgICAgIm91dC5zMiI6IHsKICAgICAgICAiJHJlZ2V4IjogImJldCIsICIkb3B0aW9ucyI6ICJpIgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIiwKICAgICAgIm91dC5zMiI6IHsKICAgICAgICAiJHJlZ2V4IjogImJldCIsICIkb3B0aW9ucyI6ICJpIgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
@@ -100,7 +100,7 @@
 }
 </code></pre>
 <p>Find all input scripts with the sender <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code></p>
-<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -115,7 +115,7 @@
 <p>In many cases you are querying for a certain pattern in the subdocument.</p>
 <p>For example, you may be looking for a transaction that matches certain OP_RETURN pattern in its output.</p>
 <p>By default all BitDB queries return the entire transaction, so you may want to ask it to only return the matched OP_RETURN output. You can do this by using MongoDB's <a href="https://docs.mongodb.com/manual/reference/operator/projection/positional/">Positional Operator $</a>.</p>
-<p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
   <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
