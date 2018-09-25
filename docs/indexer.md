@@ -13,7 +13,7 @@ After TNA transforms the raw transaction into BitDB document format, it's stored
 
 We can think of each bitcoin transaction as a DNA that needs to be expressed into a meaningful protein. This is what BitDB Indexer does before storing into the database, through a module named [TNA](https://github.com/21centurymotorcompany/tna).
 
-![protein](/img/protein.png)
+![protein](assets/protein.png)
 
 For example, here's a raw transaction:
 
@@ -215,7 +215,7 @@ There are two edges: **in.e** (input edge) and **out.e** (output edge)
 
 These represent the edges between transactions, one transaction linking to another. Let's take a look at an example to explain these concepts. We'll focus on TX B from the following diagram:
 
-![graph](/img/graph.png)
+![graph](assets/graph.png)
 
 1. TX B (Transaction B) has 3 inputs and 1 output.
 2. The first input of 0.5 BCH comes from Bob
@@ -272,4 +272,4 @@ Or, you can also use MongoDB's [$lookup](https://docs.mongodb.com/manual/referen
 
 For example, bitdb's graph data can be used to construct an application-specific overlay graph database, such as [tokengraph.network](https://tokengraph.network), an explorer for [Simple Ledger Protocol](https://simpleledger.cash), a colored coin protocol implementation.
 
-![tokengraph](/img/tokengraph.png)
+![tokengraph](assets/tokengraph.png)

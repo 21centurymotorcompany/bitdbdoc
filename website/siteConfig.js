@@ -24,7 +24,7 @@ const siteConfig = {
   title: 'bitdb', // Title for your website.
   tagline: 'Random Access Memory for Bitcoin',
   url: 'https://docs.bitdb.network', // Your website URL
-  baseUrl: '/bitdbdoc/website/build/bitdbdoc/', // Base URL for your project */
+  baseUrl: '/bitdbdoc/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',

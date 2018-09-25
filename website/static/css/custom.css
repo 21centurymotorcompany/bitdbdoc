@@ -37,6 +37,12 @@ body {
 .toc .toggleNav .navGroup .navGroupCategoryTitle {
   font-weight: 900;
 }
+.toc .toggleNav ul li.navListItemActive a, .toc .toggleNav ul li a:focus, .toc .toggleNav ul li a:hover {
+  font-weight: bold;
+}
+.toc .toggleNav ul li a {
+  font-size: 13px;
+}
 h1,h2,h3,h4,h5,h6 {
   color: #20232a;
 /*

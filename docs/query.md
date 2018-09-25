@@ -12,14 +12,14 @@ On top of MongoDB's own query language, BitDB's query language adds one addition
 - BitDB supports most MongoDB methods such as find, aggregate, sort, limit, project, etc.
 - To query the database, you simply make a request to BitDB with a JSON-based query language that looks like this:
 
-![ql](/img/ql.png)
+![ql](assets/ql.png)
 
 
 ## 1. BitDB Document Format
 
 Before looking at the query language, first make sure you understand how a bitcoin transaction is decoded and transformed and stored into a query-optimized format in BitDB.
 
-You can learn about BitDB document format in the Indexer section: [Learn Indexer](/docs/indexer)
+You can learn about BitDB document format in the Indexer section: [Learn Indexer](indexer)
 
 ## 2. BitDB Query Language
 

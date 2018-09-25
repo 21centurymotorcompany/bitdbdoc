@@ -12,7 +12,7 @@ sidebar_label: Crawler
 
 Unlike web search engines like Google which crawl the web by traveling through a network of links, BitDB indexes bitcoin by traveling through time, linearly.
 
-![timecrawler](/img/timecrawler.png)
+![timecrawler](assets/timecrawler.png)
 
 ## Bitcoin Index
 

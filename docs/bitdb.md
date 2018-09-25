@@ -4,11 +4,11 @@ title: BitDB
 sidebar_label: BitDB
 ---
 
-Random Access Memory for Bitcoin - [https://bitdb.network](https://bitdb.network)
+**Random Access Memory for Bitcoin** - [https://bitdb.network](https://bitdb.network)
 
 <br>
 
-![ram](/img/ram.png)
+![ram](assets/ram.png)
 
 <br>
 
@@ -38,7 +38,7 @@ BitDB is an autonomous database that continuously synchronizes itself with Bitco
 
 By **functioning as a "Memory" to Bitcoin's "Hard Disk"**, BitDB enables a whole new category of powerful in-memory data processing that used to be impossible with Bitcoin's JSON-RPC alone, and makes it as simple as a MongoDB query.
 
-![arch](/img/arch.png)
+![arch](assets/arch.png)
 
 ### 2. BitDB is Readonly
 
@@ -63,7 +63,7 @@ You'll see that BitDB immediately synchronizes with Bitcoin and your transaction
 
 https://developer.bitcoin.com/bitbox.html
 
-<img src='/img/bitbox.png' class='text-left'>
+<img src='assets/bitbox.png' class='text-left'>
 
 ---
 
@@ -71,7 +71,7 @@ https://developer.bitcoin.com/bitbox.html
 
 https://bitcoincashjs.github.io/
 
-<img src='/img/bitcoincashjs.png' class='text-left'>
+<img src='assets/bitcoincashjs.png' class='text-left'>
 
 </div>
 
@@ -79,7 +79,7 @@ https://bitcoincashjs.github.io/
 
 In essence, BitDB is a database constructed by a one-way synchronization function that transforms a raw Bitcoin transaction into a structured data format that can be queried against.
 
-![function](/img/function.png)
+![function](assets/function.png)
 
 This means we can reconstruct identical BitDB databases as many times as we want from Bitcoin. If there's a nuclear war and every single BitDB node goes down, as long as there are Bitcoin nodes running, you can recover from the destruction by traversing the transform function through time (blockchain).
 
@@ -132,9 +132,9 @@ Good news: You don't have to wait because it's already here, it's called BitDB.
 
 BitDB is all three of those databases in one:
 
-- BitDB is a [Bitcoin Transaction Database](http://localhost:3000/docs/indexer#level-1-transaction)
-- BitDB is a [Bitcoin Script Database](http://localhost:3000/docs/indexer#level-2-script)
-- BitDB is a [Bitcoin Transaction Graph Database](http://localhost:3000/docs/indexer#level-3-graph)
+- BitDB is a [Bitcoin Transaction Database](indexer#level-1-transaction)
+- BitDB is a [Bitcoin Script Database](indexer#level-2-script)
+- BitDB is a [Bitcoin Transaction Graph Database](indexer#level-3-graph)
 
 ---
 
@@ -180,7 +180,7 @@ The standardized database query language protocol ensures that your app will liv
 
 ### 2. Architecture Overview
 
-![ciq](/img/ciq.png)
+![ciq](assets/ciq.png)
 
 Here's a high level overview of BitDB:
 

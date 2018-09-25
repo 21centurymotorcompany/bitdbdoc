@@ -10,7 +10,7 @@ The app will be 100% frontend (No server) and will fetch and display contents fr
 
 <br>
 
-<img src='/img/app.png' class='frame'>
+<img src='assets/app.png' class='frame'>
 
 <br>
 
@@ -25,7 +25,7 @@ The app will be 100% frontend (No server) and will fetch and display contents fr
 
 We are going to fetch bitcoin transactions that follow the [memo.cash OP_RETURN protocol](https://memo.cash/protocol). Check out the protocol spec and you'll find the following at the top:
 
-![memoprotocol](/img/memoprotocol.png)
+![memoprotocol](assets/memoprotocol.png)
 
 This is just one example protocol, but most other OP_RETURN protocols work in similar ways. In this case there are 3 push data: `OP_RETURN`, `6d01`, and `6d656d6f`
 
@@ -35,11 +35,11 @@ The BitDB document format indexes these as:
 - **out.b1**: base64 encoded version of 0x6d01
 - **out.b2**: base64 encoded version of 0x6d656d6f
 
-> To learn more about the Bitdb document format, see [here](/docs/indexer#2-bitdb-document-format)
+> To learn more about the Bitdb document format, see [here](indexer#2-bitdb-document-format)
 
 Now that we understand how Memo's protocol works, let's look at the actual "action" that we're interested in. We only want to fetch all the "Post memo" actions and display them.
 
-![memoaction](/img/memopost.png)
+![memoaction](assets/memopost.png)
 
 So what we need is:
 
@@ -92,7 +92,7 @@ var query = {
 3. **q:** Inside the q is just a regular MongoDB query.
     - **find:** It's looking for a match for "out.b1": "6d02" (We already specified the hex encoding from above, so the query engine will recognize this as hex)
     - **limit:** get 50
-    - **project:** This is a special MongoDB projection operation that [only returns a matched subdocument instead of the entire document](/docs/query#4-only-return-the-matched-part). In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.
+    - **project:** This is a special MongoDB projection operation that [only returns a matched subdocument instead of the entire document](query#4-only-return-the-matched-part). In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.
 
 # 3. Write the Web App
 
@@ -159,5 +159,5 @@ And that's it! Open the HTML file in your browser and you should see the followi
 
 <br>
 
-<img src='/img/app.png' class='frame'>
+<img src='assets/app.png' class='frame'>
 

@@ -14,7 +14,7 @@ Most attempts at building a "global decentralized database" have looked like thi
 2. implement the replication feature
 3. sprinkle some magical distributed consensus and governance rules to tackle the decentralized replication problem.
 
-![concurrent write](/img/concurrentwrite.png)
+![concurrent write](assets/concurrentwrite.png)
 
 The big challenge with this approach is that the network needs to not only get the tech but also the incentive structure right in order to achieve decentralization. If nobody is incentivized enough to run the network, the whole thing collapses overnight. This is not a trivial problem. There's a reason why we don't have a mainstream decentralized database with such architecture.
 
@@ -35,7 +35,7 @@ BitDB is a project to show that:
 
 BitDB builds on top of Bitcoin.
 
-![one way sync](/img/onewaysync.png)
+![one way sync](assets/onewaysync.png)
 
 ### 1. BitDB is Proof of Work
 
