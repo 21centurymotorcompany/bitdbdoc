@@ -59,6 +59,7 @@
 <blockquote>
 <p>All examples below contain <strong>&quot;v&quot;: 2</strong>, (version 2) you should also always include the version number (&quot;v&quot;: 2 at the moment) in all your queries to future-proof your applications.</p>
 </blockquote>
+<hr>
 <p>Find 10 OP_RETURN transactions that contains &quot;hello&quot; as the second push data:</p>
 <ol>
 <li>The first push data (b0) is <code>{&quot;op&quot;: 106}</code> (OP_RETURN)</li>
@@ -78,6 +79,7 @@
   }
 }
 </code></pre>
+<hr>
 <p>Find 10 transactions where the second push data is &quot;6d02&quot; in hex encoding</p>
 <p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
@@ -89,6 +91,7 @@
   }
 }
 </code></pre>
+<hr>
 <p>Find 10 transactions where <a href="https://github.com/fyookball/ChainBet/blob/master/PROTOCOL.md#op_return-communication-messages">the second push data is &quot;00424554&quot;</a></p>
 <p><a href="https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIm91dC5iMSI6ICIwMDQyNDU1NCIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
@@ -102,6 +105,7 @@
   }
 }
 </code></pre>
+<hr>
 <p>Find 10 transactions where the second push data is &quot;6d02&quot; in hex encoding, and the second push data matches &quot;bet&quot; in UTF8 (Note that it's combined with a full text search query for efficiency. Learn more about speeding up MongoDB regular expression queries here: <a href="https://medium.com/statuscode/how-to-speed-up-mongodb-regex-queries-by-a-factor-of-up-to-10-73995435c606">How to Speed-Up MongoDB Regex Queries by a Factor of up-to 10</a>)</p>
 <p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIiwKICAgICAgIm91dC5zMiI6IHsKICAgICAgICAiJHJlZ2V4IjogImJldCIsICIkb3B0aW9ucyI6ICJpIgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
@@ -121,6 +125,7 @@
   }
 }
 </code></pre>
+<hr>
 <p>Find 10 transactions with an input script with the sender <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code></p>
 <p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
@@ -133,6 +138,7 @@
   }
 }
 </code></pre>
+<hr>
 <h2><a class="anchor" aria-hidden="true" id="4-only-return-the-matched-part"></a><a href="#4-only-return-the-matched-part" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Only Return the Matched Part</h2>
 <p>In many cases you are querying for a certain pattern in the subdocument.</p>
 <p>For example, you may be looking for a transaction that matches certain OP_RETURN pattern in its output.</p>
