@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Build a Bitcoin App in 5 Minutes · bitdb</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Required Skills"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Build a Bitcoin App in 5 Minutes · bitdb"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.bitdb.network/index.html"/><meta property="og:description" content="## Required Skills"/><meta property="og:image" content="https://docs.bitdb.network/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://docs.bitdb.network/img/docusaurus.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,900"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><h2 class="headerTitle">bitdb</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/21centurymotorcompany/bitd" target="_self">GitHub</a></li><li class=""><a href="https://twitter.com/_unwriter" target="_self">Twitter</a></li><li class=""><a href="https://t.me/joinchat/HH1DDQ8pZlSlsdNcKgIcxw" target="_self">Chat</a></li><li class=""><a href="https://bitdb.network/v2/explorer" target="_self">Explorer</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Build a Bitcoin App in 5 Minutes</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="required-skills"></a><a href="#required-skills" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required Skills</h2>
+<blockquote>
+<p>HTML and JavaScript. That's all!</p>
+<p>You don't even need to set up a server, this demo will run server-less, leveraging the bitdb.network public endpoint.</p>
+</blockquote>
+<p>Let's build a bitcoin powered web app using a public BitDB Full Node at bitdb.network.</p>
+<p>The app will be 100% frontend (No server) and will fetch and display contents from <a href="https://memo.cash">memo.cash</a> transactions from bitcoin through bitdb. The web app will look like this:</p>
+<p><br></p>
+<p><img src='assets/app.png' class='frame'></p>
+<p><br></p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="step-1-get-bitdbnetwork-public-node-api-key"></a><a href="#step-1-get-bitdbnetwork-public-node-api-key" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 1. Get bitdb.network public node API key</h2>
+<p><a href="https://bitdb.network">bitdb.network</a> is a full node implementation of BitDB with a free HTTP API endpoint. The endpoint is completely free but you first need to sign up and get an API key (The API key is just for DDOS protection)</p>
+<p><a href="https://bitdb.network/v2/dashboard">[Get bitdb.network API Key]</a></p>
+<p><br></p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="step-2-construct-bitdb-query"></a><a href="#step-2-construct-bitdb-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 2. Construct BitDB query</h2>
+<p>We are going to fetch bitcoin transactions that follow the <a href="https://memo.cash/protocol">memo.cash OP_RETURN protocol</a>. Check out the protocol spec and you'll find the following at the top:</p>
+<p><img src="/docs/assets/memoprotocol.png" alt="memoprotocol"></p>
+<p>This is just one example protocol, but most other OP_RETURN protocols work in similar ways. In this case there are 3 push data: <code>OP_RETURN</code>, <code>6d01</code>, and <code>6d656d6f</code></p>
+<p>The BitDB document format indexes these as:</p>
+<ul>
+<li><strong>out.b0</strong>: <code>{ &quot;op&quot;: 106 }</code> (OP_RETURN's code is 106)</li>
+<li><strong>out.b1</strong>: base64 encoded version of 0x6d01</li>
+<li><strong>out.b2</strong>: base64 encoded version of 0x6d656d6f</li>
+</ul>
+<blockquote>
+<p>To learn more about the Bitdb document format, see <a href="indexer#2-bitdb-document-format">here</a></p>
+</blockquote>
+<p>Now that we understand how Memo's protocol works, let's look at the actual &quot;action&quot; that we're interested in. We only want to fetch all the &quot;Post memo&quot; actions and display them.</p>
+<p><img src="/docs/assets/memopost.png" alt="memoaction"></p>
+<p>So what we need is:</p>
+<ul>
+<li>An OP_RETURN output ( {&quot;op&quot;: 106} )</li>
+<li>that has <code>out.b1</code> of 6d02 (in hex format)</li>
+<li>and extract out <code>out.b2</code> (message), which can then be printed on the screen.</li>
+</ul>
+<p>Here's an example of what a real-world memo.cash &quot;Post memo&quot; transaction output looks like:</p>
+<pre><code class="hljs">{
+  ...
+  <span class="hljs-string">"out"</span>: [{
+    ...
+  }, {
+    <span class="hljs-string">"i"</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-string">"b0"</span>: {
+      <span class="hljs-string">"op"</span>: <span class="hljs-number">106</span>
+    },
+    <span class="hljs-string">"b1"</span>: <span class="hljs-string">"bQI="</span>,
+    <span class="hljs-string">"s1"</span>: <span class="hljs-string">"m\u0002"</span>,
+    <span class="hljs-string">"b2"</span>: <span class="hljs-string">"SGVsbG8gZ29vZCBqb2Igb25saW5lIHdvcmtpbmcKaHR0cDovL3JlZGQuaXQvOWhmZ2xl"</span>,
+    <span class="hljs-string">"s2"</span>: <span class="hljs-string">"Hello good job online working\nhttp://redd.it/9hfgle"</span>,
+    <span class="hljs-string">"str"</span>: <span class="hljs-string">"&lt;Script: OP_RETURN 2 0x6d02 51 0x48656c6c6f20676f6f64206a6f62206f6e6c696e6520776f726b696e670a687474703a2f2f726564642e69742f396866676c65&gt;"</span>,
+    <span class="hljs-string">"e"</span>: {
+      <span class="hljs-string">"v"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-string">"i"</span>: <span class="hljs-number">1</span>
+    }
+  }]
+}
+</code></pre>
+<p>The query to filter out above pattern looks like this:</p>
+<pre><code class="hljs">var query = {
+<span class="hljs-symbol">  v:</span> <span class="hljs-number">2</span>,
+<span class="hljs-symbol">  e:</span> { <span class="hljs-string">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+<span class="hljs-symbol">  q:</span> {
+<span class="hljs-symbol">    find:</span> { <span class="hljs-string">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
+<span class="hljs-symbol">    limit:</span> <span class="hljs-number">50</span>,
+<span class="hljs-symbol">    project:</span> { <span class="hljs-string">"out.b1.$"</span>: <span class="hljs-number">1</span> }
+  }
+};
+</code></pre>
+<ol>
+<li><strong>v:</strong> 2. we're using API version 2 and must specify this in the query protocol.</li>
+<li><strong>e:</strong> <code>{ &quot;out.b1&quot;: &quot;hex&quot; }</code> since our <code>out.b1</code> attribute will be in hex format, we need to specify its encoding as &quot;hex&quot;.</li>
+<li><strong>q:</strong> Inside the q is just a regular MongoDB query.
+<ul>
+<li><strong>find:</strong> It's looking for a match for &quot;out.b1&quot;: &quot;6d02&quot; (We already specified the hex encoding from above, so the query engine will recognize this as hex)</li>
+<li><strong>limit:</strong> get 50</li>
+<li><strong>project:</strong> This is a special MongoDB projection operation that <a href="query#4-only-return-the-matched-part">only returns a matched subdocument instead of the entire document</a>. In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.</li>
+</ul></li>
+</ol>
+<hr>
+<h2><a class="anchor" aria-hidden="true" id="step-3-write-the-web-app"></a><a href="#step-3-write-the-web-app" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Step 3. Write the Web App</h2>
+<p>Now that we've constructed the query, we just need to make an HTTP request to a bitdb node and render its results (Remember to replace the <strong>[YOUR API KEY GOES HERE]</strong> part with your own API key from step 1)</p>
+<pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="css">
+<span class="hljs-selector-tag">body</span> {
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">50px</span>;
+  <span class="hljs-attribute">font-family</span>: arial;
+  <span class="hljs-attribute">font-size</span>: <span class="hljs-number">12px</span>;
+}
+<span class="hljs-selector-tag">div</span> {
+  <span class="hljs-attribute">width</span>: <span class="hljs-number">500px</span>;
+  <span class="hljs-attribute">margin</span>: <span class="hljs-number">0</span> auto;
+  <span class="hljs-attribute">padding</span>: <span class="hljs-number">10px</span> <span class="hljs-number">0</span>;
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-comment">// The query we constructed from step 2.</span>
+<span class="hljs-keyword">var</span> query = {
+  <span class="hljs-attr">v</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">e</span>: { <span class="hljs-string">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">q</span>: {
+    <span class="hljs-attr">find</span>: { <span class="hljs-string">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">limit</span>: <span class="hljs-number">50</span>,
+    <span class="hljs-attr">project</span>: { <span class="hljs-string">"out.b1.$"</span>: <span class="hljs-number">1</span> }
+  }
+};
+​
+<span class="hljs-comment">// Turn the query into base64 encoded string.</span>
+<span class="hljs-comment">// This is required for accessing a public bitdb node</span>
+<span class="hljs-keyword">var</span> b64 = btoa(<span class="hljs-built_in">JSON</span>.stringify(query));
+<span class="hljs-keyword">var</span> url = <span class="hljs-string">"https://bitdb.network/q/"</span> + b64;
+​
+<span class="hljs-comment">// Attach API KEY as header</span>
+<span class="hljs-keyword">var</span> header = {
+  <span class="hljs-attr">headers</span>: { <span class="hljs-attr">key</span>: [YOUR API KEY GOES HERE] }
+};
+​
+<span class="hljs-comment">// Make an HTTP request to bitdb.network public endpoint</span>
+fetch(url, header).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">r</span>) </span>{
+  <span class="hljs-keyword">return</span> r.json()
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">r</span>) </span>{
+​
+  <span class="hljs-comment">// Parse the response and render the results on the screen</span>
+  r.confirmed.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">output</span>) </span>{
+    <span class="hljs-keyword">var</span> div = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
+    div.innerHTML = output.out[<span class="hljs-number">0</span>].s2;
+    <span class="hljs-built_in">document</span>.body.appendChild(div)
+​
+  })
+})
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>And that's it! Open the HTML file in your browser and you should see the following screen, with the latest content from Memo.cash:</p>
+<p><br></p>
+<p><img src='assets/app.png' class='frame'></p>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#required-skills">Required Skills</a></li><li><a href="#step-1-get-bitdbnetwork-public-node-api-key">Step 1. Get bitdb.network public node API key</a></li><li><a href="#step-2-construct-bitdb-query">Step 2. Construct BitDB query</a></li><li><a href="#step-3-write-the-web-app">Step 3. Write the Web App</a></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>

@@ -39,40 +39,128 @@
 <h2><a class="anchor" aria-hidden="true" id="2-bitdb-query-language"></a><a href="#2-bitdb-query-language" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. BitDB Query Language</h2>
 <p>A BitDB query is a self-contained declarative JSON query object built on top of MongoDB query language. Every query consists of 3 top level attributes:</p>
 <ol>
-<li><strong>v:</strong> stands for &quot;version&quot;. This documentation is based on v: 2 so always use v: 2 (v:1 has been deprecated)</li>
-<li><strong>e:</strong> stands for &quot;encoding&quot;. Key-value pairs of encoding schemes for b-prefixed attributes used in the query request and its response. (example: <code>{ &quot;e&quot;: { &quot;out.b1&quot;: &quot;hex&quot; } }</code> means: &quot;the <strong>out.b1</strong> attribute is hex encoded&quot;)
-<ul>
-<li>For requests, all <strong>b-prefixed attributes</strong> are treated as &quot;utf8&quot; if not specified</li>
-<li>For responses, all <strong>b-prefixed attributes</strong> will be returned as base64 encoding unless you specify it here (&quot;hex&quot; or &quot;utf8&quot;)</li>
-</ul></li>
+<li><strong>v:</strong> stands for &quot;version&quot;. This documentation is based on v: 3 so always use v: 3 (v:1 and 2 will be deprecated)</li>
 <li><strong>q:</strong> stands for &quot;query&quot;.
 <ul>
-<li><strong>find:</strong> MongoDB query filter object. Learn more about MongoDB query filter​</li>
-<li><strong>aggregate:</strong> MongoDB aggregationg pipeline stages array. Learn more about Mongodb aggregate stages​</li>
-<li><strong>project:</strong> MongoDB project operator for selectively returning attributes. Learn more about Mongodb projection​</li>
-<li><strong>sort:</strong> MongoDB sort operator. Learn more about Mongodb sort operator​</li>
+<li><strong>find:</strong> MongoDB query filter object. Learn more about MongoDB query filter</li>
+<li><strong>aggregate:</strong> MongoDB aggregationg pipeline stages array. Learn more about Mongodb aggregate stages</li>
+<li><strong>project:</strong> MongoDB project operator for selectively returning attributes. Learn more about Mongodb projection</li>
+<li><strong>sort:</strong> MongoDB sort operator. Learn more about Mongodb sort operator</li>
 <li><strong>limit:</strong> MongoDB limit operator. Limit the number of results to return</li>
-<li><strong>db:</strong> The array of database types to query against. The default is [&quot;confirmed&quot;, &quot;unconfirmed&quot;], but you can explicitly query against only one of them, using [&quot;confirmed&quot;], or [&quot;unconfirmed&quot;]</li>
+<li><strong>skip:</strong> MongoDB skip operator. Combining the &quot;limit&quot; and &quot;skip&quot; you can implement pagination</li>
+<li><strong>db:</strong> The array of database types to query against. The default is [&quot;c&quot;, &quot;u&quot;] (each representing &quot;confirmed&quot; and &quot;unconfirmed&quot; respectively), but you can explicitly query against only one of them, using [&quot;c&quot;], or [&quot;u&quot;]</li>
 </ul></li>
+<li><strong>r:</strong> stands for &quot;response&quot;. response processor.</li>
 </ol>
+<ul>
+<li><strong>f:</strong> stands for &quot;filter&quot;. This is a single line filter string written in <a href="https://stedolan.github.io/jq">jq</a>, <strong>a turing complete, stack based JSON processing language.</strong></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="a-encoding"></a><a href="#a-encoding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A. Encoding</h3>
+<p>In order to handle encoding, BitDB introduces virtual variables with <strong>h-prefix</strong> (h0, h1, h2, h3, ...) which are hex encoded representation of the b0, b1, b2, b3, etc. counterparts.</p>
+<p>Internally these h-variables are not stored in the DB but generated at query-time and response-time. Here's an example:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span>
+    }
+  }
+}
+</code></pre>
+<p>Above query is transformed at query time into:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"bQI="</span>
+    }
+  }
+}
+</code></pre>
+<p>And then sent to MongoDB (which only contains b-prefixed and s-prefixed attributes). Then it returns the response that looks like this:</p>
+<pre><code class="hljs">{
+  ...
+  confirmed: [{
+    ...
+    out: [{
+      b0: {
+        op: <span class="hljs-number">106</span>
+      },
+      b1: <span class="hljs-string">"bQI="</span>,
+      ...
+    }]
+    ...
+  }]
+  ...
+}
+</code></pre>
+<p>But the query engine doesn't stop here. It decodes above response to attach additional h-prefixed attributes, interpreted from the returned b-attributes. So the final response that's returned as the result is:</p>
+<pre><code class="hljs">{
+  ...
+  confirmed: [{
+    ...
+    out: [{
+      b0: {
+        op: <span class="hljs-number">106</span>
+      },
+      b1: <span class="hljs-string">"bQI="</span>,
+      h1: <span class="hljs-string">"6d02"</span>
+      ...
+    }]
+    ...
+  }]
+  ...
+}
+</code></pre>
+<p>This way, BitDB implements virtual variables without having to store them in the db.</p>
+<h3><a class="anchor" aria-hidden="true" id="b-query"></a><a href="#b-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. Query</h3>
+<p>The query object becomes translated into native MongoDB API call.</p>
+<p>Currently supported query API methods are: <code>find</code>, <code>aggregate</code>, <code>project</code>, <code>sort</code>, <code>limit</code>, and <code>skip</code>, but this can be expanded according to need.</p>
+<p>To learn how to query BitDB, you can just think of this as a regular MongoDB instance. You can learn more about MongoDB queries <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">here</a></p>
+<h3><a class="anchor" aria-hidden="true" id="c-response-handling"></a><a href="#c-response-handling" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>C. Response Handling</h3>
+<p>With version 3, Bitquery introduces <strong>&quot;response filter&quot;</strong>. Previously it was not easy to filter the response so that it can be used immediately in the client-side without any additional program. The only way you could do this was by using MongoDB's <code>aggregate</code> queries to write a huge sequence of complicated pipelines, but this was bad because:</p>
+<ol>
+<li>It's too convoluted</li>
+<li>It takes up too much resource on the database side</li>
+</ol>
+<p>The new approach is to let the database just make simple queries, and on top of that introduce an adapter that processes the database response before returning to the client.</p>
+<p>And <strong>BitDB chooses a turing complete, stack based JSON processing language called <a href="https://stedolan.github.io/jq/">jq</a>.</strong> Here are the benefits of jq:</p>
+<ol>
+<li><strong>Powerful:</strong> It's Turing Complete, meaning you can probably transform any JSON into any format you want.</li>
+<li><strong>Efficient:</strong> It offloads the work from the database by doing all the filtering outside of the DB engine.</li>
+<li><strong>Portable:</strong> Most importantly, the language fits into JSON format as a single line of string, thanks to its stack based programming paradigm. This is important for building decentralized applications on top of Bitcoin because a query API and its response format needs to be as self-descriptive as possible.</li>
+</ol>
+<p>Here's an example of a jq-powered response filtering:</p>
+<p>Find 100 transactions with an output OP_RETURN script that starts with <code>0x6d02</code> (memo.cash). And then return only its block index, block time, and content.</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">100</span>
+  },
+  <span class="hljs-attr">"r"</span>: {
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[{ block: .blk.i?, timestamp: .blk.t?, content: .out[1].s2 }]"</span>
+  }
+}
+</code></pre>
+<hr>
 <h2><a class="anchor" aria-hidden="true" id="3-example"></a><a href="#3-example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Example</h2>
 <blockquote>
-<p>All examples below contain <strong>&quot;v&quot;: 2</strong>, (version 2) you should also always include the version number (&quot;v&quot;: 2 at the moment) in all your queries to future-proof your applications.</p>
+<p>All examples below contain <strong>&quot;v&quot;: 3</strong>, (version 3) you should also always include the version number (&quot;v&quot;: 3 at the moment) in all your queries to future-proof your applications.</p>
 </blockquote>
+<h3><a class="anchor" aria-hidden="true" id="a-queries"></a><a href="#a-queries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A. queries</h3>
 <hr>
 <p>Find 10 OP_RETURN transactions that contains &quot;hello&quot; as the second push data:</p>
 <ol>
 <li>The first push data (b0) is <code>{&quot;op&quot;: 106}</code> (OP_RETURN)</li>
 <li>The second push data in UTF encoding (s1) is &quot;hello&quot;</li>
 </ol>
-<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmIwIjogewogICAgICAgICJvcCI6IDEwNgogICAgICB9LAogICAgICAib3V0LnMxIjogImhlbGxvIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmIwIjogeyAib3AiOiAxMDYgfSwKICAgICAgIm91dC5zMSI6ICJoZWxsbyIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
-  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
     <span class="hljs-attr">"find"</span>: {
-      <span class="hljs-attr">"out.b0"</span>: {
-        <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span>
-      },
+      <span class="hljs-attr">"out.b0"</span>: { <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span> },
       <span class="hljs-attr">"out.s1"</span>: <span class="hljs-string">"hello"</span>
     },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
@@ -81,45 +169,36 @@
 </code></pre>
 <hr>
 <p>Find 10 transactions where the second push data is &quot;6d02&quot; in hex encoding</p>
-<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LmgxIjogIjZkMDIiIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
-  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
-    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
   }
 }
 </code></pre>
 <hr>
 <p>Find 10 transactions where <a href="https://github.com/fyookball/ChainBet/blob/master/PROTOCOL.md#op_return-communication-messages">the second push data is &quot;00424554&quot;</a></p>
-<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIm91dC5iMSI6ICIwMDQyNDU1NCIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LmgxIjogIjAwNDI0NTU0IiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
-  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
-    <span class="hljs-attr">"find"</span>: {
-      <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"00424554"</span>
-    },
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"00424554"</span> },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
   }
 }
 </code></pre>
 <hr>
 <p>Find 10 transactions where the second push data is &quot;6d02&quot; in hex encoding, and the second push data matches &quot;bet&quot; in UTF8 (Note that it's combined with a full text search query for efficiency. Learn more about speeding up MongoDB regular expression queries here: <a href="https://medium.com/statuscode/how-to-speed-up-mongodb-regex-queries-by-a-factor-of-up-to-10-73995435c606">How to Speed-Up MongoDB Regex Queries by a Factor of up-to 10</a>)</p>
-<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIiwKICAgICAgIm91dC5zMiI6IHsKICAgICAgICAiJHJlZ2V4IjogImJldCIsICIkb3B0aW9ucyI6ICJpIgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7ICIkc2VhcmNoIjogImJldCIgfSwKICAgICAgIm91dC5oMSI6ICI2ZDAyIiwKICAgICAgIm91dC5zMiI6IHsgIiRyZWdleCI6ICJiZXQiLCAiJG9wdGlvbnMiOiAiaSIgfQogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
-  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
     <span class="hljs-attr">"find"</span>: {
-      <span class="hljs-attr">"$text"</span>: {
-        <span class="hljs-attr">"$search"</span>: <span class="hljs-string">"bet"</span>
-      },
-      <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span>,
-      <span class="hljs-attr">"out.s2"</span>: {
-        <span class="hljs-attr">"$regex"</span>: <span class="hljs-string">"bet"</span>, <span class="hljs-attr">"$options"</span>: <span class="hljs-string">"i"</span>
-      }
+      <span class="hljs-attr">"$text"</span>: { <span class="hljs-attr">"$search"</span>: <span class="hljs-string">"bet"</span> },
+      <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span>,
+      <span class="hljs-attr">"out.s2"</span>: { <span class="hljs-attr">"$regex"</span>: <span class="hljs-string">"bet"</span>, <span class="hljs-attr">"$options"</span>: <span class="hljs-string">"i"</span> }
     },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
   }
@@ -127,33 +206,68 @@
 </code></pre>
 <hr>
 <p>Find 10 transactions with an input script with the sender <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code></p>
-<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
-  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
-    <span class="hljs-attr">"find"</span>: {
-      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span>
-    },
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span> },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
   }
 }
 </code></pre>
 <hr>
-<h2><a class="anchor" aria-hidden="true" id="4-only-return-the-matched-part"></a><a href="#4-only-return-the-matched-part" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Only Return the Matched Part</h2>
-<p>In many cases you are querying for a certain pattern in the subdocument.</p>
-<p>For example, you may be looking for a transaction that matches certain OP_RETURN pattern in its output.</p>
-<p>By default all BitDB queries return the entire transaction, so you may want to ask it to only return the matched OP_RETURN output. You can do this by using MongoDB's <a href="https://docs.mongodb.com/manual/reference/operator/projection/positional/">Positional Operator $</a>.</p>
-<p><a href="https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
+<h3><a class="anchor" aria-hidden="true" id="b-queries-response-filter"></a><a href="#b-queries-response-filter" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. queries + response filter</h3>
+<p>In addition to the <code>q</code> attribute, we have a response handler called <code>r</code>.</p>
+<p>Currently the <code>r</code> attribute only has a subattribute called <code>f</code>, which stands for &quot;filter&quot;, meaning it's used for filtering the response before returning to the client.</p>
+<p>For this purse we use a turing complete, stack based JSON processing language called <a href="https://stedolan.github.io/jq/">jq</a>, which is normally used as a command line tool for processing JSON with a single line command. Here are some examples:</p>
+<p>Find 100 transactions with an output OP_RETURN script that starts with <code>0x6d02</code> (memo.cash). And then return only its block index, block time, and content.</p>
 <pre><code class="hljs">{
-  <span class="hljs-attr">"v"</span>: <span class="hljs-number">2</span>,
-  <span class="hljs-attr">"e"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"hex"</span> },
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
-    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.b1"</span>: <span class="hljs-string">"6d02"</span> },
-    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>,
-    <span class="hljs-attr">"project"</span>: {
-      <span class="hljs-attr">"out.$"</span>: <span class="hljs-number">1</span>
-    }
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">100</span>
+  },
+  <span class="hljs-attr">"r"</span>: {
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[ { block: .blk.i?, timestamp: .blk.t?, content: .out[1].s2 } ]"</span>
   }
 }
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/indexer"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/quickstart"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#1-bitdb-document-format">1. BitDB Document Format</a></li><li><a href="#2-bitdb-query-language">2. BitDB Query Language</a></li><li><a href="#3-example">3. Example</a></li><li><a href="#4-only-return-the-matched-part">4. Only Return the Matched Part</a></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
+<p>More complex example:</p>
+<ol>
+<li>Find 100 OP_RETURN transactions that start witn <code>0x6d02</code> (memo.cash)</li>
+<li>Group by block index (blk.i)</li>
+<li>Map the items to only return the message (.out[1].s2) and transaction hash (.tx.h)</li>
+</ol>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"db"</span>: [<span class="hljs-string">"c"</span>],
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">100</span>
+  },
+  <span class="hljs-attr">"r"</span>: {
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[ group_by(.blk.h)[] | { blocks: { (.[0].blk.i | tostring): [.[] | {message: .out[1].s2, tx: .tx.h} ] } } ]"</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="4-db-side-filtering"></a><a href="#4-db-side-filtering" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. DB-side filtering</h2>
+<p>Another thing you can do to filter the query response is ask the database to do it. This can be done using MongoDB's <code>project</code>.</p>
+<p>Unlike the <code>response filter</code> from the last section which takes place on the API server before responding to the client, the DB-side filtering actually takes place on the database engine therefore sometimes may be helpful (but not always)</p>
+<p>Just a caution: Adding too much stuff to the query via <code>aggregate</code>, etc. can put a large load on the server, so generally the <code>response filter</code> from the last section is the recommended way to go (The response filter is fully capable of manipulating the response in all kinds of ways since it's powered by a turing complete JSON processing language called <a href="https://stedolan.github.io/jq">jq</a>.</p>
+<p>However, simple <code>project</code> queries are generally good because it reduces the DB load.</p>
+<h3><a class="anchor" aria-hidden="true" id="a-project-reduces-the-db-load"></a><a href="#a-project-reduces-the-db-load" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A. 'project' reduces the DB load</h3>
+<p>'project' reduces the amount of data the database has to send back, even before it reaches the response filter. The smaller this size is the faster the query will be.</p>
+<h3><a class="anchor" aria-hidden="true" id="b-project-can-return-only-the-matched-subtree"></a><a href="#b-project-can-return-only-the-matched-subtree" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. 'project' can return ONLY the matched subtree</h3>
+<p>For example, you may be looking for a transaction that matches a certain OP_RETURN pattern in its output.</p>
+<p>By default all BitDB queries return the entire transaction, so you may want to ask it to only return the matched OP_RETURN output. You can do this by using MongoDB's <a href="https://docs.mongodb.com/manual/reference/operator/projection/positional/">Positional Operator $</a>.</p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>,
+    <span class="hljs-attr">"project"</span>: { <span class="hljs-attr">"out.$"</span>: <span class="hljs-number">1</span> }
+  }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/indexer"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/quickstart"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#1-bitdb-document-format">1. BitDB Document Format</a></li><li><a href="#2-bitdb-query-language">2. BitDB Query Language</a><ul class="toc-headings"><li><a href="#a-encoding">A. Encoding</a></li><li><a href="#b-query">B. Query</a></li><li><a href="#c-response-handling">C. Response Handling</a></li></ul></li><li><a href="#3-example">3. Example</a><ul class="toc-headings"><li><a href="#a-queries">A. queries</a></li><li><a href="#b-queries-response-filter">B. queries + response filter</a></li></ul></li><li><a href="#4-db-side-filtering">4. DB-side filtering</a><ul class="toc-headings"><li><a href="#a-project-reduces-the-db-load">A. 'project' reduces the DB load</a></li><li><a href="#b-project-can-return-only-the-matched-subtree">B. 'project' can return ONLY the matched subtree</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
