@@ -44,15 +44,9 @@
 </ol>
 <hr>
 <h3><a class="anchor" aria-hidden="true" id="a-encoding"></a><a href="#a-encoding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A. Encoding</h3>
-<p>It is impossible to know the encoding scheme of any random bitcoin script push data. Sometimes the original data could be <strong>UTF8</strong>, sometimes they could be <strong>hex</strong>-encoded. This is why we need to specify additional encoding information when querying BitDB.</p>
+<p>It is impossible to know the encoding scheme of any random piece of bitcoin script push data. Sometimes the original data could be <strong>UTF8</strong>, sometimes they could be <strong>hex</strong>-encoded. This is why we need to specify additional encoding information when querying BitDB.</p>
 <p>We could use an additional object that describes the encoding scheme of each push data used in the query, but this results in a verbose query, and not extensible enough. We can do better.</p>
-<p>In version 3, we introduce a new concept called &quot;virtual attributes&quot; to make the query much more extensible AND shorten it simultaneously.</p>
-<ol>
-<li>BitDB introduces virtual variables with <strong>h-prefix</strong> (h0, h1, h2, h3, ...) which are hex encoded representation of the b0, b1, b2, b3, etc. counterparts.</li>
-<li>These are literally &quot;virtual&quot; and not stored in DB. They are generated at query time and response time.</li>
-<li>This is powerful because it doesn't involve storing additional data, yet greatly enhances the expressive power of the language.</li>
-<li>Using this simple trick, Bitquery may introduce additional virtual attributes in the future depending on the needs.</li>
-</ol>
+<p>In version 3, BitDB introduces a new concept called <strong>&quot;virtual attribute&quot;</strong> to make the query much more flexible, extensible, AND simpler, simultaneously. Here's how it works:</p>
 <p>Internally these h-variables are not stored in the DB but generated at query-time and response-time. Here's an example v3 query:</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
@@ -109,6 +103,14 @@
 }
 </code></pre>
 <p>Now the response contains the &quot;h1&quot; attribute, even though the database doesn't really need to store the hex encoded version.</p>
+<p>To sum up:</p>
+<ol>
+<li>BitDB introduces virtual variables with <strong>h-prefix</strong> (h0, h1, h2, h3, ...) which are hex encoded representation of the b0, b1, b2, b3, etc. counterparts.</li>
+<li>These are literally &quot;virtual&quot; and not stored in the DB. They are generated at query time and response time.</li>
+<li>This is powerful because it doesn't involve storing additional data, yet greatly enhances the expressive power of the language.</li>
+<li>Using this simple trick, Bitquery may introduce additional virtual attributes in the future depending on the needs.</li>
+</ol>
+<hr>
 <h3><a class="anchor" aria-hidden="true" id="b-query"></a><a href="#b-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. Query</h3>
 <h4><a class="anchor" aria-hidden="true" id="i-1-1-mapping-to-native-mongodb-query"></a><a href="#i-1-1-mapping-to-native-mongodb-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>i. 1:1 Mapping to Native MongoDB query</h4>
 <p>The query object becomes translated into native MongoDB API call.</p>
