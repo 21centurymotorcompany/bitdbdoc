@@ -38,9 +38,9 @@
 </ol>
 <p>In the following sections, we will go through 3 important components of Bitquery:</p>
 <ol>
-<li>Encoding: Abstract out all the messy encoding related challenges</li>
-<li>Query: MongoDB based query language</li>
-<li>Processing: Programmable response processing</li>
+<li><strong>Encoding:</strong> Abstract out all the messy encoding related challenges</li>
+<li><strong>Query:</strong> MongoDB based query language</li>
+<li><strong>Processing:</strong> Programmable response processing</li>
 </ol>
 <hr>
 <h3><a class="anchor" aria-hidden="true" id="a-encoding"></a><a href="#a-encoding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>A. Encoding</h3>
@@ -156,7 +156,7 @@
   }
 }
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="c-response-processing-function"></a><a href="#c-response-processing-function" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>C. Response Processing Function</h3>
+<h3><a class="anchor" aria-hidden="true" id="c-processing"></a><a href="#c-processing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>C. Processing</h3>
 <p>With version 3, Bitquery introduces an attribute called <strong>&quot;r&quot;</strong>, a response handler.</p>
 <p>Currently there is only one type of response handler, named &quot;f&quot; (Response processing <strong>function</strong>).</p>
 <p>Previously it was not easy to filter the response so that it can be used immediately in the client-side without any additional program. The only way you could do this was by using MongoDB's <code>aggregate</code> queries to write a huge sequence of complicated pipelines, but this was bad because:</p>
@@ -311,4 +311,4 @@
   }
 }
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#1-bitdb-document-format">1. BitDB Document Format</a></li><li><a href="#2-bitquery-bitdb-query-language">2. Bitquery: BitDB Query Language</a><ul class="toc-headings"><li><a href="#a-encoding">A. Encoding</a></li><li><a href="#b-query">B. Query</a></li><li><a href="#c-response-processing-function">C. Response Processing Function</a></li></ul></li><li><a href="#3-example">3. Example</a><ul class="toc-headings"><li><a href="#a-queries">A. queries</a></li><li><a href="#b-queries-response-filter">B. queries + response filter</a></li></ul></li><li><a href="#4-db-side-filtering">4. DB-side filtering</a><ul class="toc-headings"><li><a href="#a-project-reduces-the-db-load">A. 'project' reduces the DB load</a></li><li><a href="#b-project-can-return-only-the-matched-subtree">B. 'project' can return ONLY the matched subtree</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#1-bitdb-document-format">1. BitDB Document Format</a></li><li><a href="#2-bitquery-bitdb-query-language">2. Bitquery: BitDB Query Language</a><ul class="toc-headings"><li><a href="#a-encoding">A. Encoding</a></li><li><a href="#b-query">B. Query</a></li><li><a href="#c-processing">C. Processing</a></li></ul></li><li><a href="#3-example">3. Example</a><ul class="toc-headings"><li><a href="#a-queries">A. queries</a></li><li><a href="#b-queries-response-filter">B. queries + response filter</a></li></ul></li><li><a href="#4-db-side-filtering">4. DB-side filtering</a><ul class="toc-headings"><li><a href="#a-project-reduces-the-db-load">A. 'project' reduces the DB load</a></li><li><a href="#b-project-can-return-only-the-matched-subtree">B. 'project' can return ONLY the matched subtree</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
