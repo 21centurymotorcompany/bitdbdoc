@@ -47,7 +47,7 @@
 <p>It is impossible to know the encoding scheme of any random piece of bitcoin script push data. Sometimes the original data could be <strong>UTF8</strong>, sometimes they could be <strong>hex</strong>-encoded. This is why we need to specify additional encoding information when querying BitDB.</p>
 <p>We could use an additional object that describes the encoding scheme of each push data used in the query, but this results in a verbose query, and not extensible enough. We can do better.</p>
 <p>In version 3, BitDB introduces a new concept called <strong>&quot;virtual attribute&quot;</strong> to make the query much more flexible, extensible, AND simpler. Here's how it works:</p>
-<p><strong>Step 1. A client makes a query:</strong> Here's an example v3 query. Notice the <code>out.h1</code>. This is the newly introduced virtual attribute for expressing hex encoded values:</p>
+<p><strong>Step 1. A client makes a query:</strong> Here's an example v3 query. Notice the <code>out.h1</code>. This is the virtual attribute for expressing hex encoded values:</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -57,7 +57,7 @@
   }
 }
 </code></pre>
-<p><strong>Step 2. Bitquery encodes the virtual attribute into base64:</strong> Bitquery then turns the hex code into base64 format. Above query is transformed at query time into:</p>
+<p><strong>Step 2. Bitquery encodes the virtual attribute into base64:</strong> Bitquery then replaces the hex key/value into base64 counterpart (b-attribute). Remember, the DB only contains b-prefixed and s-prefixed attributes, so we must convert to either of them. In this case we use the base64 encoded b-attribute. Above query is transformed at query time into:</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
