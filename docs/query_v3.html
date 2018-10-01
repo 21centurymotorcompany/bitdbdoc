@@ -120,7 +120,7 @@
 <li>You can learn more about MongoDB queries <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">here</a></li>
 <li>You can check out some example queries <a href="quickstart_v3">here</a></li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="ii-specify-database-to-query-against"></a><a href="#ii-specify-database-to-query-against" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ii. Specify Database to Query against</h4>
+<h4><a class="anchor" aria-hidden="true" id="ii-specify-a-database-to-query-against"></a><a href="#ii-specify-a-database-to-query-against" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ii. Specify a Database to Query against</h4>
 <p>There are currently two separate collections in BitDB: <code>confirmed</code> and <code>unconfirmed</code>.</p>
 <p>By default, all queries are run against both <code>confirmed</code> and <code>unconfirmed</code> collections and gets returned as a unified object that looks like this:</p>
 <pre><code class="hljs">{
@@ -132,13 +132,13 @@
   ]
 }
 </code></pre>
-<p>However sometimes you may want to explicitly specify the database you want to query. You can use the <code>&quot;db&quot;</code> attribute, which can be:</p>
+<p>However sometimes you may want to explicitly specify the database to query. You can use the <code>&quot;db&quot;</code> attribute, which can be:</p>
 <ul>
 <li><code>[&quot;u&quot;]</code>: unconfirmed only</li>
 <li><code>[&quot;c&quot;]</code>: confirmed only</li>
 <li><code>[&quot;u&quot;, &quot;c&quot;]</code>: both unconfirmed and confirmed (default)</li>
 </ul>
-<p>Example 1. Find all confirmed transactions in blocks with block height (block index) larger than 400000 (only query &quot;confirmed&quot; since &quot;unconfirmed&quot; doesn't have a block):</p>
+<p><strong>Example 1.</strong> Find all confirmed transactions in blocks with block height (block index) larger than 400000 (only query &quot;confirmed&quot; since &quot;unconfirmed&quot; doesn't have a block):</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -149,7 +149,7 @@
   }
 }
 </code></pre>
-<p>Example 2. Fetch all unconfirmed transactions in the mempool</p>
+<p><strong>Example 2.</strong> Fetch all unconfirmed transactions in the mempool</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
