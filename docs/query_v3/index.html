@@ -192,7 +192,7 @@
 <p>If we zoom in to the response processor function:</p>
 <pre><code class="hljs"><span class="hljs-string">"[.[] | .out[0] | {title: <span class="hljs-subst">\"</span>[<span class="hljs-subst">\\</span>(.s4)] <span class="hljs-subst">\\</span>(.s5)<span class="hljs-subst">\"</span>, document_url: .s6} ]"</span>
 </code></pre>
-<p>It's a <a href="https://stedolan.github.io/jq/">jq</a> syntax that says <code>&quot;for each item in the array, find the first output (out[0]) and extract out its s4, s5, and s6 attributes to assign them to the custom attributes &quot;title&quot; and &quot;document_url&quot;</code>.</p>
+<p>It's a <a href="https://stedolan.github.io/jq/">jq</a> syntax that says <strong>&quot;for each item in the array (<code>.[]</code>), find the first output (<code>out[0]</code>) and extract out its <code>s4</code>, <code>s5</code>, and <code>s6</code> attributes to assign them to the custom attributes <code>&quot;title&quot;</code> and <code>&quot;document_url&quot;</code></strong>.</p>
 <p>As you can see, this lets you create a query that describes <strong>NOT only the request, but also the response</strong>.</p>
 <p>Instead of returning all the non-human-readable <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attributes, the API will return the response in the EXACT format you want.</p>
 <pre><code class="hljs">{
