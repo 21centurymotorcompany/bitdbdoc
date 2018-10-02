@@ -185,14 +185,14 @@
     <span class="hljs-attr">"project"</span>: { <span class="hljs-attr">"out.$"</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">"_id"</span>: <span class="hljs-number">0</span> }
   },
   <span class="hljs-attr">"r"</span>: {
-    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[.[] | .out[0] | {title: \"[\\(.s4)] \\(.s5)\", document_url: .s6} ]"</span>
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[.[] | .out[0] | { token_symbol: .s4, token_name: .s5, document_url: .s6} ]"</span>
   }
 }
 </code></pre>
-<p>If we zoom in to the response processor function:</p>
-<pre><code class="hljs"><span class="hljs-string">"[.[] | .out[0] | {title: <span class="hljs-subst">\"</span>[<span class="hljs-subst">\\</span>(.s4)] <span class="hljs-subst">\\</span>(.s5)<span class="hljs-subst">\"</span>, document_url: .s6} ]"</span>
+<p>If we zoom in to the response processor function <code>r.f</code>:</p>
+<pre><code class="hljs"><span class="hljs-string">"<span class="hljs-subst">[.[]</span> | .out<span class="hljs-subst">[0]</span> | { token_symbol: .s4, token_name: .s5, document_url: .s6} ]"</span>
 </code></pre>
-<p>It's a <a href="https://stedolan.github.io/jq/">jq</a> syntax that says <strong>&quot;for each item in the array (<code>.[]</code>), find the first output (<code>.out[0]</code>) and extract out its <code>.s4</code>, <code>.s5</code>, and <code>.s6</code> attributes to assign them to the custom attributes <code>&quot;title&quot;</code> and <code>&quot;document_url&quot;</code></strong>.</p>
+<p>It's a <a href="https://stedolan.github.io/jq/">jq</a> syntax that says <strong>&quot;for each item in the array (<code>.[]</code>), find the first output (<code>.out[0]</code>) and extract out its <code>.s4</code>, <code>.s5</code>, and <code>.s6</code> attributes to assign them to the custom attributes <code>&quot;token_symbol&quot;</code>, <code>&quot;token_name&quot;</code>, and <code>&quot;document_url&quot;</code></strong>.</p>
 <p>Instead of returning all the raw non-human-readable <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attributes straight from the DB, the API will return the response in the EXACT format you want:</p>
 <pre><code class="hljs">{
   <span class="hljs-string">"unconfirmed"</span>: [{
