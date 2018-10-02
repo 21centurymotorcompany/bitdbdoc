@@ -68,7 +68,7 @@
   }
 }
 </code></pre>
-<p><strong>Step 3. Bitquery sends the query to the DB:</strong> And then sent to MongoDB (which only contains b-prefixed and s-prefixed attributes). The DB returns the response that looks like this (only b/s prefixed attributes):</p>
+<p><strong>Step 3. Bitquery sends the query to the DB:</strong> The transformed query is then sent to MongoDB (which only contains b-prefixed and s-prefixed attributes). The DB returns a response that looks something like this (no h-prefixed attributes since they're not stored in the db)</p>
 <pre><code class="hljs">{
   ...
   confirmed: [{
@@ -103,11 +103,11 @@
   ...
 }
 </code></pre>
-<p>Now the response contains the &quot;h1&quot; attribute, even though the database doesn't really need to store the hex encoded version.</p>
+<p>Now the response contains the &quot;h1&quot; attribute, even though the database doesn't really need to store the hex encoded version. The client doesn't need to know about all this, and it appears as though BitDB contains the h-prefixed attributes. This approach can be extended to other types of attributes in the future in a scalable manner since all of this takes place in the code instead of the database.</p>
 <p>To sum up:</p>
 <ol>
-<li>BitDB introduces virtual variables with <strong>h-prefix</strong> (h0, h1, h2, h3, ...) which are hex encoded representation of the b0, b1, b2, b3, etc. counterparts.</li>
-<li>These are literally &quot;virtual&quot; and not stored in the DB. They are generated at query time and response time.</li>
+<li>BitDB introduces virtual variables with <strong>h-prefix</strong> (h0, h1, h2, h3, ...) which are hex encoded representations of the b0, b1, b2, b3, etc. counterparts.</li>
+<li>These are &quot;virtual&quot; and not stored in the DB. They are generated at query time and response time.</li>
 <li>This is powerful because it doesn't involve storing additional data, yet greatly enhances the expressive power of the language.</li>
 <li>Using this simple trick, Bitquery may introduce additional virtual attributes in the future depending on the needs.</li>
 </ol>
@@ -115,14 +115,18 @@
 <h3><a class="anchor" aria-hidden="true" id="b-query"></a><a href="#b-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>B. Query</h3>
 <h4><a class="anchor" aria-hidden="true" id="i-1-1-mapping-to-native-mongodb-query"></a><a href="#i-1-1-mapping-to-native-mongodb-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>i. 1:1 Mapping to Native MongoDB query</h4>
 <p>The query object becomes translated into native MongoDB API call.</p>
-<p>Currently supported query API methods are: <code>find</code>, <code>aggregate</code>, <code>project</code>, <code>sort</code>, <code>limit</code>, and <code>skip</code>, but this can be extended according to demand.</p>
+<p>The currently supported query API methods are: <code>find</code>, <code>aggregate</code>, <code>project</code>, <code>sort</code>, <code>limit</code>, and <code>skip</code>, but this can be extended according to demand.</p>
 <p>To learn how to query BitDB, you can just think of this as a regular MongoDB instance.</p>
 <ul>
 <li>You can learn more about MongoDB queries <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">here</a></li>
 <li>You can check out some example queries <a href="quickstart_v3">here</a></li>
 </ul>
-<h4><a class="anchor" aria-hidden="true" id="ii-specify-the-database-to-query-against"></a><a href="#ii-specify-the-database-to-query-against" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ii. Specify the Database to Query against</h4>
+<h4><a class="anchor" aria-hidden="true" id="ii-specifying-the-database-to-query-against"></a><a href="#ii-specifying-the-database-to-query-against" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ii. Specifying the Database to Query against</h4>
 <p>There are currently two separate collections in BitDB: <code>confirmed</code> and <code>unconfirmed</code>.</p>
+<ul>
+<li><strong>confirmed:</strong> Everything on the blockchain</li>
+<li><strong>unconfirmed:</strong> Everything in the mempool</li>
+</ul>
 <p>By default, all queries are run against both <code>confirmed</code> and <code>unconfirmed</code> collections and returned as a unified object that looks like this:</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"unconfirmed"</span>: [
@@ -163,9 +167,10 @@
 <p>With version 3, Bitquery introduces an attribute called <strong>&quot;r&quot;</strong>, a response handler.</p>
 <p>Currently there is only one type of response handler, named &quot;f&quot; (Response processing <strong>function</strong>). Here are the problems it solves:</p>
 <h4><a class="anchor" aria-hidden="true" id="1-filter-down-to-only-the-required-attributes"></a><a href="#1-filter-down-to-only-the-required-attributes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Filter down to only the required attributes</h4>
-<p>Without this post-processing function, all bitdb responses are by default <strong>full transaction objects</strong>. You probably won't be able to use it as it and need to write additional code to process this. With the response processing function, you can encode this logic directly into the query itself.</p>
+<p>By default, all bitdb responses are returned as <strong>a full transaction object</strong>. You probably won't be able to use it as is, but write some code to process this on your app.</p>
+<p>The response processing function gets rid of this need by letting you <strong>encode the response filtering logic onto the query itself</strong>.</p>
 <h4><a class="anchor" aria-hidden="true" id="2-build-self-contained-protocol"></a><a href="#2-build-self-contained-protocol" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Build self-contained protocol</h4>
-<p>Being able to encode the response processing logic directly into the query means query can now actually act as the blueprint for a protocol. If you're creating a bitcoin script based protocol and want to codify it and set in stone (instead of simply writing a whitepaper that can have different interpretations depending on people).</p>
+<p>This means <strong>queries can now actually act as de facto protocol blueprint</strong> for any bitcoin applications. If you're creating a bitcoin script based protocol and want to codify its behavior (instead of simply writing a whitepaper that can result in multiple interpretations depending on point of view), you can simply write a self-contained query and open source this query. Then anyone can tap into this query to use your application API.</p>
 <h4><a class="anchor" aria-hidden="true" id="3-human-readable-api"></a><a href="#3-human-readable-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Human readable API</h4>
 <p>All bitdb responses without the processing have uniform attribute set (b-prefixed, h-prefixed, s-prefixed), all of which are NOT human friendly. You probably want a more human readable attribute name. The language used for the processing function can transform a response into any format you desire.</p>
 <h4><a class="anchor" aria-hidden="true" id="4-turing-complete-query-language"></a><a href="#4-turing-complete-query-language" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Turing complete query language</h4>
