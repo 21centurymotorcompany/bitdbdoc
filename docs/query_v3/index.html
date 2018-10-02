@@ -23,17 +23,17 @@
 <li><strong>v:</strong> stands for &quot;version&quot;. This documentation is based on v: 3 so always use v: 3 (v:1 and 2 will be deprecated)</li>
 <li><strong>q:</strong> stands for &quot;query&quot;.
 <ul>
-<li><strong>find:</strong> MongoDB query filter object. Learn more about MongoDB query filter</li>
-<li><strong>aggregate:</strong> MongoDB aggregationg pipeline stages array. Learn more about Mongodb aggregate stages</li>
-<li><strong>project:</strong> MongoDB project operator for selectively returning attributes. Learn more about Mongodb projection</li>
-<li><strong>sort:</strong> MongoDB sort operator. Learn more about Mongodb sort operator</li>
-<li><strong>limit:</strong> MongoDB limit operator. Limit the number of results to return</li>
-<li><strong>skip:</strong> MongoDB skip operator. Combining the &quot;limit&quot; and &quot;skip&quot; you can implement pagination</li>
+<li><strong>find:</strong> MongoDB query filter object. <a href="https://docs.mongodb.com/manual/reference/method/db.collection.find/">Learn more about MongoDB find command</a></li>
+<li><strong>aggregate:</strong> MongoDB aggregationg pipeline stages array. <a href="https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate">Learn more about Mongodb aggregate stages</a></li>
+<li><strong>project:</strong> MongoDB project operator for selectively returning attributes. <a href="https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/">Learn more about Mongodb projection</a></li>
+<li><strong>sort:</strong> MongoDB sort operator. <a href="https://docs.mongodb.com/manual/reference/method/cursor.sort/">Learn more about Mongodb sort operator</a></li>
+<li><strong>limit:</strong> MongoDB limit operator. Limit the number of results to return. <a href="https://docs.mongodb.com/manual/reference/method/cursor.limit/">Leanr more about MongoDB limit operator</a></li>
+<li><strong>skip:</strong> MongoDB skip operator. Combining the &quot;limit&quot; and &quot;skip&quot; you can implement pagination. <a href="https://docs.mongodb.com/manual/reference/method/cursor.skip/">Learn more about MongoDB skip operator</a></li>
 <li><strong>db:</strong> The name of the database type  The default is [&quot;c&quot;, &quot;u&quot;] (each representing &quot;confirmed&quot; and &quot;unconfirmed&quot; respectively), but you can explicitly query against only one of them, using [&quot;c&quot;], or [&quot;u&quot;]</li>
 </ul></li>
 <li><strong>r:</strong> stands for &quot;response&quot;. response processor.
 <ul>
-<li><strong>f:</strong> stands for &quot;filter&quot;. A single-line program written in <a href="https://stedolan.github.io/jq">jq</a>, <strong>a Turing complete, stack based JSON processing language.</strong></li>
+<li><strong>f:</strong> stands for &quot;function&quot;. It's a single-line program for processing the response before sending back to the client. It's written in <a href="https://stedolan.github.io/jq">jq</a>, <strong>a Turing complete, stack based JSON processing language.</strong></li>
 </ul></li>
 </ol>
 <p>In the following sections, we will go through 3 important components of Bitquery:</p>
