@@ -228,7 +228,7 @@
 <p>By default, all bitdb responses are returned as <strong>a full transaction object</strong>. You probably won't be able to use it as is, but write some code to process this on your app.</p>
 <p>The response processing function gets rid of this need by letting you <strong>encode the response filtering logic onto the query itself</strong>.</p>
 <h4><a class="anchor" aria-hidden="true" id="2-human-readable-api"></a><a href="#2-human-readable-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Human readable API</h4>
-<p>The default <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attribute names are NOT human processable--you have no idea what those attributes represent--You probably want a more human readable attribute name for the protocol API, such as &quot;title&quot;, &quot;document_uri&quot;, &quot;username&quot;, etc.</p>
+<p>The default <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attribute names are NOT human processable--you have no idea what those attributes represent unless you look up the protocol specification--You probably want a more human readable attribute name for the protocol API, such as &quot;title&quot;, &quot;document_uri&quot;, &quot;username&quot;, etc.</p>
 <h4><a class="anchor" aria-hidden="true" id="3-query-as-a-protocol-spec"></a><a href="#3-query-as-a-protocol-spec" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Query as a protocol spec</h4>
 <p>The human readable aspect is especially important when you want to publish your API to the world as &quot;open source&quot;, so anyone can understand and make use of it easily.</p>
 <p>This means <strong>queries can now actually act as de facto protocol specification</strong> for any bitcoin applications.</p>
@@ -243,21 +243,16 @@
 <p>If the protocol inventors simply open source the query along with their protocol specification, then all of this problem will go away and we will see way more innovation and mashups.</p>
 </blockquote>
 <h4><a class="anchor" aria-hidden="true" id="4-turing-complete-query-language"></a><a href="#4-turing-complete-query-language" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. Turing complete query language</h4>
-<p>In most cases you can't use this directly and need to write additional code to process the result.</p>
-<p>Previously it was not easy to filter the response so that it can be used immediately in the client-side without any additional code. The only (mediocre) way of doing this was to use MongoDB's <code>aggregate</code> queries to write a huge sequence of complicated pipelines, but this is not ideal because:</p>
+<p>Bitquery makes use of <a href="https://stedolan.github.io/jq/">the popuar jq language</a> as the language of choice for describing the response processing logic.</p>
+<p>jq is a Turing complete, stack based JSON processing language. jq has been a popular language of choice for processing JSON in the command line interface thanks to its stack based paradigm (meaning you can write a fully functioning program with a single line, just like Bitcoin script), and this makes a lot of sense in the context of bitquery because we also need a <strong>single line stack based Turing complete JSON programming language</strong>.</p>
+<p>Here are some of the reasons why Bitquery uses jq:</p>
 <ol>
-<li>Most of the times the query becomes so convoluted that it's not worth the trouble</li>
-<li>Even if we succeed in writing the query, it takes up too much resource on the database side</li>
-</ol>
-<p>The new approach is to let the database just make simple queries and let the query engine deal with the DB response before returning to the client.</p>
-<p>For this goal, <strong>BitDB chooses a turing complete, stack based JSON processing language called <a href="https://stedolan.github.io/jq/">jq</a>.</strong> Here are some of the reasons why Bitquery uses jq:</p>
-<ol>
-<li><strong>Powerful:</strong> It's Turing Complete, meaning you can probably transform any JSON into any format you want.</li>
-<li><strong>Efficient:</strong> It offloads the work from the database by doing all the filtering outside of the DB engine.</li>
-<li><strong>Portable:</strong> Most importantly, the language fits into JSON format as a single line of string, thanks to its stack based programming paradigm. This is important for building decentralized applications on top of Bitcoin because a query API and its response format needs to be as self-descriptive as possible.</li>
+<li><strong>Powerful:</strong> It's Turing Complete, meaning you can transform any JSON into any format you want.</li>
+<li><strong>Efficient:</strong> It offloads the work from the database by doing all the filtering outside of the DB engine AFTER the DB responds, but BEFORE the result is sent back to the client.</li>
+<li><strong>Portable:</strong> Most importantly, the language fits into JSON format, since it's a single line programming language (stack based).</li>
 </ol>
 <p>Here's an example of a jq-powered response filtering:</p>
-<p>Find 100 transactions with an output OP_RETURN script that starts with <code>0x6d02</code> (memo.cash). And then return only its block index, block time, and content.</p>
+<p><strong>&quot;Find 100 transactions with an output OP_RETURN script that starts with <code>0x6d02</code> (memo.cash). And then return only its block index, block time, and content.&quot;</strong></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
