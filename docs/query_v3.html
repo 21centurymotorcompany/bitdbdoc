@@ -2,7 +2,7 @@
 <p>Bitquery is a self-contained, portable, and programmable query language for Bitcoin.</p>
 </blockquote>
 <p>BitDB is an autonomous database that indexes Bitcoin in the most query-able manner possible.</p>
-<p>Once indexed, you are free to query the database in whichever manner you want, but it is beneficial to have a open, portable, and standardized language to query BitDB. In fact, it's a critical factor in building an interoperable and  decentralized BitDB Network ecosystem.</p>
+<p>Once indexed, you are free to query the database in whichever manner you want, but it is beneficial to have an open, portable, and standardized language to query BitDB. In fact, it's a critical factor in building an interoperable and  decentralized BitDB Network ecosystem.</p>
 <ul>
 <li>BitDB internally uses <strong>MongoDB</strong> to index the transactions in a structured manner. This means you can query it just like any regular MongoDB collection.</li>
 <li>BitDB supports most MongoDB methods such as <strong>find, aggregate, sort, limit, skip, project,</strong> etc.</li>
@@ -11,8 +11,8 @@
 <p><img src="/docs/assets/ql3.png" alt="ql"></p>
 <p>On top of MongoDB's native query language, Bitquery adds an additional layer to create a query language that's:</p>
 <ul>
-<li><strong>Programmable:</strong> A Turing complete data processing language for filtering/manipulating the response.</li>
-<li><strong>Self-contained:</strong> The query completely stands on its own without the need to depend on a 3rd party system or schema. Can describe every step of a query lifecycle, including encoding, query, and post-processing logic.</li>
+<li><strong>Programmable:</strong> A Turing complete data processing language for filtering/manipulating the db response before sending back to the client.</li>
+<li><strong>Self-contained:</strong> The query completely stands on its own without the need to depend on a 3rd party system or schema. Can describe every step of the query lifecycle, including encoding, query, and post-processing logic.</li>
 <li><strong>Portable:</strong> All of this expressed in JSON, the most ubiquitous portable data format in existence today. You don't need to write a separate program to process the response because that logic is embedded in the portable query itself.</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="1-bitdb-document-format"></a><a href="#1-bitdb-document-format" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. BitDB Document Format</h2>
@@ -21,8 +21,8 @@
 <h2><a class="anchor" aria-hidden="true" id="2-bitquery-bitdb-query-language"></a><a href="#2-bitquery-bitdb-query-language" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Bitquery: BitDB Query Language</h2>
 <p>A BitDB query is a self-contained declarative JSON query object built on top of MongoDB query language. Every query consists of 3 top level attributes:</p>
 <ol>
-<li><strong>v:</strong> stands for &quot;version&quot;. This documentation is based on v: 3 so always use v: 3 (v:1 and 2 will be deprecated)</li>
-<li><strong>q:</strong> stands for &quot;query&quot;.
+<li><strong>v:</strong> is for &quot;version&quot;. This documentation is based on v: 3 so always use v: 3 (v:1 and 2 will be deprecated)</li>
+<li><strong>q:</strong> is for &quot;query&quot;.
 <ul>
 <li><strong>find:</strong> MongoDB query filter object. <a href="https://docs.mongodb.com/manual/reference/method/db.collection.find/">Learn more about MongoDB find command</a></li>
 <li><strong>aggregate:</strong> MongoDB aggregationg pipeline stages array. <a href="https://docs.mongodb.com/manual/reference/method/db.collection.aggregate/#db.collection.aggregate">Learn more about Mongodb aggregate stages</a></li>
@@ -32,12 +32,12 @@
 <li><strong>skip:</strong> MongoDB skip operator. Combining the &quot;limit&quot; and &quot;skip&quot; you can implement pagination. <a href="https://docs.mongodb.com/manual/reference/method/cursor.skip/">Learn more about MongoDB skip operator</a></li>
 <li><strong>db:</strong> The name of the database type  The default is [&quot;c&quot;, &quot;u&quot;] (each representing &quot;confirmed&quot; and &quot;unconfirmed&quot; respectively), but you can explicitly query against only one of them, using [&quot;c&quot;], or [&quot;u&quot;]</li>
 </ul></li>
-<li><strong>r:</strong> stands for &quot;response&quot;. response processor.
+<li><strong>r:</strong> is for &quot;response&quot;. This is the response processor.
 <ul>
-<li><strong>f:</strong> stands for &quot;function&quot;. It's a single-line program for processing the response before sending back to the client. It's written in <a href="https://stedolan.github.io/jq">jq</a>, <strong>a Turing complete, stack based JSON processing language.</strong></li>
+<li><strong>f:</strong> is for &quot;function&quot;. It's a single-line program for processing the response before sending back to the client. The supported language is <a href="https://stedolan.github.io/jq">jq</a>, <strong>a Turing complete, stack based JSON processing language.</strong></li>
 </ul></li>
 </ol>
-<p>In the following sections, we will go through 3 important components of Bitquery:</p>
+<p>In the sections below, we will go through 3 important components of Bitquery:</p>
 <ol>
 <li><strong>Encoding:</strong> Abstract out all the messy encoding related challenges</li>
 <li><strong>Query:</strong> MongoDB based query language</li>
