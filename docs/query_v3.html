@@ -135,7 +135,7 @@
 <li>You can declare the query under the &quot;q&quot; attribute of the query language.</li>
 <li>Then the Bitquery engine translates this &quot;q&quot; object into a native MongoDB API call at query time.</li>
 </ol>
-<p>The currently supported query API methods are: <code>find</code>, <code>aggregate</code>, <code>project</code>, <code>sort</code>, <code>limit</code>, and <code>skip</code>, but this can be extended according to demand. Here's an example:</p>
+<p>Here's an example:</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -152,6 +152,7 @@
   }
 }
 </code></pre>
+<p>The currently supported query API methods are: <code>find</code>, <code>aggregate</code>, <code>project</code>, <code>sort</code>, <code>limit</code>, and <code>skip</code>, but this can be extended according to demand.</p>
 <p>To learn how to query BitDB, you can just think of this as a regular MongoDB instance.</p>
 <ul>
 <li>You can learn more about MongoDB queries <a href="https://docs.mongodb.com/manual/tutorial/query-documents/">here</a></li>
