@@ -79,7 +79,8 @@
   }
 }
 </code></pre>
-<p><strong>Step 3. Bitquery sends the query to the DB:</strong> The transformed query is then sent to MongoDB (which only contains b-prefixed and s-prefixed attributes). The DB returns a response that looks something like this (no h-prefixed attributes since they're not stored in the db)</p>
+<p><strong>Step 3. Bitquery sends the query to the DB:</strong> The transformed query is then sent to MongoDB (which only contains b-prefixed and s-prefixed attributes).</p>
+<p>The DB returns a response that looks something like this:</p>
 <pre><code class="hljs">{
   ...
   confirmed: [{
@@ -96,7 +97,7 @@
   ...
 }
 </code></pre>
-<p><strong>Step 4. Bitquery generates virtual attributes:</strong> The query engine then decodes above response to attach additional h-prefixed attributes, interpreted from the returned b-attributes. So the final response that's returned as the result is:</p>
+<p><strong>Step 4. Bitquery generates virtual attributes:</strong> Notice how the DB response doesn't contain an h-attribute. The query engine now decodes the b-attributes from above response to attach additional h-prefixed attributes. So the final response that's returned as the result is:</p>
 <pre><code class="hljs">{
   ...
   confirmed: [{
