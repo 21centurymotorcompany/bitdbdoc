@@ -267,12 +267,11 @@
   }]
 }
 </code></pre>
-<p>Notice how instead of returning all the raw non-human-readable <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attributes straight from the DB, the API now returns the response in the <strong>EXACT format you want</strong>:</p>
-<p>This was just a simple example but jq is a pretty powerful language (it's turing complete), so when it comes to what you can do with this, imagination is your limit.</p>
 <blockquote>
 <p>Note: The processing function gets executed for each database the query is run against.</p>
 <p>This means &quot;u&quot; (unconfirmed) and &quot;c&quot; (confirmed) by default, but if you specify the db using the &quot;q.db&quot; attribute, the function will only be executed for that db collection</p>
 </blockquote>
+<p>Notice how instead of returning all the raw non-human-readable <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attributes straight from the DB, the API now returns the response in the <strong>EXACT format you want</strong>:</p>
 <p>As you can see, this effectively closes the loop in the entire query lifecycle by letting you create a query that describes <strong>NOT only the request, but also the response</strong>, which means a query is completely self-contained for instant usage.</p>
 <blockquote>
 <p>When we end up with a query language that is 100% self-contained for instant usage,</p>
