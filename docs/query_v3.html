@@ -214,10 +214,22 @@
   }
 }
 </code></pre>
-<p>If we zoom in to the response processor function <code>r.f</code>:</p>
+<p>Let's zoom in to the response processor function <code>r.f</code>:</p>
 <pre><code class="hljs"><span class="hljs-string">"<span class="hljs-subst">[.[]</span> | .out<span class="hljs-subst">[0]</span> | { token_symbol: .s4, token_name: .s5, document_url: .s6} ]"</span>
 </code></pre>
-<p>It's a <a href="https://stedolan.github.io/jq/">jq</a> syntax that says <strong>&quot;for each item in the array (<code>.[]</code>), find the first output (<code>.out[0]</code>) and extract out its <code>.s4</code>, <code>.s5</code>, and <code>.s6</code> attributes to assign them to the custom attributes <code>&quot;token_symbol&quot;</code>, <code>&quot;token_name&quot;</code>, and <code>&quot;document_url&quot;</code></strong>.</p>
+<p>This is written in <a href="https://stedolan.github.io/jq/">jq</a>. And here's how to read the program:</p>
+<ol>
+<li>All jq programs are stack based, therefore you read from left to right</li>
+<li>All jq programs assume an incoming input object and produces an output in the end</li>
+<li>The <code>|</code> (pipe) works like <a href="https://en.wikipedia.org/wiki/Pipeline_(Unix)">unix pipes</a>. It passes the computed output from the left side as input to the right.</li>
+</ol>
+<p>So following these rules (learn more about the syntax <a href="https://stedolan.github.io/jq/manual/#Basicfilters">here</a>), here's what the code says:</p>
+<ol>
+<li>for each item in the array (<code>.[]</code>)</li>
+<li>find the first output (<code>.out[0]</code>)</li>
+<li>and extract out its <code>.s4</code>, <code>.s5</code>, and <code>.s6</code> attributes to assign them to the custom attributes <code>&quot;token_symbol&quot;</code>, <code>&quot;token_name&quot;</code>, and <code>&quot;document_url&quot;</code></li>
+<li>and the entire expression is wrapped inside the root <code>[ ]</code>, which means it turns the resulting list into a JSON array</li>
+</ol>
 <p>Instead of returning all the raw non-human-readable <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attributes straight from the DB, the API will return the response in the EXACT format you want:</p>
 <pre><code class="hljs">{
   <span class="hljs-string">"unconfirmed"</span>: [{
@@ -254,6 +266,7 @@
   }]
 }
 </code></pre>
+<p>This was just a simple example but jq is a pretty powerful language (it's turing complete), so when it comes to what you can do with this, imagination is your limit.</p>
 <blockquote>
 <p>Note: The processing function gets executed for each database the query is run against.</p>
 <p>This means &quot;u&quot; (unconfirmed) and &quot;c&quot; (confirmed) by default, but if you specify the db using the &quot;q.db&quot; attribute, the function will only be executed for that db collection</p>
