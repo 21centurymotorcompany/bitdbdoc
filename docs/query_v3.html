@@ -3,8 +3,15 @@
 </blockquote>
 <p>BitDB is an autonomous database that indexes Bitcoin in the most query-able manner possible.</p>
 <p>Once indexed, it is of course completely up to you to query your own DB in whichever way you want.</p>
-<p>However, it is beneficial to have an open, portable, and standard way of querying the database because that will help us build applications that can talk to one another effortlessly leading to decentralization.</p>
-<p>This is why BitDB has its own query language (and query engine) called Bitquery.</p>
+<p>However, just having a commong database backend doesn't guarantee the main goal of BitDB, which are:</p>
+<ol>
+<li><strong>Transparent:</strong> BitDB should help applications build transparent applications</li>
+<li><strong>Portable:</strong> Applications powered by BitDB must be portable. If one host dies, the &quot;spirit&quot; (the application logic) should be able to seamlessly move over to another host.</li>
+<li><strong>Interoperable:</strong> Applications powered by BitDB must be as interoperable as possible through API mashups.</li>
+<li><strong>Decentralized:</strong> All these qualities should maximize decentralization factor so that no single party can have monopolistic power over the ecosystem.</li>
+</ol>
+<p>To guarantee these qualities, it is important to have <strong>a transparent, portable, and interoperable way to READ from the database</strong>.</p>
+<p>This is why BitDB has its own query language (and query engine) called <strong>Bitquery</strong>.</p>
 <ul>
 <li>BitDB internally uses <strong>MongoDB</strong> to index the transactions in a structured manner. This means you can query it just like any regular MongoDB collection.</li>
 <li>BitDB supports most MongoDB methods such as <strong>find, aggregate, sort, limit, skip, project,</strong> etc.</li>
