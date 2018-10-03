@@ -231,7 +231,7 @@
 <li>and extract out its <code>.s4</code>, <code>.s5</code>, and <code>.s6</code> attributes to assign them to the custom attributes <code>&quot;token_symbol&quot;</code>, <code>&quot;token_name&quot;</code>, and <code>&quot;document_url&quot;</code></li>
 <li>and the entire expression is wrapped inside the root <code>[ ]</code>, which means it turns the resulting list into a JSON array</li>
 </ol>
-<p>Instead of returning all the raw non-human-readable <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attributes straight from the DB, the API will return the response in the EXACT format you want:</p>
+<p>And here's the result:</p>
 <pre><code class="hljs">{
   <span class="hljs-string">"unconfirmed"</span>: [{
     ...
@@ -267,6 +267,7 @@
   }]
 }
 </code></pre>
+<p>Notice how instead of returning all the raw non-human-readable <code>b-prefixed</code>, <code>h-prefixed</code>, or <code>s-prefixed</code> attributes straight from the DB, the API now returns the response in the <strong>EXACT format you want</strong>:</p>
 <p>This was just a simple example but jq is a pretty powerful language (it's turing complete), so when it comes to what you can do with this, imagination is your limit.</p>
 <blockquote>
 <p>Note: The processing function gets executed for each database the query is run against.</p>
