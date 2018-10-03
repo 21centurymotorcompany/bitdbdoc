@@ -117,7 +117,9 @@
   ...
 }
 </code></pre>
-<p>Now the response contains the &quot;h1&quot; attribute, even though the database doesn't really need to store the hex encoded version. The client doesn't need to know about all this, and it appears as though BitDB contains the h-prefixed attributes. This approach can be extended to other types of attributes in the future in a scalable manner since all of this takes place in the code instead of the database.</p>
+<p>Now the response contains the &quot;h1&quot; attribute!</p>
+<p>The client doesn't even need to know about all this. To the outside world it's almost as if the h-attributes are actually stored in the DB.</p>
+<p>This approach can be extended to other types of attributes in the future in a scalable manner since all of this takes place in the code instead of the database.</p>
 <p>To sum up:</p>
 <ol>
 <li>BitDB introduces virtual variables with <strong>h-prefix</strong> (h0, h1, h2, h3, ...) which are hex encoded representations of the b0, b1, b2, b3, etc. counterparts.</li>
