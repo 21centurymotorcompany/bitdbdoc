@@ -99,7 +99,7 @@
   ...
 }
 </code></pre>
-<p><strong>Step 4. Bitquery generates virtual attributes:</strong> Notice how the above DB response doesn't contain an h-attribute. The query engine now decodes the b-attributes from above response to attach additional h-prefixed attributes. So the final response that's returned as the result is:</p>
+<p><strong>Step 4. Bitquery generates virtual attributes:</strong> The query engine now decodes the b-attributes from above response to h-prefixed attributes and attaches them to the response. So the final response that's returned as the result is:</p>
 <pre><code class="hljs">{
   ...
   confirmed: [{
