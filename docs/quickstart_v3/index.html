@@ -21,6 +21,8 @@
 <li>The number denotes the push data index</li>
 </ul>
 <p>So let's interpret the above output script according to this rule.</p>
+<pre><code class="hljs">OP_RETURN <span class="hljs-number">0x6d02</span> fe<span class="hljs-number">32</span>a<span class="hljs-number">4</span>bc<span class="hljs-number">5</span>a<span class="hljs-number">52</span>ce<span class="hljs-number">9</span>b<span class="hljs-number">861725462</span>ad<span class="hljs-number">7</span>d<span class="hljs-number">5</span>d<span class="hljs-number">223</span>d<span class="hljs-number">3554532</span>eb<span class="hljs-number">172</span><span class="hljs-keyword">c</span><span class="hljs-number">7</span>d<span class="hljs-number">29</span>feca<span class="hljs-number">5722</span>d<span class="hljs-number">44</span><span class="hljs-keyword">c</span> <span class="hljs-string">"this is a reply"</span>
+</code></pre>
 <ul>
 <li>Index 0: OP_RETURN
 <ul>
@@ -30,7 +32,7 @@
 <li>Index 1: 0x6d02
 <ul>
 <li>This is hex encoded string of &quot;6d02&quot;. When you transform it to base64, it becomes <code>{ &quot;b1&quot;: &quot;bQM=&quot; }</code></li>
-<li>When you turn it into utf8, it's <code>&quot;m&quot;</code></li>
+<li>When you turn it into utf8, it's <code>{ &quot;s1&quot;: &quot;m&quot; }</code></li>
 </ul></li>
 <li>Index 2: fe32a4bc5a52ce9b861725462ad7d5d223d3554532eb172c7d29feca5722d44c
 <ul>
