@@ -3,10 +3,10 @@
 <p>There's a lot going on inside a transaction, but for simplicity let's zoom in and take a look at how an OP_RETURN output is indexed in BitDB as an example:</p>
 <p><img src="/docs/assets/output_script.png" alt="output_script"></p>
 <p>To interpret this we follow a simple rule:</p>
-<pre><code class="hljs">Script output attribute names start with either <span class="hljs-string">"b"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"s"</span> followed by a number.
+<pre><code class="hljs">Script output attribute names <span class="hljs-keyword">start</span> <span class="hljs-keyword">with</span> either <span class="hljs-string">"b"</span>, <span class="hljs-string">"s"</span>, <span class="hljs-keyword">or</span> <span class="hljs-string">"h"</span> followed <span class="hljs-keyword">by</span> a number.
 
-1. The<span class="hljs-built_in"> prefix </span>denotes the encoding scheme (<span class="hljs-string">"b"</span> is base64, <span class="hljs-string">"s"</span> is utf8)
-2. The number denotes the push data index
+<span class="hljs-number">1.</span> The prefix denotes the <span class="hljs-keyword">encoding</span> scheme (<span class="hljs-string">"b"</span> <span class="hljs-keyword">is</span> base64, <span class="hljs-string">"s"</span> <span class="hljs-keyword">is</span> utf8, <span class="hljs-string">"h"</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">hex</span>)
+<span class="hljs-number">2.</span> The <span class="hljs-built_in">number</span> denotes the push <span class="hljs-keyword">data</span> <span class="hljs-keyword">index</span>
 </code></pre>
 <p>So let's interpret the above output script according to this rule.</p>
 <ul>
