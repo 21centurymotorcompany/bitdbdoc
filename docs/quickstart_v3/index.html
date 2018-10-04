@@ -121,7 +121,8 @@
 <hr>
 <h2><a class="anchor" aria-hidden="true" id="processing"></a><a href="#processing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Processing</h2>
 <p>This section will show you some response processor function examples, written in <a href="https://stedolan.github.io/jq/">jq</a></p>
-<h3><a class="anchor" aria-hidden="true" id="1-memocash-post-api"></a><a href="#1-memocash-post-api" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Memo.cash post API</h3>
+<h3><a class="anchor" aria-hidden="true" id="1-map"></a><a href="#1-map" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Map</h3>
+<p>Here's a simple example for getting all posts from Memo.cash protocol and extracting out the <code>.blk.i</code>, <code>.blk.t</code>, and <code>.out[1].s2</code> attributes:</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -134,6 +135,8 @@
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="2-using-local-variables"></a><a href="#2-using-local-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Using Local Variables</h3>
+<p>Using the <a href="https://stedolan.github.io/jq/manual/#Advancedfeatures">variables operator</a> in jq, we can assign values to local variables (<code>... as $identifier</code>) and use them later on in the expression.</p>
+<p>In the example below, assign the <code>$blk</code> and <code>$tx</code> variables, and then use them later on in the last pipeline stage:</p>
 <pre><code class="hljs">{
   <span class="hljs-string">"v"</span>: 3,
   <span class="hljs-string">"q"</span>: {
@@ -148,8 +151,9 @@
   }
 }
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="2-token-protocol-parsing"></a><a href="#2-token-protocol-parsing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Token Protocol Parsing</h3>
-<p>Here's an example of SLP (Simple Ledger Protocol) Genesis transaction:</p>
+<h3><a class="anchor" aria-hidden="true" id="3-string-interpolation"></a><a href="#3-string-interpolation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. String Interpolation</h3>
+<p>Using the <a href="https://stedolan.github.io/jq/manual/#Stringinterpolation-(foo">string interpolation</a>) feature, we can create a new string from existing attributes.</p>
+<p>In the example below, we parse the SLP (Simple Ledger Protocol) Genesis transaction items and create a new string called <code>&quot;title&quot;</code> (as well as a normal attribute <code>document_url</code>):</p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -164,6 +168,12 @@
 </code></pre>
 <ul>
 <li>it uses the <code>project</code> attribute to only return the matched output (the OP_RETURN one), through db-side filtering</li>
-<li>then it uses the response filter to extract out <code>s4</code> (token symbol), <code>s5</code> (token name) and <code>s6</code> (token url)</li>
+<li>then it uses the response filter to extract out <code>s4</code> (token symbol), <code>s5</code> (token name) and <code>s6</code> (token url), but also makes use of the <code>\( )</code> operator for string interpolation.</li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#query">Query</a><ul class="toc-headings"><li><a href="#1-exact-string-match">1. Exact String Match</a></li><li><a href="#2-multiple-push-data-query">2. Multiple Push Data Query</a></li><li><a href="#3-exact-match-full-text-search">3. Exact Match + Full Text Search</a></li><li><a href="#4-regular-expression-full-text-search">4. Regular Expression + Full Text Search</a></li><li><a href="#5-query-by-address">5. Query by Address</a></li><li><a href="#6-query-by-multiple-addresses">6. Query by Multiple Addresses</a></li><li><a href="#7-find-op-return-transactions">7. Find OP_RETURN Transactions</a></li><li><a href="#8-find-multisig-transactions">8. Find Multisig Transactions</a></li><li><a href="#9-filter-down-to-the-actual-matched-script">9. Filter down to the actual matched script</a></li></ul></li><li><a href="#processing">Processing</a><ul class="toc-headings"><li><a href="#1-memocash-post-api">1. Memo.cash post API</a></li><li><a href="#2-using-local-variables">2. Using Local Variables</a></li><li><a href="#2-token-protocol-parsing">2. Token Protocol Parsing</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
+<p>You can learn more about jq here:</p>
+<ul>
+<li>jq tutorial: <a href="https://stedolan.github.io/jq/tutorial/">https://stedolan.github.io/jq/tutorial/</a></li>
+<li>jq manual: <a href="https://stedolan.github.io/jq/manual/">https://stedolan.github.io/jq/manual/</a></li>
+</ul>
+<hr>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#query">Query</a><ul class="toc-headings"><li><a href="#1-exact-string-match">1. Exact String Match</a></li><li><a href="#2-multiple-push-data-query">2. Multiple Push Data Query</a></li><li><a href="#3-exact-match-full-text-search">3. Exact Match + Full Text Search</a></li><li><a href="#4-regular-expression-full-text-search">4. Regular Expression + Full Text Search</a></li><li><a href="#5-query-by-address">5. Query by Address</a></li><li><a href="#6-query-by-multiple-addresses">6. Query by Multiple Addresses</a></li><li><a href="#7-find-op-return-transactions">7. Find OP_RETURN Transactions</a></li><li><a href="#8-find-multisig-transactions">8. Find Multisig Transactions</a></li><li><a href="#9-filter-down-to-the-actual-matched-script">9. Filter down to the actual matched script</a></li></ul></li><li><a href="#processing">Processing</a><ul class="toc-headings"><li><a href="#1-map">1. Map</a></li><li><a href="#2-using-local-variables">2. Using Local Variables</a></li><li><a href="#3-string-interpolation">3. String Interpolation</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
