@@ -3,7 +3,7 @@
 <p>There's a lot going on inside a transaction, but for simplicity let's zoom in and take a look at how an OP_RETURN output is indexed in BitDB as an example:</p>
 <p><img src="/docs/assets/output_script.png" alt="output_script"></p>
 <p>To interpret this we follow a simple rule:</p>
-<pre><code class="hljs">Note how all attribute names either start with <span class="hljs-string">"b"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"s"</span>, followed by a number.
+<pre><code class="hljs">Script output attribute names start with either <span class="hljs-string">"b"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"s"</span> followed by a number.
 
 1. The<span class="hljs-built_in"> prefix </span>denotes the encoding scheme (<span class="hljs-string">"b"</span> is base64, <span class="hljs-string">"s"</span> is utf8)
 2. The number denotes the push data index
