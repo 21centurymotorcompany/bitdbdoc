@@ -2,28 +2,13 @@
 <p>BitDB turns every Bitcoin transaction into a MongoDB document.</p>
 <p>There's a lot going on inside a transaction, but for simplicity let's zoom in and take a look at how an OP_RETURN output is indexed in BitDB as an example:</p>
 <p><img src="/docs/assets/output_script.png" alt="output_script"></p>
-<p>This is just a simple OP_RETURN output script.</p>
-<p>The script is just a one dimensional string so it's not something you can easily query against. This is why BitDB transforms them in a more strucutred 2-dimensional format:</p>
-<pre><code class="hljs">{
-  <span class="hljs-attr">"out"</span>: [{
-    <span class="hljs-attr">"b0"</span>: { <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span> },
-    <span class="hljs-attr">"b1"</span>: <span class="hljs-string">"bQM="</span>,
-    <span class="hljs-attr">"b2"</span>: <span class="hljs-string">"ZmUzMmE0YmM1YTUyY2U5Yjg2MTcyNTQ2MmFkN2Q1ZDIyM2QzNTU0NTMyZWIxNzJjN2QyOWZlY2E1NzIyZDQ0Yw=="</span>,
-    <span class="hljs-attr">"b3"</span>: <span class="hljs-string">"InRoaXMgaXMgYSByZXBseSI="</span>,
-    <span class="hljs-attr">"s1"</span>: <span class="hljs-string">"m"</span>,
-    <span class="hljs-attr">"s2"</span>: <span class="hljs-string">"fe32a4bc5a52ce9b861725462ad7d5d223d3554532eb172c7d29feca5722d44c"</span>,
-    <span class="hljs-attr">"s3"</span>: <span class="hljs-string">"this is a reply"</span>
-  }]
-}
+<p>To interpret this we follow a simple rule:</p>
+<pre><code class="hljs">Note how all attribute names either start with <span class="hljs-string">"b"</span> <span class="hljs-keyword">or</span> <span class="hljs-string">"s"</span>, followed by a number.
+
+1. The<span class="hljs-built_in"> prefix </span>denotes the encoding scheme (<span class="hljs-string">"b"</span> is base64, <span class="hljs-string">"s"</span> is utf8)
+2. The number denotes the push data index
 </code></pre>
-<p>Note how all attribute names either start with &quot;b&quot; or &quot;s&quot;, followed by a number.</p>
-<ul>
-<li>The prefix denotes the encoding scheme (&quot;b&quot; is base64, &quot;s&quot; is utf8)</li>
-<li>The number denotes the push data index</li>
-</ul>
 <p>So let's interpret the above output script according to this rule.</p>
-<pre><code class="hljs">OP_RETURN <span class="hljs-number">0x6d02</span> fe<span class="hljs-number">32</span>a<span class="hljs-number">4</span>bc<span class="hljs-number">5</span>a<span class="hljs-number">52</span>ce<span class="hljs-number">9</span>b<span class="hljs-number">861725462</span>ad<span class="hljs-number">7</span>d<span class="hljs-number">5</span>d<span class="hljs-number">223</span>d<span class="hljs-number">3554532</span>eb<span class="hljs-number">172</span><span class="hljs-keyword">c</span><span class="hljs-number">7</span>d<span class="hljs-number">29</span>feca<span class="hljs-number">5722</span>d<span class="hljs-number">44</span><span class="hljs-keyword">c</span> <span class="hljs-string">"this is a reply"</span>
-</code></pre>
 <ul>
 <li>Index 0: OP_RETURN
 <ul>
