@@ -133,28 +133,26 @@
     <span class="hljs-attr">project</span>: { <span class="hljs-string">"out.b1.$"</span>: <span class="hljs-number">1</span> }
   }
 };
-​
+
 <span class="hljs-comment">// Turn the query into base64 encoded string.</span>
 <span class="hljs-comment">// This is required for accessing a public bitdb node</span>
 <span class="hljs-keyword">var</span> b64 = btoa(<span class="hljs-built_in">JSON</span>.stringify(query));
 <span class="hljs-keyword">var</span> url = <span class="hljs-string">"https://bitdb.network/q/"</span> + b64;
-​
+
 <span class="hljs-comment">// Attach API KEY as header</span>
 <span class="hljs-keyword">var</span> header = {
   <span class="hljs-attr">headers</span>: { <span class="hljs-attr">key</span>: [YOUR API KEY GOES HERE] }
 };
-​
+
 <span class="hljs-comment">// Make an HTTP request to bitdb.network public endpoint</span>
 fetch(url, header).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">r</span>) </span>{
   <span class="hljs-keyword">return</span> r.json()
 }).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">r</span>) </span>{
-​
   <span class="hljs-comment">// Parse the response and render the results on the screen</span>
   r.confirmed.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">output</span>) </span>{
     <span class="hljs-keyword">var</span> div = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">"div"</span>);
     div.innerHTML = output.out[<span class="hljs-number">0</span>].s2;
     <span class="hljs-built_in">document</span>.body.appendChild(div)
-​
   })
 })
 </span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
