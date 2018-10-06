@@ -11,11 +11,11 @@
 <li>When the <strong>final evaluated result is true</strong>, the two transactions are successfully &quot;linked&quot;, and you have spent your bitcoin.</li>
 </ol>
 <h2><a class="anchor" aria-hidden="true" id="bitdb-101"></a><a href="#bitdb-101" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>BitDB 101</h2>
-<p>As mentioned, bitcoin scripts are one-dimensional. It works well for running the program, but if we want to SEARCH for certain bitcoin script code, it's not easy because they're not stored in a structured manner.</p>
-<p>This is why BitDB exists. BitDB turns every Bitcoin transaction into a structured MongoDB document.</p>
+<p>As mentioned above, <strong>bitcoin scripts are one-dimensional</strong>. It works well for running the program itself, but if we want to SEARCH for certain bitcoin script within the entire bitcoin universe, it's impossible because <strong>they're not stored in a structured manner</strong>.</p>
+<p>This is why BitDB exists. <strong>BitDB turns every Bitcoin transaction into a structured MongoDB document</strong>.</p>
 <p>For simplicity let's zoom into a specific example and take a look at how an OP_RETURN output is indexed in BitDB as an example:</p>
 <blockquote>
-<p>OP_RETURN is an opcode that lets you embed arbitrary data on the output script without spending bitcoins.</p>
+<p>OP_RETURN is an opcode that lets you embed arbitrary data inside a bitcoin script without actually spending bitcoins.</p>
 </blockquote>
 <p><img src="/docs/assets/output_script.png" alt="output_script"></p>
 <p>To interpret this we follow a simple rule:</p>
