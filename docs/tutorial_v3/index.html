@@ -59,9 +59,9 @@
 <p><img src="/docs/assets/memopost.png" alt="memoaction"></p>
 <p>So what we need is:</p>
 <ul>
-<li>An OP_RETURN output ( {&quot;op&quot;: 106} )</li>
-<li>that has <code>out.h1</code> of 6d02 (we use the &quot;h1&quot; attribute since we're querying for hex format)</li>
-<li>and process the response to extract out <code>out.s2</code> (the second push data) to create a custom API (assign <code>s2</code> to a human readable attribute)</li>
+<li>An OP_RETURN output ( {&quot;op&quot;: 106} ) at index 0 (<code>out.b0</code>)</li>
+<li>that has 6d02 at index 1 (<code>out.h1</code> -- we use the &quot;h1&quot; attribute since we're querying for hex format)</li>
+<li>and process the response to extract out the push data at index 2 (<code>out.s2</code>) to create a custom API (assign <code>s2</code> to a human readable attribute)</li>
 <li>Then use the custom API response to render the HTML</li>
 </ul>
 <p>Here's an example of what a real-world memo.cash &quot;Post memo&quot; transaction output looks like:</p>
@@ -90,7 +90,7 @@
 <pre><code class="hljs">var query = {
   <span class="hljs-string">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-string">"q"</span>: {
-    <span class="hljs-string">"find"</span>: { <span class="hljs-string">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-string">"find"</span>: { <span class="hljs-string">"out.b0"</span>: { <span class="hljs-string">"op"</span>: <span class="hljs-number">106</span> }, <span class="hljs-string">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
     <span class="hljs-string">"project"</span>: { <span class="hljs-string">"out.$"</span>: <span class="hljs-number">1</span> }
   },
   <span class="hljs-string">"r"</span>: {
@@ -130,7 +130,7 @@
 <span class="hljs-keyword">var</span> query = {
   <span class="hljs-string">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-string">"q"</span>: {
-    <span class="hljs-string">"find"</span>: { <span class="hljs-string">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-string">"find"</span>: { <span class="hljs-string">"out.b0"</span>: { <span class="hljs-string">"op"</span>: <span class="hljs-number">106</span> }, <span class="hljs-string">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
     <span class="hljs-string">"project"</span>: { <span class="hljs-string">"out.$"</span>: <span class="hljs-number">1</span> }
   },
   <span class="hljs-string">"r"</span>: {
