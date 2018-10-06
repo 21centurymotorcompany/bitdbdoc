@@ -61,8 +61,8 @@
 <ul>
 <li>An OP_RETURN output ( {&quot;op&quot;: 106} )</li>
 <li>that has <code>out.h1</code> of 6d02 (we use the &quot;h1&quot; attribute since we're querying for hex format)</li>
-<li>and process the response to create a custom API</li>
-<li>Then use the API response to render</li>
+<li>and process the response to extract out <code>out.s2</code> (the second push data) to create a custom API (assign <code>s2</code> to a human readable attribute)</li>
+<li>Then use the custom API response to render the HTML</li>
 </ul>
 <p>Here's an example of what a real-world memo.cash &quot;Post memo&quot; transaction output looks like:</p>
 <pre><code class="hljs">{
