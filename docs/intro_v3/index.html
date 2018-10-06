@@ -176,7 +176,7 @@
 <p>This is the main part that contains the actual MongoDB query. <a href="query_v3#b-query">Learn more</a></p>
 <h3><a class="anchor" aria-hidden="true" id="1-exact-string-match"></a><a href="#1-exact-string-match" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Exact String Match</h3>
 <p>Find all transactions where the first push data is &quot;hello&quot; in UTF8</p>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -185,12 +185,11 @@
   }
 }
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="2-multiple-push-data-query"></a><a href="#2-multiple-push-data-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Multiple Push Data Query</h3>
+<h3><a class="anchor" aria-hidden="true" id="2-hex-value-push-data-query"></a><a href="#2-hex-value-push-data-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Hex-value Push Data Query</h3>
+<p>Another class of attribute you can query with is h0, h1, h2, ... which are hex encoded version of the push data.</p>
+<p>Here's an example:</p>
 <p>Find all transactions that start with &quot;6d02&quot; in hex as the first push data.</p>
-<blockquote>
-<p>Another class of attribute you can query with is h0, h1, h2, ... which are hex encoded version of the push data</p>
-</blockquote>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -208,7 +207,7 @@
 <li>Full text search is applied universally over all s-attributes so you can't search against a specific attribute</li>
 </ol>
 </blockquote>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -224,7 +223,7 @@
 <p>It is possible to run regular expression matches on fields. But due to the way MongoDB works, running pure regular expression queries can be inefficient unless efficiently structured. (<a href="https://medium.com/statuscode/how-to-speed-up-mongodb-regex-queries-by-a-factor-of-up-to-10-73995435c606">Related Article</a>)</p>
 <p>It is recommended that you use it in conjunction with a full text search to filter it down to a subset that matches the full text search results, and then apply the regex operation. (Also, make sure to read the linked article above)</p>
 <p>Example: Find all transactions where the second push data matches the UTF8 regular expression <code>/hello.*/i</code></p>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7CiAgICAgICAgIiRzZWFyY2giOiAiaGVsbG8iCiAgICAgIH0sCiAgICAgICJvdXQuczIiOiB7CiAgICAgICAgIiRyZWdleCI6ICJoZWxsby4qIiwgIiRvcHRpb25zIjogImkiCiAgICAgIH0KICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7CiAgICAgICAgIiRzZWFyY2giOiAiaGVsbG8iCiAgICAgIH0sCiAgICAgICJvdXQuczIiOiB7CiAgICAgICAgIiRyZWdleCI6ICJoZWxsby4qIiwgIiRvcHRpb25zIjogImkiCiAgICAgIH0KICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -243,7 +242,7 @@
 So if you want to query all transactions input edge address, you use &quot;in.e.a&quot; (input.edge.address)
 Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here</a></p>
 </blockquote>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -256,7 +255,7 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="6-query-by-multiple-addresses"></a><a href="#6-query-by-multiple-addresses" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6. Query by Multiple Addresses</h3>
 <p>Find all transactions sent from the address <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code> and received by <code>qpne29ue8chsv9pxv653zxdhjn45umm4esyds75nx6</code></p>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIsCiAgICAgICJvdXQuZS5hIjogInFwbmUyOXVlOGNoc3Y5cHh2NjUzenhkaGpuNDV1bW00ZXN5ZHM3NW54NiIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIsCiAgICAgICJvdXQuZS5hIjogInFwbmUyOXVlOGNoc3Y5cHh2NjUzenhkaGpuNDV1bW00ZXN5ZHM3NW54NiIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -270,7 +269,7 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="7-find-op-return-transactions"></a><a href="#7-find-op-return-transactions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>7. Find OP_RETURN Transactions</h3>
 <p>Find all transactions that contain an <strong>OP_RETURN</strong> output (<strong>output.b0</strong> <code>{ op: 106 }</code>)</p>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmIwIjogewogICAgICAgICJvcCI6IDEwNgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmIwIjogewogICAgICAgICJvcCI6IDEwNgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -283,7 +282,7 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="8-find-multisig-transactions"></a><a href="#8-find-multisig-transactions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>8. Find Multisig Transactions</h3>
 <p>Find all transactions that contain Multisig transactions (<strong>output.b5</strong> <code>{ op: 174 }</code>)</p>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmI1IjogewogICAgICAgICJvcCI6IDE3NAogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmI1IjogewogICAgICAgICJvcCI6IDE3NAogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -297,7 +296,7 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 <h3><a class="anchor" aria-hidden="true" id="9-filter-down-to-the-actual-matched-script"></a><a href="#9-filter-down-to-the-actual-matched-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>9. Filter down to the actual matched script</h3>
 <p>By default all queries return transaction objects since a &quot;row&quot; in BitDB is a transaction. However we can take advantage of the flexible MongoDB queries to drill down into the matched subdocuments.</p>
 <p>For example, if we were looking for a specific match in an output, we can ask the query to return the actual matched output instead of the full transaction, using MongoDB's project and $ operator:</p>
-<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -317,37 +316,39 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 <p>In this section, pay attention to <code>.r.f</code> under every query.</p>
 <h3><a class="anchor" aria-hidden="true" id="1-map"></a><a href="#1-map" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Map</h3>
 <p>Here's a simple example for getting all posts from Memo.cash protocol and extracting out the <code>.blk.i</code>, <code>.blk.t</code>, and <code>.out[1].s2</code> attributes:</p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LmgxIjogIjZkMDIiIH0KICB9LAogICJyIjogewogICAgImYiOiAiWyAuW10gfCB7IGJsb2NrOiAuYmxrLmk/LCB0aW1lc3RhbXA6IC5ibGsudD8sIGNvbnRlbnQ6IC5vdXRbMV0uczIgfV0iCiAgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
-    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
-    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">100</span>
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> }
   },
   <span class="hljs-attr">"r"</span>: {
-    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[{ block: .blk.i?, timestamp: .blk.t?, content: .out[1].s2 }]"</span>
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[ .[] | { block: .blk.i?, timestamp: .blk.t?, content: .out[1].s2 }]"</span>
   }
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="2-using-local-variables"></a><a href="#2-using-local-variables" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Using Local Variables</h3>
 <p>Using the <a href="https://stedolan.github.io/jq/manual/#Advancedfeatures">variables operator</a> in jq, we can assign values to local variables (<code>... as $identifier</code>) and use them later on in the expression.</p>
 <p>In the example below, assign the <code>$blk</code> and <code>$tx</code> variables, and then use them later on in the last pipeline stage:</p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7ICIkc2VhcmNoIjogImJldCIgfSwKICAgICAgIm91dC5oMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfSwKICAiciI6IHsKICAgICJmIjogIlsgLltdIHwgLmJsayBhcyAkYmxrIHwgLnR4IGFzICR0eCB8IC5vdXRbMV0gfCB7dW5peF90aW1lOiAkYmxrLnQsIGJsb2NrOiAkYmxrLmksIHR4OiAkdHguaCwgbXNnOiAuczJ9IF0iCiAgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
-  <span class="hljs-string">"v"</span>: 3,
-  <span class="hljs-string">"q"</span>: {
-    <span class="hljs-string">"find"</span>: {
-      <span class="hljs-string">"<span class="hljs-variable">$text</span>"</span>: { <span class="hljs-string">"<span class="hljs-variable">$search</span>"</span>: <span class="hljs-string">"bet"</span> },
-      <span class="hljs-string">"out.h1"</span>: <span class="hljs-string">"6d02"</span>
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: {
+      <span class="hljs-attr">"$text"</span>: { <span class="hljs-attr">"$search"</span>: <span class="hljs-string">"bet"</span> },
+      <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span>
     },
-    <span class="hljs-string">"limit"</span>: 10
+    <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
   },
-  r: {
-    f: <span class="hljs-string">"[ .[] | .blk as <span class="hljs-variable">$blk</span> | .tx as <span class="hljs-variable">$tx</span> | .out[1] | {unix_time: <span class="hljs-variable">$blk</span>.t, block: <span class="hljs-variable">$blk</span>.i, tx: <span class="hljs-variable">$tx</span>.h, msg: .s2} ]"</span>
+  <span class="hljs-attr">"r"</span>: {
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[ .[] | .blk as $blk | .tx as $tx | .out[1] | {unix_time: $blk.t, block: $blk.i, tx: $tx.h, msg: .s2} ]"</span>
   }
 }
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="3-string-interpolation"></a><a href="#3-string-interpolation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. String Interpolation</h3>
 <p>Using the <a href="https://stedolan.github.io/jq/manual/#Stringinterpolation-(foo">string interpolation</a>) feature, we can create a new string from existing attributes.</p>
 <p>In the example below, we parse the SLP (Simple Ledger Protocol) Genesis transaction items and create a new string called <code>&quot;title&quot;</code> (as well as a normal attribute <code>document_url</code>):</p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LmgxIjogIjUzNGM1MDAwIiwgIm91dC5zMyI6ICJHRU5FU0lTIiB9LAogICAgImxpbWl0IjogMjAsCiAgICAicHJvamVjdCI6IHsgIm91dC4kIjogMSwgIl9pZCI6IDAgfQogIH0sCiAgInIiOiB7CiAgICAiZiI6ICJbLltdIHwgLm91dFswXSB8IHt0aXRsZTogXCJbXFwoLnM0KV0gXFwoLnM1KVwiLCBkb2N1bWVudF91cmw6IC5zNn0gXSIKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -364,18 +365,20 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 <li>it uses the <code>project</code> attribute to only return the matched output (the OP_RETURN one), through db-side filtering</li>
 <li>then it uses the response filter to extract out <code>s4</code> (token symbol), <code>s5</code> (token name) and <code>s6</code> (token url), but also makes use of the <code>\( )</code> operator for string interpolation.</li>
 </ul>
-<p>You can learn more about jq here:</p>
-<ul>
-<li>jq tutorial: <a href="https://stedolan.github.io/jq/tutorial/">https://stedolan.github.io/jq/tutorial/</a></li>
-<li>jq manual: <a href="https://stedolan.github.io/jq/manual/">https://stedolan.github.io/jq/manual/</a></li>
-</ul>
 <h3><a class="anchor" aria-hidden="true" id="4-string-construction"></a><a href="#4-string-construction" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4. String Construction</h3>
 <p>This makes a bitquery request, parses out the <code>s2</code> attributes from every output, and joins them to create a full HTML text.</p>
+<p><a href="https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsgImZpbmQiOiB7ICJ0eC5oIjogImZhNjlmYjUzYmI0NWNkOWRmMzc1ZjkzZjZjY2E1MmQwNDRlNDUwNWVkYTVjZTFiOTUwNGFlMmM2YTk5OWFlMjciIH0sICJsaW1pdCI6IDEgfSwKICAiciI6IHsgImYiOiAiWy5bMF0ub3V0W10gfCAuczJdIHwgW3sgaHRtbDogam9pbihcIlwiKSB9XSIgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: { <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"tx.h"</span>: <span class="hljs-string">"fa69fb53bb45cd9df375f93f6cca52d044e4505eda5ce1b9504ae2c6a999ae27"</span> }, <span class="hljs-attr">"limit"</span>: <span class="hljs-number">1</span> },
   <span class="hljs-attr">"r"</span>: { <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[.[0].out[] | .s2] | [{ html: join(\"\") }]"</span> }
 }
 </code></pre>
+<h3><a class="anchor" aria-hidden="true" id="5-more"></a><a href="#5-more" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>5. More</h3>
+<p>There's much more you can do with jq, you can learn more about jq here:</p>
+<ul>
+<li>jq tutorial: <a href="https://stedolan.github.io/jq/tutorial/">https://stedolan.github.io/jq/tutorial/</a></li>
+<li>jq manual: <a href="https://stedolan.github.io/jq/manual/">https://stedolan.github.io/jq/manual/</a></li>
+</ul>
 <hr>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/quickstart_v3"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/install"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#bitcoin-101">Bitcoin 101</a></li><li><a href="#bitdb-101">BitDB 101</a></li><li><a href="#query-examples">Query Examples</a><ul class="toc-headings"><li><a href="#1-exact-string-match">1. Exact String Match</a></li><li><a href="#2-multiple-push-data-query">2. Multiple Push Data Query</a></li><li><a href="#3-exact-match-full-text-search">3. Exact Match + Full Text Search</a></li><li><a href="#4-regular-expression-full-text-search">4. Regular Expression + Full Text Search</a></li><li><a href="#5-query-by-address">5. Query by Address</a></li><li><a href="#6-query-by-multiple-addresses">6. Query by Multiple Addresses</a></li><li><a href="#7-find-op-return-transactions">7. Find OP_RETURN Transactions</a></li><li><a href="#8-find-multisig-transactions">8. Find Multisig Transactions</a></li><li><a href="#9-filter-down-to-the-actual-matched-script">9. Filter down to the actual matched script</a></li></ul></li><li><a href="#processing-function-examples">Processing Function Examples</a><ul class="toc-headings"><li><a href="#1-map">1. Map</a></li><li><a href="#2-using-local-variables">2. Using Local Variables</a></li><li><a href="#3-string-interpolation">3. String Interpolation</a></li><li><a href="#4-string-construction">4. String Construction</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/quickstart_v3"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/install"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#bitcoin-101">Bitcoin 101</a></li><li><a href="#bitdb-101">BitDB 101</a></li><li><a href="#query-examples">Query Examples</a><ul class="toc-headings"><li><a href="#1-exact-string-match">1. Exact String Match</a></li><li><a href="#2-hex-value-push-data-query">2. Hex-value Push Data Query</a></li><li><a href="#3-exact-match-full-text-search">3. Exact Match + Full Text Search</a></li><li><a href="#4-regular-expression-full-text-search">4. Regular Expression + Full Text Search</a></li><li><a href="#5-query-by-address">5. Query by Address</a></li><li><a href="#6-query-by-multiple-addresses">6. Query by Multiple Addresses</a></li><li><a href="#7-find-op-return-transactions">7. Find OP_RETURN Transactions</a></li><li><a href="#8-find-multisig-transactions">8. Find Multisig Transactions</a></li><li><a href="#9-filter-down-to-the-actual-matched-script">9. Filter down to the actual matched script</a></li></ul></li><li><a href="#processing-function-examples">Processing Function Examples</a><ul class="toc-headings"><li><a href="#1-map">1. Map</a></li><li><a href="#2-using-local-variables">2. Using Local Variables</a></li><li><a href="#3-string-interpolation">3. String Interpolation</a></li><li><a href="#4-string-construction">4. String Construction</a></li><li><a href="#5-more">5. More</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
