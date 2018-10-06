@@ -9,6 +9,7 @@
 <url> <loc>https://docs.bitdb.network/docs/diy</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://docs.bitdb.network/docs/diy" /> </url>
 <url> <loc>https://docs.bitdb.network/docs/indexer</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://docs.bitdb.network/docs/indexer" /> </url>
 <url> <loc>https://docs.bitdb.network/docs/install</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://docs.bitdb.network/docs/install" /> </url>
+<url> <loc>https://docs.bitdb.network/docs/intro_v3</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://docs.bitdb.network/docs/intro_v3" /> </url>
 <url> <loc>https://docs.bitdb.network/docs/layer2</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://docs.bitdb.network/docs/layer2" /> </url>
 <url> <loc>https://docs.bitdb.network/docs/query_v2</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://docs.bitdb.network/docs/query_v2" /> </url>
 <url> <loc>https://docs.bitdb.network/docs/query_v3</loc> <changefreq>hourly</changefreq> <priority>1.0</priority> <xhtml:link rel="alternate" hreflang="en" href="https://docs.bitdb.network/docs/query_v3" /> </url>
