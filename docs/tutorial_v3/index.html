@@ -105,7 +105,7 @@
 <li><strong>q:</strong> Inside the q is just a regular MongoDB query.
 <ul>
 <li><strong>find:</strong> It's looking for a match for &quot;out.h1&quot;: &quot;6d02&quot; ('h'-prefixed variables are used for hex-encoded queries)</li>
-<li><strong>project:</strong> This is a special MongoDB projection operation that <a href="query#4-only-return-the-matched-part">only returns a matched subdocument instead of the entire document</a>. In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.</li>
+<li><strong>project:</strong> This is a special MongoDB projection operation that <a href="query_v3#4-only-return-the-matched-part">only returns a matched subdocument instead of the entire document</a>. In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.</li>
 </ul></li>
 <li><strong>r:</strong> the <code>r.f</code> is a <a href="https://stedolan.github.io/jq/">jq</a> expression that transforms the query result into another format. This is the part that lets you build your own custom API from Bitquery. In this case, it's taking the query response and extracting out its <code>s2</code> attribute (and assigning to a custom variable &quot;msg&quot;) to create the final result.</li>
 </ol>
