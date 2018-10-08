@@ -1,0 +1,288 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Build immutable ownerless APIs on Bitcoin · bitdb</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Intro"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Build immutable ownerless APIs on Bitcoin · bitdb"/><meta property="og:type" content="website"/><meta property="og:url" content="https://docs.bitdb.network/index.html"/><meta property="og:description" content="## Intro"/><meta property="og:image" content="https://docs.bitdb.network/img/docusaurus.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://docs.bitdb.network/img/docusaurus.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,900"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><h2 class="headerTitle">bitdb</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="https://github.com/21centurymotorcompany/bitd" target="_self">GitHub</a></li><li class=""><a href="https://twitter.com/_unwriter" target="_self">Twitter</a></li><li class=""><a href="https://t.me/joinchat/HH1DDQ8pZlSlsdNcKgIcxw" target="_self">Chat</a></li><li class=""><a href="https://bitdb.network/v3/explorer" target="_self">Explorer</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Tutorials</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Introduction</h3><ul><li class="navListItem"><a class="navItem" href="/docs/bitdb">BitDB</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Components</h3><ul><li class="navListItem"><a class="navItem" href="/docs/crawler">Crawler</a></li><li class="navListItem"><a class="navItem" href="/docs/indexer">Indxer</a></li><li class="navListItem"><a class="navItem" href="/docs/query_v3">Query Engine</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Howto</h3><ul><li class="navListItem"><a class="navItem" href="/docs/quickstart_v3">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/intro_v3">Learn</a></li><li class="navListItem"><a class="navItem" href="/docs/install">Run a node</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Tutorials</h3><ul><li class="navListItem"><a class="navItem" href="/docs/tutorial_v3">Build a Bitcoin App in 5 Minutes</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/tutorial_bitquery">Build immutable ownerless APIs on Bitcoin</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">FAQ</h3><ul><li class="navListItem"><a class="navItem" href="/docs/chain">What chain does BitDB support?</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Build immutable ownerless APIs on Bitcoin</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="intro"></a><a href="#intro" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Intro</h2>
+<p>Have you heard of BitDB? It's a universal bitcoin database that lets you easily build serverless decentralized applications on top of Bitcoin (If you haven't, check out <a href="https://www.yours.org/content/introducing-bitdb-20-e8c17c845939">this article</a> to learn more)</p>
+<p>If you've tried BitDB, you probably used the built-in JSON based query language.</p>
+<p>While useful, this language was rough around thte edges, lacked some critical features, and I was far from satisfied with the expressive power and extensibility of the language. I've been internally experimenting and iterating on different approaches, and have finally reached a point where I can officially announce it (as well as give it a name).</p>
+<p>Today I am releasing <a href="https://docs.bitdb.network/docs/query_v3">Bitquery</a>, <strong>a Turing complete query language for building immutable APIs on Bitcoin</strong>.</p>
+<p>Also, I'm open sourcing <a href="https://github.com/21centurymotorcompany/bitqueryd">Bitqueryd</a>, the query engine that lets you interact with BitDB using bitquery language.</p>
+<p><img src="/docs/assets/bitquery/logo.png" alt="logo"></p>
+<p>Note that while Bitquery is the default query language of BitDB, it's a completely decoupled from the <a href="https://github.com/21centurymotorcompany/bitd">core bitd</a> module to maximize extensibility of each module going forward.</p>
+<ul>
+<li><p><strong>Bitd:</strong> An autonomous engine that <strong>writes</strong> to BitDB</p></li>
+<li><p><strong>Bitqueryd:</strong> A query engine that <strong>reads</strong> from BitDB through the bitquery query language.</p></li>
+</ul>
+<p><img src="/docs/assets/bitquery/arch.png" alt="arch"></p>
+<h2><a class="anchor" aria-hidden="true" id="quick-intro-to-bitdb"></a><a href="#quick-intro-to-bitdb" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Quick Intro to BitDB</h2>
+<p>Before we discuss Bitquery, let's quickly go through what BitDB does:</p>
+<ol>
+<li>It crawls Bitcoin</li>
+<li>Parses raw transaction into a strucutred JSON document</li>
+<li>Stores it into MongoDB</li>
+</ol>
+<p><img src="/docs/assets/bitquery/protein.png" alt="protein"></p>
+<p>Here's what a raw transaction looks like:</p>
+<pre><code class="hljs"><span class="hljs-number">0100000001</span>b<span class="hljs-number">08</span>acdbdad<span class="hljs-number">97</span>ad<span class="hljs-number">6670</span><span class="hljs-keyword">c</span><span class="hljs-number">83</span>cee<span class="hljs-number">6794</span>bfbd<span class="hljs-number">1e9</span>bb<span class="hljs-number">1220</span>b<span class="hljs-number">9e6</span>b<span class="hljs-number">3116</span>b<span class="hljs-number">754</span>bca<span class="hljs-number">2459326010000006</span>a<span class="hljs-number">47304402201</span><span class="hljs-keyword">c</span><span class="hljs-number">6039241540945</span><span class="hljs-keyword">c</span><span class="hljs-number">8</span><span class="hljs-keyword">c</span><span class="hljs-number">65</span>f<span class="hljs-number">3</span>d<span class="hljs-number">3</span>ba<span class="hljs-number">116</span>dd<span class="hljs-number">7</span>b<span class="hljs-number">77</span>ea<span class="hljs-number">2</span>ca<span class="hljs-number">89</span>afac<span class="hljs-number">33</span>ef<span class="hljs-number">49</span>a<span class="hljs-number">8</span>bfa<span class="hljs-number">66</span>dafef<span class="hljs-number">022035</span>f<span class="hljs-number">906</span>ffc<span class="hljs-number">1</span>a<span class="hljs-number">12613</span>cab<span class="hljs-number">7</span>ee<span class="hljs-number">1</span>ec<span class="hljs-number">9443674</span>f<span class="hljs-number">594039</span><span class="hljs-keyword">c</span><span class="hljs-number">09</span>fce<span class="hljs-number">6e59</span>b<span class="hljs-number">4</span>f<span class="hljs-number">1781e18086</span>f<span class="hljs-number">8412103</span>d<span class="hljs-number">6</span>d<span class="hljs-number">364</span>d<span class="hljs-number">31666821548044723</span>f<span class="hljs-number">6</span>a<span class="hljs-number">8</span>b<span class="hljs-number">15</span>f<span class="hljs-number">43e6</span><span class="hljs-keyword">c</span><span class="hljs-number">7</span>dc<span class="hljs-number">5</span>edcc<span class="hljs-number">2</span>fc<span class="hljs-number">3</span>cf<span class="hljs-number">7831</span>b<span class="hljs-number">3e81095</span>cffffffff<span class="hljs-number">020000000000000000176</span>a<span class="hljs-number">026</span>d<span class="hljs-number">0212706</span>f<span class="hljs-number">737420746</span>f<span class="hljs-number">206</span>d<span class="hljs-number">656</span>d<span class="hljs-number">6</span>f<span class="hljs-number">2e636173682108420000000000001976</span>a<span class="hljs-number">91419</span>b<span class="hljs-number">26</span>abab<span class="hljs-number">87</span>de<span class="hljs-number">1</span>a<span class="hljs-number">5</span>d<span class="hljs-number">07</span>d<span class="hljs-number">34</span>a<span class="hljs-number">12</span>f<span class="hljs-number">232</span>f<span class="hljs-number">5</span>b<span class="hljs-number">75</span><span class="hljs-keyword">c</span><span class="hljs-number">7</span>caf<span class="hljs-number">188</span>ac<span class="hljs-number">00000000</span>
+</code></pre>
+<p>BitDB transforms it into a structured object and stores it into database, like this:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"tx"</span>: {
+    <span class="hljs-attr">"h"</span>: <span class="hljs-string">"92b87fc7390dff0ccfc43469ce90a8d3dbc20e752fdd5cbde55a6d89e230cdf5"</span>
+  },
+  <span class="hljs-attr">"blk"</span>: {
+    <span class="hljs-attr">"i"</span>: <span class="hljs-number">546492</span>,
+    <span class="hljs-attr">"h"</span>: <span class="hljs-string">"000000000000000000d3ad1ddba37d2d82cd50246e8ed20ee4bbea235d066e25"</span>,
+    <span class="hljs-attr">"t"</span>: <span class="hljs-number">1536117057</span>
+  },
+  <span class="hljs-attr">"in"</span>: [
+    {
+      <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"b0"</span>: <span class="hljs-string">"MEQCIBxgOSQVQJRcjGXz07oRbde3fqLKia+sM+9JqL+mba/vAiA1+Qb/waEmE8q37h7JRDZ09ZQDnAn85uWbTxeB4YCG+EE="</span>,
+      <span class="hljs-attr">"b1"</span>: <span class="hljs-string">"A9bTZNMWZoIVSARHI/aosV9D5sfcXtzC/Dz3gxs+gQlc"</span>,
+      <span class="hljs-attr">"str"</span>: <span class="hljs-string">"&lt;Script: 71 0x304402201c6039241540945c8c65f3d3ba116dd7b77ea2ca89afac33ef49a8bfa66dafef022035f906ffc1a12613cab7ee1ec9443674f594039c09fce6e59b4f1781e18086f841 33 0x03d6d364d31666821548044723f6a8b15f43e6c7dc5edcc2fc3cf7831b3e81095c&gt;"</span>,
+      <span class="hljs-attr">"e"</span>: {
+        <span class="hljs-attr">"h"</span>: <span class="hljs-string">"269345a2bc54b716316b9e0b22b19b1ebdbf9467ee3cc87066ad97adbdcd8ab0"</span>,
+        <span class="hljs-attr">"i"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"a"</span>: <span class="hljs-string">"qqvmy646hp77rfws0562zter9adht3727yu7kf3sls"</span>
+      }
+    }
+  ],
+  <span class="hljs-attr">"out"</span>: [
+    {
+      <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"b0"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span>
+      },
+      <span class="hljs-attr">"b1"</span>: <span class="hljs-string">"bQI="</span>,
+      <span class="hljs-attr">"s1"</span>: <span class="hljs-string">"m\u0002"</span>,
+      <span class="hljs-attr">"b2"</span>: <span class="hljs-string">"cG9zdCB0byBtZW1vLmNhc2gh"</span>,
+      <span class="hljs-attr">"s2"</span>: <span class="hljs-string">"post to memo.cash!"</span>,
+      <span class="hljs-attr">"str"</span>: <span class="hljs-string">"&lt;Script: OP_RETURN 2 0x6d02 18 0x706f737420746f206d656d6f2e6361736821&gt;"</span>,
+      <span class="hljs-attr">"e"</span>: {
+        <span class="hljs-attr">"v"</span>: <span class="hljs-number">0</span>,
+        <span class="hljs-attr">"i"</span>: <span class="hljs-number">0</span>
+      }
+    },
+    {
+      <span class="hljs-attr">"i"</span>: <span class="hljs-number">1</span>,
+      <span class="hljs-attr">"b0"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">118</span>
+      },
+      <span class="hljs-attr">"b1"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">169</span>
+      },
+      <span class="hljs-attr">"b2"</span>: <span class="hljs-string">"GbJqurh94aXQfTShLyMvW3XHyvE="</span>,
+      <span class="hljs-attr">"s2"</span>: <span class="hljs-string">"\u0019�j��}��}4�/#/[u���"</span>,
+      <span class="hljs-attr">"b3"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">136</span>
+      },
+      <span class="hljs-attr">"b4"</span>: {
+        <span class="hljs-attr">"op"</span>: <span class="hljs-number">172</span>
+      },
+      <span class="hljs-attr">"str"</span>: <span class="hljs-string">"&lt;Script: OP_DUP OP_HASH160 20 0x19b26abab87de1a5d07d34a12f232f5b75c7caf1 OP_EQUALVERIFY OP_CHECKSIG&gt;"</span>,
+      <span class="hljs-attr">"e"</span>: {
+        <span class="hljs-attr">"v"</span>: <span class="hljs-number">16904</span>,
+        <span class="hljs-attr">"i"</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">"a"</span>: <span class="hljs-string">"qqvmy646hp77rfws0562zter9adht3727yu7kf3sls"</span>
+      }
+    }
+  ]
+}
+</code></pre>
+<blockquote>
+<p>You can learn more about what each attribute means <a href="https://docs.bitdb.network/docs/indexer">here</a></p>
+</blockquote>
+<p>So how do we get the data OUT of BitDB?</p>
+<p>One way would be to leave it up to app programmers to write their own custom code to handle <strong>querying</strong>, <strong>encoding</strong>, and <strong>processing</strong> the DB response to produce a human readable API.</p>
+<p>But this means every application will have a different way of reading from Bitcoin and will lead to interoperability issues and lack of decentralization.</p>
+<p><strong>A better solution</strong> is to design a high level declarative query language that takes care of all of this in a <strong>portable</strong> and <strong>self-contained</strong> manner, which is crucial in building truly decentralized applications on Bitcoin.</p>
+<p>And THIS is Bitquery.</p>
+<h2><a class="anchor" aria-hidden="true" id="bitquery-build-immutable-apis-on-bitcoin"></a><a href="#bitquery-build-immutable-apis-on-bitcoin" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bitquery: Build Immutable APIs on Bitcoin</h2>
+<p>The most important part about Bitquery is that it lets you <strong>build immutable, ownerless APIs on Bitcoin</strong>.</p>
+<h3><a class="anchor" aria-hidden="true" id="1-before"></a><a href="#1-before" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Before</h3>
+<p>Let's take a look at an example raw BitDB object. The structure and the attribute names are not exactly &quot;human readable&quot;:</p>
+<p><img src="/docs/assets/bitquery/old.png" alt="old"></p>
+<h3><a class="anchor" aria-hidden="true" id="2-after"></a><a href="#2-after" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. After</h3>
+<p>On the other hand, here's what a Bitquery response looks like:</p>
+<p><img src="/docs/assets/bitquery/new.png" alt="new"></p>
+<p>As you can see, <strong>the query result is human readable, and INDISTINGUISHABLE from any mainstream API providers like Twitter, Facebook, etc..</strong>.</p>
+<p>So we get the best of both worlds--the usability of mainstream APIs, and the security of Bitcoin. This is possible because <strong>Bitquery</strong>:</p>
+<ol>
+<li>not only lets you <strong>Query Bitcoin through BitDB</strong> (which is deterministically derived from Bitcoin)</li>
+<li>but also lets you <strong>Process the BitDB response with a Turing complete language</strong></li>
+<li>all within a single query language, letting us create <strong>&quot;API endpoints&quot;</strong> that are containerized within a single portable JSON object.</li>
+</ol>
+<p>So how does this Bitquery actually work?</p>
+<h2><a class="anchor" aria-hidden="true" id="how-bitquery-works"></a><a href="#how-bitquery-works" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How Bitquery Works</h2>
+<p>Bitquery is a declarative query language that has the expressive power to contain all of the following within a single JSON object:</p>
+<ol>
+<li><strong>Querying:</strong> Query BitDB using the native JSON based query language for MongoDB.</li>
+<li><strong>Encoding</strong>: A built-in encoding scheme for dealing with bitcoin script push data.</li>
+<li><strong>Processing:</strong> Process the BitDB response using <a href="https://en.wikipedia.org/wiki/Jq_(programming_language)">jq</a>, a Turing complete stack based functional programming language.</li>
+</ol>
+<p>Here's an example:</p>
+<p><img src="/docs/assets/bitquery/query.png" alt="query"></p>
+<p>Let's go through each highlighted part:</p>
+<ol>
+<li><strong>Protocol Version:</strong> The query language is 100% self-contained (doesn't require a 3rd party schema to interpret its semantics) and will evolve over time, so it's important to declare the version.</li>
+<li><strong>Query:</strong> Bitquery implements a 1:1 mapping from the JSON query object to the native MongoDB query API. Basically it's a pure MongoDB query. (To see how BitDB stores these )</li>
+<li><strong>Process Function:</strong> This part is powered by <a href="https://en.wikipedia.org/wiki/Jq_(programming_language)">jq</a>, a Turing complete stack based functional programming language for processing data.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" id="1-querying"></a><a href="#1-querying" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Querying</h3>
+<p>The query part is simple, it's just a mongodb query. Once you understand how each bitcoin transaction is indexed in BitDB, this part is as simple as making a regular mongodb query request.</p>
+<p>So if you're looking for a transaction output that containst <code>OP_RETURN</code> as the first push data (index 0), you can write:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"out.b0"</span>: { <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span> }
+  }
+}
+</code></pre>
+<blockquote>
+<p>The opcode for OP_RETURN is 106</p>
+</blockquote>
+<p>And to search for output scripts that are <code>OP_RETURN</code> and and contain the text &quot;hello&quot; in any of the push data, you can say:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"$text"</span>: { <span class="hljs-attr">"$search"</span>: <span class="hljs-string">"hello"</span> },
+    <span class="hljs-attr">"out.b0"</span>: { <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span> }
+  }
+}
+</code></pre>
+<p>Again, it's just a regular MongoDB query. You can learn more here:</p>
+<h3><a class="anchor" aria-hidden="true" id="2-encoding"></a><a href="#2-encoding" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Encoding</h3>
+<p>Another important part about Bitquery is its encoding handler.</p>
+<p>Internally BitDB stores each script push data under &quot;b0&quot;, &quot;b1&quot;, &quot;b2&quot;, ... as base64 encoded string (or as an object if it's an opcode)</p>
+<p>But each application protocol powered by bitcoin script can have their own custom encoding scheme per script push data. One app might be using <strong>hex</strong> encoding for the second push data, while another might be using <strong>UTF8</strong> encoding.</p>
+<p>Therefore we need to specify the encoding of the attributes we're querying for. Bitquery makes this easy through the built-in attribute name convention:</p>
+<ul>
+<li>b0, b1, b2, b3, b4, ... : use these to query the push data in base64 encoding (or an opcode)</li>
+<li>h0, h1, h2, h3, h4, ... : use these to query the push data in hex encoding</li>
+<li>s0, s1, s2, s3, s4, ... : use these to query the push data in UTF8 encoding (The s-attributes are also indexed for <a href="https://docs.mongodb.com/manual/reference/operator/query/text/">full-text search</a>)</li>
+</ul>
+<blockquote>
+<p>In the earlier versions the query language included an extra object to describe these encoding schemes, but this was too verbose, not flexible enough, and not very intuitive.</p>
+</blockquote>
+<p>For example, if you want to fetch Memo.cash posts whose output script looks like this:</p>
+<pre><code class="hljs">OP_RETURN <span class="hljs-number">0x6d</span>02 Hello
+</code></pre>
+<p>You can write a query that looks like this:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"out.b0"</span>: { <span class="hljs-attr">"op"</span>: <span class="hljs-number">106</span> },
+    <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span>,
+    <span class="hljs-attr">"out.s2"</span>: <span class="hljs-string">"Hello"</span>
+  }
+}
+</code></pre>
+<p>Here's what's going on:</p>
+<ol>
+<li><strong>OP_RETURN</strong>: It's index 0 push data, so the query looks for <code>out.b0</code> of <code>{&quot;op&quot;: 106}</code> (<a href="https://en.bitcoin.it/wiki/Script#Opcodes">OP_RETURN's opcode is 106</a>)</li>
+<li><strong>0x6d02</strong>: It's index 1, and is hex format, so the query looks for <code>out.h1</code> of <code>&quot;6d02&quot;</code></li>
+<li><strong>Hello</strong>: It's index 2, and is UTF8, so the query looks for <code>out.s2</code> of <code>&quot;Hello&quot;</code></li>
+</ol>
+<blockquote>
+<p>You can learn more about the encoding scheme <a href="https://docs.bitdb.network/docs/query_v3#a-encoding">here</a></p>
+</blockquote>
+<h3><a class="anchor" aria-hidden="true" id="3-processing"></a><a href="#3-processing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Processing</h3>
+<p>Finally, here's the last piece of the puzzle that's been missing from the previous versions of bitdb's query language--<strong>programmability</strong>.</p>
+<p>With a raw query, BitDB only returns a regular transaction object--which as we saw above, is too raw and not human readable. And application developers probably will need to write additional code on their side to turn it into a usable format.</p>
+<p>While this is certainly possible, the ideal approach would be if we could somehow pack even the processing part into the query language so everyone who wants to make use of an API endpoint can use exactly the same query, with as little additional code as possible.</p>
+<p>To achieve this, Bitquery adopts <a href="https://en.wikipedia.org/wiki/Jq_(programming_language)">jq</a>, a popular <strong>Turing complete functional programming language that fits into a single line string</strong>.</p>
+<p>jq was originally designed to be used in a unix command line setting, and this &quot;command line&quot; constraint gave rise to a programming language that is Turing complete yet can be packed into a single line string. And this quality is perfect for something like Bitquery.</p>
+<p>For example, here's a bitquery that makes a query to BitDB (<code>&quot;q.find&quot;</code>), and then passes it to the response processing function (<code>r.f</code>) to extract out the <code>.blk.i</code>, <code>.blk.t</code>, <code>.out[1].s2</code> attributes and assign them to the human-readable attributes <code>block</code>, <code>timestamp</code>, and <code>content</code>, respectively:</p>
+<pre><code class="hljs">{
+  <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-attr">"q"</span>: {
+    <span class="hljs-attr">"find"</span>: { <span class="hljs-attr">"out.h1"</span>: <span class="hljs-string">"6d02"</span> }
+  },
+  <span class="hljs-attr">"r"</span>: {
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[ .[] | { block: .blk.i?, timestamp: .blk.t?, content: .out[1].s2 }]"</span>
+  }
+}
+</code></pre>
+<p>This is one example, but just remember, <strong>jq is Turing complete</strong>, which means you can process the query response to transform it into ANY format you desire.</p>
+<p>And <strong>THIS</strong> is how you can create your own custom immutable API on Bitcoin.</p>
+<p>You can write a query that results in a human readable response, and share it with any 3rd party developers who want to integrate with your application protocol.</p>
+<h2><a class="anchor" aria-hidden="true" id="example"></a><a href="#example" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Example</h2>
+<p>Enough with the theory. Let's actually try something tangible.</p>
+<p>Here's a quick example you can try out right now. Go ahead and copy and paste the code in a text editor, save it as an HTML file, and open it in a browser:</p>
+<pre><code class="hljs"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+<span class="hljs-comment">// Bitquery for filtering memo.cash posts (6d02) and extract out only the messages</span>
+<span class="hljs-keyword">var</span> query = {
+  <span class="hljs-string">"v"</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-string">"q"</span>: {
+    <span class="hljs-string">"find"</span>: { <span class="hljs-string">"out.b0"</span>: { <span class="hljs-string">"op"</span>: <span class="hljs-number">106</span> }, <span class="hljs-string">"out.h1"</span>: <span class="hljs-string">"6d02"</span> },
+    <span class="hljs-string">"project"</span>: { <span class="hljs-string">"out.$"</span>: <span class="hljs-number">1</span> }
+  },
+  <span class="hljs-string">"r"</span>: {
+    <span class="hljs-string">"f"</span>: <span class="hljs-string">"[ .[] | {msg: .out[0].s2} ]"</span>
+  }
+};
+
+<span class="hljs-comment">// Make an HTTP request to bitdb.network public endpoint with an API key</span>
+fetch(
+  <span class="hljs-string">"https://bitdb.network/q/"</span> + btoa(<span class="hljs-built_in">JSON</span>.stringify(query)),
+  { <span class="hljs-string">"headers"</span>: { <span class="hljs-attr">key</span>: <span class="hljs-string">"qqjtyk2qmphm4d2ddqfeg855we2u4ly7m59a0tuenn"</span> } }
+).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">r</span>) </span>{
+  <span class="hljs-keyword">return</span> r.json()
+}).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">r</span>) </span>{
+  <span class="hljs-comment">// Render the response!</span>
+  <span class="hljs-built_in">document</span>.write(<span class="hljs-string">"&lt;pre&gt;"</span> + <span class="hljs-built_in">JSON</span>.stringify(r, <span class="hljs-literal">null</span>, <span class="hljs-number">2</span>) + <span class="hljs-string">"&lt;/pre&gt;"</span>)
+})
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>The best part about bitdb is, <strong>you can get started immediately without setting up some esoteric &quot;developer environment&quot;</strong>.</p>
+<p>If you want to be more secure, you can also add methods to cross-validate between multiple bitdb nodes, as well as cross-validate with any bitcoin node (Remember, bitdb is derived from bitcoin, so you can compare any bitcoin transaction with its corresponding bitdb document very easily)</p>
+<p>Of course, the HTTP API is not the only way, there are two ways you can use bitdb:</p>
+<ol>
+<li><strong>Direct:</strong> Directly connect to the MongoDB instance through bitqueryd. This is simple if you run your own bitdb node.</li>
+<li><strong>HTTP API:</strong> Connect to a public BitDB node via HTTP API</li>
+</ol>
+<p>In both cases you make the query request with exactly the same query object.</p>
+<h2><a class="anchor" aria-hidden="true" id="conclusion-what-does-this-all-mean"></a><a href="#conclusion-what-does-this-all-mean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conclusion: What Does This All Mean?</h2>
+<h3><a class="anchor" aria-hidden="true" id="1-like-a-chain-of-math-functions"></a><a href="#1-like-a-chain-of-math-functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>1. Like a chain of math functions</h3>
+<p>Here's a high level view: We can think of the whole thing as a series of mathematical functions.</p>
+<ol>
+<li><strong>Index:</strong> BitDB crawls, parses, and indexes Bitcoin's raw transaction in a structured manner. The whole process is deterministic, therefore we can be sure that querying BitDB is equivalent to querying Bitcoin. We can think of this as a &quot;function&quot; that takes the entire Bitcoin universe as input and returns the derived BitDB as output.</li>
+<li><strong>Query:</strong> The first step of Bitquery is the actual <strong>query request</strong> into the MongoDB instance. This could be seen as a &quot;function&quot; as well. It takes the <strong>query object as &quot;input&quot;</strong>, and returns the <strong>response as &quot;output&quot;</strong>.</li>
+<li><strong>Process:</strong> The second step of Bitquery is the <strong>processing</strong> part. This is where you can <strong>manipulate the DB response into any format you want</strong> using the transparent programming language (jq). This is also a &quot;function&quot; that takes the <strong>BitDB query response as input</strong> and returns <strong>Application API as output</strong>.</li>
+</ol>
+<p><img src="/docs/assets/bitquery/function.png" alt="function"></p>
+<h3><a class="anchor" aria-hidden="true" id="2-build-immutable-and-deterministic-apis"></a><a href="#2-build-immutable-and-deterministic-apis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>2. Build Immutable and Deterministic APIs</h3>
+<p>Because the entire derivation process (Bitcoin to BitDB to Bitquery to Application APIs) is completely open source, transparent, and has zero side-effect, we can conclude that <strong>the resulting application api transitively benefits from the immutability and determinism of Bitcoin</strong>, secured by Proof of Work.</p>
+<p>At the same time, we end up with an API that can be so user-friendly and developer-friendly that it's indistinguishable from any existing mainstream cloud API providers.</p>
+<h3><a class="anchor" aria-hidden="true" id="3-api-that-can-seamlessly-talk-to-one-another"></a><a href="#3-api-that-can-seamlessly-talk-to-one-another" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. API that can seamlessly talk to one another</h3>
+<p>Because we can trust that each API created this way is immutably derived from bitcoin, we can trust the resulting immutability and build one API on top of another. Multiple parties can build and publish their own APIs, and these APIs can communicate with one another.</p>
+<p>Also, now that we have human-readable APIs, application developers can easily come up with an additional layer of open standards for such inter-application communications.</p>
+<p>There are many more benefits and much more potential I haven't covered here, but I will leave it up to the reader's imagination.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/tutorial_v3"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/chain"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#intro">Intro</a></li><li><a href="#quick-intro-to-bitdb">Quick Intro to BitDB</a></li><li><a href="#bitquery-build-immutable-apis-on-bitcoin">Bitquery: Build Immutable APIs on Bitcoin</a><ul class="toc-headings"><li><a href="#1-before">1. Before</a></li><li><a href="#2-after">2. After</a></li></ul></li><li><a href="#how-bitquery-works">How Bitquery Works</a><ul class="toc-headings"><li><a href="#1-querying">1. Querying</a></li><li><a href="#2-encoding">2. Encoding</a></li><li><a href="#3-processing">3. Processing</a></li></ul></li><li><a href="#example">Example</a></li><li><a href="#conclusion-what-does-this-all-mean">Conclusion: What Does This All Mean?</a><ul class="toc-headings"><li><a href="#1-like-a-chain-of-math-functions">1. Like a chain of math functions</a></li><li><a href="#2-build-immutable-and-deterministic-apis">2. Build Immutable and Deterministic APIs</a></li><li><a href="#3-api-that-can-seamlessly-talk-to-one-another">3. API that can seamlessly talk to one another</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"></footer></div></body></html>
