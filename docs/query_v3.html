@@ -252,7 +252,9 @@
 <p>Let's zoom in to the response processor function <code>r.f</code>:</p>
 <pre><code class="hljs"><span class="hljs-string">"<span class="hljs-subst">[.[]</span> | .out<span class="hljs-subst">[0]</span> | { token_symbol: .s4, token_name: .s5, document_url: .s6} ]"</span>
 </code></pre>
-<p>This is written in <a href="https://en.wikipedia.org/wiki/Jq_(programming_language)">jq</a>. And here's how to read the program:</p>
+<p>This is written in <a href="https://en.wikipedia.org/wiki/Jq_(programming_language)">jq</a>, a Turing complete data processing language.</p>
+<p><img src="/docs/assets/jq.png" alt="jq"></p>
+<p>And here's how to read the program:</p>
 <ol>
 <li>All jq programs are stack based, therefore you read from left to right</li>
 <li>All jq programs assume an incoming input object and produces an output in the end</li>
