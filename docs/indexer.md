@@ -6,12 +6,11 @@ sidebar_label: Indxer
 
 The first task of BitDB indexer is to take a raw Bitcoin transaction and transform it into a structured format on top of which we can run all kinds of powerful queries.
 
-After TNA transforms the raw transaction into BitDB document format, it's stored into the database.
+The second task is to store it into the NoSQL database backend, currently MongoDB.
 
-## 1. TNA
+## 1. How BitDB parses Bitcoin Transactions
 
-
-We can think of each bitcoin transaction as a DNA that needs to be expressed into a meaningful protein. This is what BitDB Indexer does before storing into the database, through a module named [TNA](https://github.com/21centurymotorcompany/tna).
+We can think of each bitcoin transaction as a DNA that needs to be expressed into a meaningful protein. This is what BitDB Indexer does before storing into the database. [View Module](https://github.com/21centurymotorcompany/tna)
 
 ![protein](assets/protein.png)
 

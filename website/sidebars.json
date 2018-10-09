@@ -1,12 +1,11 @@
 {
   "docs": {
     "Introduction": ["bitdb"],
-    "Components": ["crawler", "indexer", "query"],
-    "Howto": ["quickstart", "tutorial", "install"],
+    "Components": ["crawler", "indexer", "query_v3"],
+    "Howto": ["quickstart_v3", "intro_v3", "install"],
+    "Tutorials": ["tutorial_v3"],
     "FAQ": [
-      "diy",
-      "chain",
-      "decentralized"
+      "chain"
     ]
   },
   "docs-other": {

@@ -55,8 +55,8 @@ pre {
   font-size: 12px;
 }
 .well {
-  padding: 0 20px;
   border: 5px solid black;
+  padding: 10px 40px;
 }
 a {
   color: cornflowerblue;

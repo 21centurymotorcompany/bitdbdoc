@@ -4,6 +4,12 @@ title: Build a Bitcoin App in 5 Minutes
 sidebar_label: Build a Bitcoin App in 5 Minutes
 ---
 
+## Required Skills
+
+> HTML and JavaScript. That's all!
+>
+> You don't even need to set up a server, this demo will run server-less, leveraging the bitdb.network public endpoint.
+
 Let's build a bitcoin powered web app using a public BitDB Full Node at bitdb.network. 
 
 The app will be 100% frontend (No server) and will fetch and display contents from [memo.cash](https://memo.cash) transactions from bitcoin through bitdb. The web app will look like this:
@@ -14,14 +20,20 @@ The app will be 100% frontend (No server) and will fetch and display contents fr
 
 <br>
 
+---
 
-# 1. Get bitdb.network public node API key
+
+## Step 1. Get bitdb.network public node API key
 
 [bitdb.network](https://bitdb.network) is a full node implementation of BitDB with a free HTTP API endpoint. The endpoint is completely free but you first need to sign up and get an API key (The API key is just for DDOS protection)
 
-[[Get bitdb.network API Key]](https://bitdb.network/register)
+[[Get bitdb.network API Key]](https://bitdb.network/v2/dashboard)
 
-# 2. Construct BitDB query
+<br>
+
+---
+
+## Step 2. Construct BitDB query
 
 We are going to fetch bitcoin transactions that follow the [memo.cash OP_RETURN protocol](https://memo.cash/protocol). Check out the protocol spec and you'll find the following at the top:
 
@@ -94,7 +106,9 @@ var query = {
     - **limit:** get 50
     - **project:** This is a special MongoDB projection operation that [only returns a matched subdocument instead of the entire document](query#4-only-return-the-matched-part). In this case, our query will match with a transaction's output, and without this clause it will return the entire transaction. We only want it to return the OP_RETURN output that matched, which is why we've added this line.
 
-# 3. Write the Web App
+---
+
+## Step 3. Write the Web App
 
 Now that we've constructed the query, we just need to make an HTTP request to a bitdb node and render its results (Remember to replace the **[YOUR API KEY GOES HERE]** part with your own API key from step 1)
 

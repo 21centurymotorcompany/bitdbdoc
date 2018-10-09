@@ -4,9 +4,15 @@ title: What chain does BitDB support?
 sidebar_label: What chain does BitDB support?
 ---
 
+**Short Answer:**
+
+BCH.
+
+**Long Answer:**
+
 Technically BitDB is compatible with all forks of Bitcoin, which would include BTC, BCH, and many other blockchain projects derived from Bitcoin.
 
-However, the current implementation of BitDB runs on Bitcoin Cash (BCH) network.
+However, **the current implementation of BitDB runs on Bitcoin Cash (BCH) network**.
 
 This decision was based on pure return on investment assessment in terms of what BitDB is trying to achieve. 
 
@@ -24,12 +30,12 @@ Currently the only fork of Bitcoin where this somewhat radical vision of "Bitcoi
 
 ## 2. Global Railway of Everything
 
-BitDB indexes everything, from Bitcoin transaction itself to Bitcoin input/output scripts to the graph structure between transactions. And most of this has to do with ON-CHAIN transfer of bits.
+BitDB indexes everything, from Bitcoin transaction itself to Bitcoin input/output scripts to the graph structure between transactions. And most of these involve ON-CHAIN transfer of bits.
 
 Here's the current landscape of bitcoin ecosystem and why BitDB is valuable or not in each chain:
 
-- The BTC roadmap is to avoid scaling on-chain and scale through lightning network to transfer bits. Lightning network is not a ledger for storing data, so BitDB doesn't add any value to lightning network, and therefore to BTC. 
-- The BCH roadmap is to scale through 100% on-chain scaling, with the bet that free market capitalism will find ways to scale. If everything is 100% on-chain, BitDB can be very helpful. 
+- The BTC roadmap is to avoid scaling on-chain and scale through off-chain solutions like lightning network to transfer bits. Lightning network is a network, but not a ledger for storing data, so BitDB doesn't add value to lightning network, hence to BTC. 
+- The BCH roadmap is to scale through 100% on-chain scaling, with the bet that free market capitalism will find ways to scale. BitDB shines when there's a lot of content on-chain.
 
 ## 3. Infinite Scaling Ledger
 

@@ -1,7 +1,7 @@
 ---
 id: decentralized
-title: BitDB vs. Decentralized Databases vs. "DApp Blockchain"
-sidebar_label: BitDB vs. Decentralized Databases vs. "DApp Blockchain"
+title: BitDB vs. Other Decentralized Projects
+sidebar_label: BitDB vs. Other Decentralized Projects
 ---
 
 ---
@@ -31,7 +31,7 @@ One of the main reasons why these decentralized database or blockchains don't us
 BitDB is a project to show that:
 
 - It is not only possible to build a scalable decentralized app on top of proof of work
-- But actually, proof of work is THE ONLY way to build **truly decentralized** apps.
+- But actually, proof of work is THE ONLY IDEAL way to build **truly decentralized** apps.
 
 BitDB builds on top of Bitcoin.
 
@@ -61,3 +61,5 @@ This "readonly" and "one way synchronization" aspect is important because the ac
 BitDB's read action is powered by flexible NoSQL database.
 
 BitDB's write action is powered by Bitcoin's Proof of Work.
+
+BitDB brings the efficiency of centralized databases while providing the security of Bitcoin's Proof of Work, by being one-way pegged to Bitcoin.

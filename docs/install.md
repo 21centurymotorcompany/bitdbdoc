@@ -15,8 +15,8 @@ In this section, we will take a look at how you can run your own BitDB node.
 
 First you need the following:
 
-1. Bitcoin: You must have a Bitcoin running on your computer.
-2. MongoDB: You must have set up a MongoDB database on your computer.
+1. **Bitcoin:** You must have a Bitcoin running on your computer.
+2. **MongoDB:** You must have set up a MongoDB database on your computer.
 
 ### 1. Bitcoin
 
@@ -24,11 +24,9 @@ BitDB sits on top of Bitcoin, therefore you need to have a Bitcoin node running.
 
 Also, you need to configure your bitcoin node for BitDB to work, such as:
 
-Higher RPC limit
-
-Zeromq broadcast setting
-
-RPC username and password setting
+- Higher RPC limit
+- Zeromq broadcast setting
+- RPC username and password setting
 
 Here's an example bitcoin.conf file to get your Bitcoin node to work with BitDB:
 

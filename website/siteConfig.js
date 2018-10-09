@@ -40,10 +40,10 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { href: "https://github.com/21centurymotorcompany", label: "GitHub" },
+    { href: "https://github.com/21centurymotorcompany/bitdbdoc", label: "Edit This Page" },
     { href: "https://twitter.com/_unwriter", label: "Twitter" },
     { href: "https://t.me/joinchat/HH1DDQ8pZlSlsdNcKgIcxw", label: "Chat" },
-    { href: "https://bitdb.network/explorer", label: "Explorer" },
+    { href: "https://bitdb.network/v3/explorer", label: "Explorer" },
 
     /*
     {doc: 'doc4', label: 'API'},

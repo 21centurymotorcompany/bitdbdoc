@@ -4,17 +4,17 @@ title: Quickstart
 sidebar_label: Quickstart
 ---
 
-Go to https://bitdb.network/explorer and try the following queries. (Don't forget the `"v": 2`, this entire documentation is based on version 2.0, and the previous version has been deprecated)
+Go to https://bitdb.network/v3/explorer and try the following queries. (Don't forget the `"v": 3`, this entire documentation is based on version 2.0, and the previous version has been deprecated)
 
 ## 1. Exact String Match
 
 Find all transactions where the first push data is "hello" in UTF8 
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LnMxIjogImhlbGxvIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
 
 ```
 {
-  "v": 2,
+  "v": 3,
   "q": {
     "find": { "out.s1": "hello" },
     "limit": 10
@@ -26,14 +26,13 @@ Find all transactions where the first push data is "hello" in UTF8
 
 Find all transactions that start with "6d02" in hex as the first push data. 
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
 
 ```
 {
-  "v": 2,
-  "e": { "out.b1": "hex" },
+  "v": 3,
   "q": {
-    "find": { "out.b1": "6d02" },
+    "find": { "out.h1": "6d02" },
     "limit": 10
   }
 }
@@ -43,18 +42,15 @@ Find all transactions that start with "6d02" in hex as the first push data.
 
 Find all transactions where one of its outputs starts with "6d02" in hex, but also includes the string "bet" in any of its output push data. 
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9)
 
 ```
 {
-  "v": 2,
-  "e": { "out.b1": "hex" },
+  "v": 3,
   "q": {
     "find": {
-      "$text": {
-        "$search": "bet"
-      },
-      "out.b1": "6d02"
+      "$text": { "$search": "bet" },
+      "out.h1": "6d02"
     },
     "limit": 10
   }
@@ -69,19 +65,15 @@ It is recommended that you use it in conjunction with a full text search to filt
 
 Example: Find all transactions where the second push data matches the UTF8 regular expression `/hello.*/i` 
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7CiAgICAgICAgIiRzZWFyY2giOiAiaGVsbG8iCiAgICAgIH0sCiAgICAgICJvdXQuczIiOiB7CiAgICAgICAgIiRyZWdleCI6ICJoZWxsby4qIiwgIiRvcHRpb25zIjogImkiCiAgICAgIH0KICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7CiAgICAgICAgIiRzZWFyY2giOiAiaGVsbG8iCiAgICAgIH0sCiAgICAgICJvdXQuczIiOiB7CiAgICAgICAgIiRyZWdleCI6ICJoZWxsby4qIiwgIiRvcHRpb25zIjogImkiCiAgICAgIH0KICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==)
 
 ```
 {
-  "v": 2,
+  "v": 3,
   "q": {
     "find": {
-      "$text": {
-        "$search": "hello"
-      },
-      "out.s2": {
-        "$regex": "hello.*", "$options": "i"
-      }
+      "$text": { "$search": "hello" },
+      "out.s2": { "$regex": "hello.*", "$options": "i" }
     },
     "limit": 10
   }
@@ -92,11 +84,11 @@ Example: Find all transactions where the second push data matches the UTF8 regul
 
 Find all transactions sent from the address `qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe`
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==)
 
 ```
 {
-  "v": 2,
+  "v": 3,
   "q": {
     "find": {
       "in.e.a": "qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"
@@ -111,12 +103,12 @@ Find all transactions sent from the address `qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc9
 
 Find all transactions sent from the address `qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe` and received by `qpne29ue8chsv9pxv653zxdhjn45umm4esyds75nx6`
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIsCiAgICAgICJvdXQuZS5hIjogInFwbmUyOXVlOGNoc3Y5cHh2NjUzenhkaGpuNDV1bW00ZXN5ZHM3NW54NiIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIsCiAgICAgICJvdXQuZS5hIjogInFwbmUyOXVlOGNoc3Y5cHh2NjUzenhkaGpuNDV1bW00ZXN5ZHM3NW54NiIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==)
 
 
 ```
 {
-  "v": 2,
+  "v": 3,
   "q": {
     "find": {
       "in.e.a": "qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe",
@@ -131,16 +123,14 @@ Find all transactions sent from the address `qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc9
 
 Find all transactions that contain an **OP_RETURN** output (**output.b0** `{ op: 106 }`) 
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmIwIjogewogICAgICAgICJvcCI6IDEwNgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmIwIjogewogICAgICAgICJvcCI6IDEwNgogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
 
 ```
 {
-  "v": 2,
+  "v": 3,
   "q": {
     "find": {
-      "out.b0": {
-        "op": 106
-      }
+      "out.b0": { "op": 106 }
     },
     "limit": 10
   }
@@ -151,16 +141,14 @@ Find all transactions that contain an **OP_RETURN** output (**output.b0** `{ op:
 
 Find all transactions that contain Multisig transactions (**output.b5** `{ op: 174 }`) 
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmI1IjogewogICAgICAgICJvcCI6IDE3NAogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmI1IjogewogICAgICAgICJvcCI6IDE3NAogICAgICB9CiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=)
 
 ```
 {
-  "v": 2,
+  "v": 3,
   "q": {
     "find": {
-      "out.b5": {
-        "op": 174
-      }
+      "out.b5": { "op": 174 }
     },
     "limit": 10
   }
@@ -173,18 +161,36 @@ By default all queries return transaction objects since a "row" in BitDB is a tr
 
 For example, if we were looking for a specific match in an output, we can ask the query to return the actual matched output instead of the full transaction, using MongoDB's project and $ operator:
 
-[Try Query](https://bitdb.network/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==)
+[Try Query](https://bitdb.network/v2/explorer/ewogICJ2IjogMiwKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==)
 
 ```
 {
-  "v": 2,
-  "e": { "out.b1": "hex" },
+  "v": 3,
   "q": {
-    "find": { "out.b1": "6d02" },
+    "find": { "out.h1": "6d02" },
     "limit": 10,
-    "project": {
-      "out.$": 1
-    }
+    "project": { "out.$": 1 }
   }
 }
 ```
+
+## 10. Token Protocol Parsing
+
+Here's an example of SLP (Simple Ledger Protocol) Genesis transaction:
+
+```
+{
+  "v": 3,
+  "q": {
+    "find": { "out.h1": "534c5000", "out.s3": "GENESIS" },
+    "limit": 20,
+    "project": { "out.$": 1, "_id": 0 }
+  },
+  "r": {
+    "f": "[.[] | .out[0] | {title: \"[\\(.s4)] \\(.s5)\", document_url: .s6} ]"
+  }
+}
+```
+
+- it uses the `project` attribute to only return the matched output (the OP_RETURN one), through db-side filtering
+- then it uses the response filter to extract out `s4` (token symbol), `s5` (token name) and `s6` (token url) 
