@@ -443,6 +443,36 @@ This makes a bitquery request, parses out the `s2` attributes from every output,
 }
 ```
 
+### 5. Filter addresses that sent me tips
+
+Because all transactions involve not only sending to the receiver but some sort of "change address" that sends back the leftover amount to the sender, we often need to filter out those outputs the sender obviously sent back to self.
+
+To do this we need to filter out the outputs with address that's not the sender's address.
+
+1. First it queries for the transactions that sent funds to an address
+2. Then through `r.f`, it only selects the outputs that do not match the sender address
+
+
+[Try Query](https://bitdb.network/v3/explorer/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmUuYSI6ICJxcTRrcDN3M3loaHZ5NGdtNGpnZXphNHZ1czh2cHhncndjOTBuOHJoeGUiCiAgICB9LAogICAgImxpbWl0IjogMTAwMCwKICAgICJwcm9qZWN0IjogewogICAgICAib3V0LmUiOiAxCiAgICB9CiAgfSwKICAiciI6IHsKICAgICJmIjogIlsuW10gfCAub3V0W10gfCAuZSAgfCBzZWxlY3QoLmEgYW5kIC5hICE9IFwicXE0a3AzdzN5aGh2eTRnbTRqZ2V6YTR2dXM4dnB4Z3J3YzkwbjhyaHhlXCIpIHwgLiB8IHthZGRyOiAuYSwgdmFsdWU6IC52fV0iCiAgfQp9)
+
+```
+{
+  "v": 3,
+  "q": {
+    "find": {
+      "out.e.a": "qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"
+    },
+    "limit": 1000,
+    "project": {
+      "out.e": 1
+    }
+  },
+  "r": {
+    "f": "[.[] | .out[] | .e  | select(.a and .a != \"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe\") | . | {addr: .a, value: .v}]"
+  }
+}
+```
+
 ### 5. Learn More 
 
 There's much more you can do with jq, you can learn more about jq here:
