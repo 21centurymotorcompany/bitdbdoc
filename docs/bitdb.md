@@ -177,7 +177,7 @@ You'll see that BitDB immediately synchronizes with Bitcoin and your transaction
 
 #### i. BitBox SDK
 
-https://developer.bitcoin.com/bitbox.html
+https://developer.bitcoin.com/bitbox
 
 <img src='assets/bitbox.png' class='text-left'>
 
