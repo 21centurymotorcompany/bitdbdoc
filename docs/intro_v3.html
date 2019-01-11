@@ -189,7 +189,7 @@
 <p>Another class of attribute you can query with is h0, h1, h2, ... which are hex encoded version of the push data.</p>
 <p>Here's an example:</p>
 <p>Find all transactions that start with &quot;6d02&quot; in hex as the first push data.</p>
-<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
+<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LmgxIjogIjZkMDIiIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -207,7 +207,7 @@
 <li>Full text search is applied universally over all s-attributes so you can't search against a specific attribute</li>
 </ol>
 </blockquote>
-<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsKICAgICAgIiR0ZXh0IjogewogICAgICAgICIkc2VhcmNoIjogImJldCIKICAgICAgfSwKICAgICAgIm91dC5iMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
+<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiJHRleHQiOiB7ICIkc2VhcmNoIjogImJldCIgfSwKICAgICAgIm91dC5oMSI6ICI2ZDAyIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -242,12 +242,12 @@
 So if you want to query all transactions input edge address, you use &quot;in.e.a&quot; (input.edge.address)
 Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here</a></p>
 </blockquote>
-<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogIjE3eXZvMk1ZNkRTWDRKRkpOV3pFZGF2OTVFREU5UGNXdngiCiAgICB9LAogICAgImxpbWl0IjogMTAKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
     <span class="hljs-attr">"find"</span>: {
-      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span>
+      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"17yvo2MY6DSX4JFJNWzEdav95EDE9PcWvx"</span>
     },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
   }
@@ -255,13 +255,13 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="6-query-by-multiple-addresses"></a><a href="#6-query-by-multiple-addresses" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>6. Query by Multiple Addresses</h3>
 <p>Find all transactions sent from the address <code>qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe</code> and received by <code>qpne29ue8chsv9pxv653zxdhjn45umm4esyds75nx6</code></p>
-<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogInFxNGtwM3czeWhodnk0Z200amdlemE0dnVzOHZweGdyd2M5MG44cmh4ZSIsCiAgICAgICJvdXQuZS5hIjogInFwbmUyOXVlOGNoc3Y5cHh2NjUzenhkaGpuNDV1bW00ZXN5ZHM3NW54NiIKICAgIH0sCiAgICAibGltaXQiOiAxMAogIH0KfQ==">Try Query</a></p>
+<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAiaW4uZS5hIjogIjE0eE16OHJLbTRMODNSdVpkbXNIWEQyanZFTlpidjcydlIiLAogICAgICAib3V0LmUuYSI6ICIxNHhNejhyS200TDgzUnVaZG1zSFhEMmp2RU5aYnY3MnZSIgogICAgfSwKICAgICJsaW1pdCI6IDEwCiAgfQp9">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
     <span class="hljs-attr">"find"</span>: {
-      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span>,
-      <span class="hljs-attr">"out.e.a"</span>: <span class="hljs-string">"qpne29ue8chsv9pxv653zxdhjn45umm4esyds75nx6"</span>
+      <span class="hljs-attr">"in.e.a"</span>: <span class="hljs-string">"14xMz8rKm4L83RuZdmsHXD2jvENZbv72vR"</span>,
+      <span class="hljs-attr">"out.e.a"</span>: <span class="hljs-string">"14xMz8rKm4L83RuZdmsHXD2jvENZbv72vR"</span>
     },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">10</span>
   }
@@ -296,7 +296,7 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 <h3><a class="anchor" aria-hidden="true" id="9-filter-down-to-the-actual-matched-script"></a><a href="#9-filter-down-to-the-actual-matched-script" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>9. Filter down to the actual matched script</h3>
 <p>By default all queries return transaction objects since a &quot;row&quot; in BitDB is a transaction. However we can take advantage of the flexible MongoDB queries to drill down into the matched subdocuments.</p>
 <p>For example, if we were looking for a specific match in an output, we can ask the query to return the actual matched output instead of the full transaction, using MongoDB's project and $ operator:</p>
-<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAiZSI6IHsgIm91dC5iMSI6ICJoZXgiIH0sCiAgInEiOiB7CiAgICAiZmluZCI6IHsgIm91dC5iMSI6ICI2ZDAyIiB9LAogICAgImxpbWl0IjogMTAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC4kIjogMQogICAgfQogIH0KfQ==">Try Query</a></p>
+<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogeyAib3V0LmgxIjogIjZkMDIiIH0sCiAgICAibGltaXQiOiAxMCwKICAgICJwcm9qZWN0IjogeyAib3V0LiQiOiAxIH0KICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
@@ -382,12 +382,12 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
 <li>First it queries for the transactions that sent funds to an address</li>
 <li>Then through <code>r.f</code>, it only selects the outputs that do not match the sender address</li>
 </ol>
-<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmUuYSI6ICJxcTRrcDN3M3loaHZ5NGdtNGpnZXphNHZ1czh2cHhncndjOTBuOHJoeGUiCiAgICB9LAogICAgImxpbWl0IjogMTAwMCwKICAgICJwcm9qZWN0IjogewogICAgICAib3V0LmUiOiAxCiAgICB9CiAgfSwKICAiciI6IHsKICAgICJmIjogIlsuW10gfCAub3V0W10gfCAuZSAgfCBzZWxlY3QoLmEgYW5kIC5hICE9IFwicXE0a3AzdzN5aGh2eTRnbTRqZ2V6YTR2dXM4dnB4Z3J3YzkwbjhyaHhlXCIpIHwgLiB8IHthZGRyOiAuYSwgdmFsdWU6IC52fV0iCiAgfQp9">Try Query</a></p>
+<p><a href="https://genesis.bitdb.network/query/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/ewogICJ2IjogMywKICAicSI6IHsKICAgICJmaW5kIjogewogICAgICAib3V0LmUuYSI6ICIxNHhNejhyS200TDgzUnVaZG1zSFhEMmp2RU5aYnY3MnZSIgogICAgfSwKICAgICJsaW1pdCI6IDEwMDAsCiAgICAicHJvamVjdCI6IHsKICAgICAgIm91dC5lIjogMQogICAgfQogIH0sCiAgInIiOiB7CiAgICAiZiI6ICJbLltdIHwgLm91dFtdIHwgLmUgIHwgc2VsZWN0KC5hIGFuZCAuYSAhPSBcIjE0eE16OHJLbTRMODNSdVpkbXNIWEQyanZFTlpidjcydlJcIikgfCAuIHwge2FkZHI6IC5hLCB2YWx1ZTogLnZ9XSIKICB9Cn0=">Try Query</a></p>
 <pre><code class="hljs">{
   <span class="hljs-attr">"v"</span>: <span class="hljs-number">3</span>,
   <span class="hljs-attr">"q"</span>: {
     <span class="hljs-attr">"find"</span>: {
-      <span class="hljs-attr">"out.e.a"</span>: <span class="hljs-string">"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe"</span>
+      <span class="hljs-attr">"out.e.a"</span>: <span class="hljs-string">"14xMz8rKm4L83RuZdmsHXD2jvENZbv72vR"</span>
     },
     <span class="hljs-attr">"limit"</span>: <span class="hljs-number">1000</span>,
     <span class="hljs-attr">"project"</span>: {
@@ -395,7 +395,7 @@ Learn more <a href="https://docs.bitdb.network/docs/indexer#level-3-graph">here<
     }
   },
   <span class="hljs-attr">"r"</span>: {
-    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[.[] | .out[] | .e  | select(.a and .a != \"qq4kp3w3yhhvy4gm4jgeza4vus8vpxgrwc90n8rhxe\") | . | {addr: .a, value: .v}]"</span>
+    <span class="hljs-attr">"f"</span>: <span class="hljs-string">"[.[] | .out[] | .e  | select(.a and .a != \"14xMz8rKm4L83RuZdmsHXD2jvENZbv72vR\") | . | {addr: .a, value: .v}]"</span>
   }
 }
 </code></pre>
